@@ -12,16 +12,17 @@
 
 #pragma once
 
-#include "PlatformConfig.hpp"
+#include "Util/PlatformConfig.hpp"
 
 #include <string>
-#include <sstream>
+#include <iostream>
 
 namespace robo {
 
 struct Results {
-    const char* filepath;
-    const char* method;
+    std::string filename;
+    std::string filepath;
+    std::string method;
 };
 
 class CLIParser {
@@ -58,24 +59,20 @@ public:
         filepath += seperator_;
         filepath += argv[1];
 
-        return Results { filepath.c_str(), argv[2] };
+        return Results { argv[1], filepath, argv[2] };
     }
 
-    void print_error(const char* msg)
+    void print_error(const std::string& msg)
     {
-        printf("%s: %s see '%s --help'",
-               bin_name_.c_str(),
-               msg,
-               bin_name_.c_str());
+        std::cout << bin_name_ << ": " << msg << " see '"
+                  << bin_name_ << " --help'" << std::endl;
     }
 
     void print_help()
     {
-        std::stringstream help;
-        help << "\n";
-        help << "usage: " << bin_name_ << " [-h | --help] " << "<filename> <method>\n\n";
-        help << desc_ << "\n";
-        printf("%s", help.str().c_str());
+        std::cout << "\n";
+        std::cout << "usage: " << bin_name_ << " [-h | --help] " << "<filename> <method>\n\n";
+        std::cout << desc_ << "\n";
     }
 
     std::string app_name()

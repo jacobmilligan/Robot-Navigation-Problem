@@ -12,54 +12,13 @@
 
 #pragma once
 
+#include "Containers/Environment.hpp"
+
 #include <vector>
 #include <fstream>
 #include <sstream>
 
 namespace robo {
-
-
-struct Environment {
-    Environment()
-        : valid_(false)
-    {}
-
-    Environment(int cols, int rows)
-        : valid_(true)
-    {
-        grid_.resize(rows);
-        for ( auto& row : grid_ ) {
-            row.resize(cols);
-        }
-    }
-
-    void set_value(int col, int row, int value)
-    {
-        grid_[row][col] = value;
-    }
-
-    std::string to_string()
-    {
-        std::stringstream ss;
-        for ( auto& c : grid_ ) {
-            for ( auto& r : c ) {
-                ss << r << " ";
-            }
-            ss << "\n";
-        }
-        return ss.str();
-    }
-
-    bool valid()
-    {
-        return valid_;
-    }
-
-private:
-    bool valid_;
-    std::vector<std::vector<int>> grid_;
-
-};
 
 enum class TokenType {
     grid_definition,
@@ -78,7 +37,7 @@ struct Token {
         : type(token_type)
     {}
 
-    std::vector<int> values;
+    std::vector<unsigned int> values;
 };
 
 class FileParser {
