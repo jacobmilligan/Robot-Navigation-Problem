@@ -12,8 +12,22 @@
 
 #include "Environment.hpp"
 
+#include <sstream>
+
 namespace robo {
 
+
+std::string direction_to_string(const Direction dir)
+{
+    switch (dir) {
+        case Direction::unknown: return "unknown";
+        case Direction::none: return "none";
+        case Direction::up: return "up";
+        case Direction::left: return "left";
+        case Direction::down: return "down";
+        case Direction::right: return "right";
+    }
+}
 
 Environment::Environment()
     : valid_(false), step_cost(0)

@@ -13,11 +13,9 @@
 #define CATCH_CONFIG_MAIN
 
 #include "catch.hpp"
-#include "Containers/Graph.hpp"
+#include "Search/SearchMethod.hpp"
 #include "Parsers/FileParser.hpp"
 
-#include <array>
-#include <Search/Uninformed.hpp>
 
 TEST_CASE("uninformed tests", "[uninformed]")
 {

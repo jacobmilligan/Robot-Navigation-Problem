@@ -1,6 +1,6 @@
 #include "Parsers/CLIParser.hpp"
 #include "Parsers/FileParser.hpp"
-#include "Search/Uninformed.hpp"
+#include "Search/SearchMethod.hpp"
 
 void print_output(const std::string& filename, const std::string& method,
                   const unsigned long nodes, const std::vector<robo::Direction>& path)

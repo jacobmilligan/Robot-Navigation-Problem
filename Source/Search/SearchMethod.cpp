@@ -10,8 +10,8 @@
 //  14/03/2017
 //
 
-#include "Search/Uninformed.hpp"
-#include "Containers/Environment.hpp"
+#include "Search/SearchMethod.hpp"
+#include "Environment.hpp"
 
 #include <algorithm>
 

@@ -13,7 +13,7 @@
 
 #pragma once
 
-#include "Containers/Graph.hpp"
+#include "Search/Environment.hpp"
 
 #include <queue>
 #include <unordered_map>
