@@ -35,9 +35,9 @@ Node SearchMethod::get_child(const Environment& env, Node& parent, const Directi
     }
 
     if ( env.passable(state) )
-        return Node(state, &parent, parent.cost + env.step_cost, action);
+        return Node(state, parent.id, parent.cost + env.step_cost, action);
 
-    return Node(parent.state, nullptr, 1, Direction::unknown);
+    return Node(parent.state, -1, 1, Direction::unknown);
 }
 
 SearchResults SearchMethod::search(const Environment& env)
@@ -45,27 +45,24 @@ SearchResults SearchMethod::search(const Environment& env)
     frontier_clear();
     explored_.clear();
 
-    Node node(env.start, nullptr, 0, Direction::none);
+    Node node(env.start, -1, 0, Direction::none);
     if ( env.goal_test(env.start) ) {
-        return SearchResults(true, explored_.size(), node);
+        return SearchResults(true, explored_, node);
     }
 
     frontier_add(node);
-    explored_[node.state] = node;
-    operations_.push_back(node);
+    explored_.add(node);
 
     Node child;
-    double parent_cost = 0.0;
     while ( !frontier_empty() ) {
         node = frontier_remove();
 
         for ( auto& a : env.actions() ) {
-            child = get_child(env, explored_[node.state], a);
-            if ( explored_.find(child.state) == explored_.end() ) {
-                explored_[child.state] = child;
-                operations_.push_back(child);
+            child = get_child(env, explored_.get(node.state), a);
+            if ( !explored_.contains(child) ) {
+                explored_.add(child);
                 if ( env.goal_test(child.state) ) {
-                    return SearchResults(true, explored_.size(), child);
+                    return SearchResults(true, explored_, child);
                 }
 
                 frontier_add(child);
@@ -73,7 +70,7 @@ SearchResults SearchMethod::search(const Environment& env)
         }
     }
 
-    return SearchResults(false, explored_.size(), child);
+    return SearchResults(false, explored_, child);
 }
 
 

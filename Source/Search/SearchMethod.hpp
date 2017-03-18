@@ -28,7 +28,13 @@ struct ExploredSet {
     void add(const Node& node)
     {
         operations_.push_back(node);
+        operations_.back().id = static_cast<int>(operations_.size() - 1);
         explored_[node.state] = operations_.size() - 1;
+    }
+
+    unsigned long size() const
+    {
+        return operations_.size();
     }
 
     void clear()
@@ -39,7 +45,28 @@ struct ExploredSet {
 
     bool contains(const Node& node) const
     {
-        return explored_[node.state] != explored_.end();
+        return explored_.find(node.state) != explored_.end();
+    }
+
+    Node& get(const Point& state)
+    {
+        auto index = explored_[state];
+        return operations_[index];
+    }
+
+    const Node& get(const int id) const
+    {
+        return operations_[id];
+    }
+
+    Node* begin()
+    {
+        return &operations_[0];
+    }
+
+    Node* end()
+    {
+        return &operations_.back();
     }
 
 private:
@@ -56,10 +83,13 @@ public:
         return explored_.size();
     }
 
+    ExploredSet& explored()
+    {
+        return explored_;
+    }
+
 protected:
-    std::unordered_map<Point, Node, PointHash> explored_;
-    std::vector<Node> operations_;
-    ExploredSet set_;
+    ExploredSet explored_;
 
     virtual Node get_child(const Environment& env, Node& parent, const Direction action);
     virtual void frontier_add(const Node& node) = 0;

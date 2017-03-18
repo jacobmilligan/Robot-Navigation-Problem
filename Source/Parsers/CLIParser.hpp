@@ -12,7 +12,7 @@
 
 #pragma once
 
-#include "Util/PlatformConfig.hpp"
+#include <Skyrocket/IO/Path.hpp>
 
 #include <string>
 #include <iostream>
@@ -33,11 +33,7 @@ public:
 
     Results parse(int argc, char** argv)
     {
-        bin_name_ = std::string(argv[0]);
-        auto lastslash = bin_name_.rfind(seperator_);
-
-        if ( lastslash != std::string::npos )
-            bin_name_.replace(0, lastslash + 1, "");
+        bin_name_ = sky::Path(argv[0]).filename();
 
         if ( argc > 3 || argc <= 1 ) {
             print_error("Incorrect number of arguments");
@@ -51,15 +47,9 @@ public:
             }
         }
 
-        std::string filepath(argv[0]);
-        lastslash = filepath.rfind(seperator_);
-        if ( lastslash != std::string::npos )
-            filepath.replace(lastslash, filepath.length(), "");
-
-        filepath += seperator_;
-        filepath += argv[1];
-
-        return Results { argv[1], filepath, argv[2] };
+        sky::Path filepath = sky::Path::bin_path(argv);
+        filepath.append(argv[1]);
+        return Results { filepath.filename(), filepath.str(), argv[2] };
     }
 
     void print_error(const std::string& msg)
@@ -80,12 +70,6 @@ public:
         return bin_name_;
     }
 private:
-#if ROBONAV_OS_WINDOWS == 1
-    static const char seperator_ = '\\';
-#else
-    static const char seperator_ = '/';
-#endif
-
     std::string desc_;
     std::string bin_name_;
 };

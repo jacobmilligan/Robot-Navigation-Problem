@@ -1,6 +1,7 @@
 #include "Parsers/CLIParser.hpp"
 #include "Parsers/FileParser.hpp"
 #include "Search/SearchMethod.hpp"
+#include "Visualizer/App.hpp"
 
 using MethodMap = std::unordered_map<std::string, std::unique_ptr<robo::SearchMethod>>;
 
@@ -8,6 +9,7 @@ void populate_search_methods(MethodMap& methods)
 {
     methods["BFS"] = std::make_unique<robo::BreadthFirst>();
     methods["DFS"] = std::make_unique<robo::DepthFirst>();
+    methods["GBFS"] = std::make_unique<robo::GreedyBestFirst>();
 }
 
 void print_output(const std::string& filename, const std::string& method,
@@ -39,6 +41,9 @@ int main(int argc, char** argv)
     auto path = method.search(env);
 
     print_output(results.filename, results.method, path);
+
+    robo::VisualizerApp app(sky::Path::bin_path(argv), env, method.explored(), path);
+    app.start();
 
     return 0;
 }

@@ -11,6 +11,7 @@
 //
 
 #include "Environment.hpp"
+#include "SearchMethod.hpp"
 
 #include <sstream>
 
@@ -29,24 +30,24 @@ std::string direction_to_string(const Direction dir)
     }
 }
 
-SearchResults::SearchResults(const bool is_succesful, const unsigned int count, Node& end)
-    : success(is_succesful), node_count(count)
+SearchResults::SearchResults(const bool is_succesful, const ExploredSet& explored, const Node& end)
+    : success(is_succesful), node_count(explored.size())
 {
     path.clear();
-    auto node = &end;
-    while ( node->parent != nullptr ) {
-        path.push_back(*node);
-        node = node->parent;
+    auto node = end;
+    while ( node.parent_id >= 0 ) {
+        path.push_back(node);
+        node = explored.get(node.parent_id);
     }
     std::reverse(path.begin(), path.end());
 }
 
 Environment::Environment()
-    : valid_(false), step_cost(0)
+    : step_cost(0), valid_(false)
 {}
 
 Environment::Environment(const unsigned int cols, const unsigned int rows)
-    : valid_(true), size_(cols, rows), step_cost(0)
+    : step_cost(0), valid_(true), size_(cols, rows)
 {
     grid_.resize(rows);
     for ( auto& row : grid_ ) {

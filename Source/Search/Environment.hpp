@@ -20,6 +20,8 @@
 
 namespace robo {
 
+struct ExploredSet;
+
 enum class Cell {
     empty = 0,
     start,
@@ -72,17 +74,19 @@ struct PointHash {
 };
 
 struct Node {
-    Node() : parent(nullptr),
-             cost(0),
-             action(Direction::unknown)
+    Node()
+        : id(-1),
+          parent_id(-1),
+          cost(0),
+          action(Direction::unknown)
     {}
 
-    Node(const Point& node_state, Node* node_parent,
+    Node(const Point& node_state, const int parent,
          const int path_cost, const Direction direction)
-        : state(node_state),
-          parent(node_parent),
+        : parent_id(parent),
           cost(path_cost),
-          action(direction)
+          action(direction),
+          state(node_state)
     {}
 
     bool operator>(const Node& rhs) const
@@ -90,10 +94,11 @@ struct Node {
         return cost > rhs.cost;
     }
 
+    int id;
+    int parent_id;
     double cost;
     Direction action;
     Point state;
-    Node* parent;
 };
 
 struct SearchResults {
@@ -101,7 +106,7 @@ struct SearchResults {
         : success(false), node_count(0)
     {}
 
-    SearchResults(const bool is_succesful, const unsigned int count, Node& end);
+    SearchResults(const bool is_succesful, const ExploredSet& explored, const Node& end);
 
     bool success;
     unsigned int node_count;
@@ -162,12 +167,12 @@ private:
     Point size_;
     std::vector<std::vector<Cell>> grid_;
 
-    std::array<Direction, 4> actions_ = {
-        Direction::up,
-        Direction::left,
-        Direction::down,
-        Direction::right
-    };
+    std::array<Direction, 4> actions_ = {{
+                                             Direction::up,
+                                             Direction::left,
+                                             Direction::down,
+                                             Direction::right
+                                         }};
 };
 
 
