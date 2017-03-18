@@ -24,9 +24,10 @@ struct Solution;
 class Graph;
 class Environment;
 
+
 class SearchMethod {
 public:
-    virtual std::vector<Direction>& search(Environment& env) = 0;
+    virtual SearchResults search(const Environment& env) = 0;
 
     inline unsigned long size()
     {
@@ -35,16 +36,20 @@ public:
 
 protected:
     std::unordered_map<Point, Node, PointHash, PointEquals> explored_;
-    std::vector<Direction> path_;
-
-    void fill_path(const Node& end);
 };
 
 class BreadthFirst : public SearchMethod {
 public:
-    std::vector<Direction>& search(Environment& env) override;
+    SearchResults search(const Environment& env) override;
 private:
     std::queue<Node> frontier_;
+};
+
+class DepthFirst : public SearchMethod {
+public:
+    SearchResults search(const Environment& env) override;
+private:
+    std::vector<Node> frontier_;
 };
 
 

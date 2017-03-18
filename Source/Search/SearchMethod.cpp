@@ -11,19 +11,17 @@
 //
 
 #include "Search/SearchMethod.hpp"
-#include "Environment.hpp"
-
-#include <algorithm>
 
 namespace robo {
 
 
-std::vector<Direction>& BreadthFirst::search(Environment& env)
+SearchResults BreadthFirst::search(const Environment& env)
 {
+    explored_.clear();
+
     Node node(env.start, nullptr, 0, Direction::none);
     if ( env.goal_test(env.start) ) {
-        path_.push_back(Direction::none);
-        return path_;
+        return SearchResults(true, explored_.size(), node);
     }
 
     frontier_.push(node);
@@ -35,13 +33,11 @@ std::vector<Direction>& BreadthFirst::search(Environment& env)
         explored_[node.state] = node;
 
         for ( auto& a : env.actions() ) {
-            child = env.get_child(node, a);
-            child.parent = &explored_[node.state];
+            child = env.get_child(explored_[node.state], a);
 
             if ( explored_.find(child.state) == explored_.end() ) {
                 if ( env.goal_test(child.state) ) {
-                    fill_path(child);
-                    return path_;
+                    return SearchResults(true, explored_.size(), child);
                 }
 
                 frontier_.push(child);
@@ -49,19 +45,41 @@ std::vector<Direction>& BreadthFirst::search(Environment& env)
         }
     }
 
-    path_.clear();
-    path_.push_back(Direction::unknown);
-    return path_;
+    return SearchResults(false, explored_.size(), child);
 }
 
-void SearchMethod::fill_path(const Node& end)
+SearchResults DepthFirst::search(const Environment& env)
 {
-    auto node = &end;
-    while ( node->parent != nullptr ) {
-        path_.push_back(node->action);
-        node = node->parent;
+    Node node(env.start, nullptr, 1, Direction::none);
+    if ( env.goal_test(env.start) ) {
+        return SearchResults(true, explored_.size(), node);
     }
-    std::reverse(path_.begin(), path_.end());
+
+    frontier_.clear();
+    explored_.clear();
+
+    frontier_.push_back(node);
+
+    Node child;
+    while ( !frontier_.empty() ) {
+        node = frontier_.back();
+        frontier_.pop_back();
+        explored_[node.state] = node;
+
+        for ( auto& a : env.actions() ) {
+            child = env.get_child(explored_[node.state], a);
+
+            if ( explored_.find(child.state) == explored_.end() ) {
+                if ( env.goal_test(child.state) ) {
+                    return SearchResults(true, explored_.size(), child);
+                }
+
+                frontier_.push_back(child);
+            }
+        }
+    }
+
+    return SearchResults(false, explored_.size(), child);
 }
 
 

@@ -90,17 +90,16 @@ struct Node {
     Node* parent;
 };
 
-struct Solution {
-    Solution()
-        : node_count(0)
+struct SearchResults {
+    SearchResults()
+        : success(false), node_count(0)
     {}
 
-    Solution(const unsigned int count, const Node& goal)
-        : node_count(count), path(goal)
-    {}
+    SearchResults(const bool is_succesful, const unsigned int count, Node& end);
 
+    bool success;
     unsigned int node_count;
-    Node path;
+    std::vector<Direction> path;
 };
 
 class Environment {
@@ -129,7 +128,7 @@ public:
         return valid_;
     }
 
-    inline std::array<Direction, 4>& actions()
+    inline const std::array<Direction, 4>& actions() const
     {
         return actions_;
     };
@@ -144,7 +143,7 @@ public:
         return in_bounds(p) && grid_[p.y][p.x] != Cell::wall;
     }
 
-    Node get_child(const Node& parent, const Direction action) const;
+    Node get_child(Node& parent, const Direction action) const;
 
     bool goal_test(const Point& pos) const;
 

@@ -2,40 +2,43 @@
 #include "Parsers/FileParser.hpp"
 #include "Search/SearchMethod.hpp"
 
-void print_output(const std::string& filename, const std::string& method,
-                  const unsigned long nodes, const std::vector<robo::Direction>& path)
+using MethodMap = std::unordered_map<std::string, std::unique_ptr<robo::SearchMethod>>;
+
+void populate_search_methods(MethodMap& methods)
 {
-    std::cout << filename << " " << method << " " << nodes << " ";
-    for ( auto& d : path ) {
+    methods["BFS"] = std::make_unique<robo::BreadthFirst>();
+    methods["DFS"] = std::make_unique<robo::DepthFirst>();
+}
+
+void print_output(const std::string& filename, const std::string& method,
+                  const robo::SearchResults& results)
+{
+    std::cout << filename << " " << method << " " << results.node_count << " ";
+    for ( auto& d : results.path ) {
         std::cout << robo::direction_to_string(d) << ";";
     }
 }
 
 int main(int argc, char** argv)
 {
-    std::unordered_map<std::string, std::unique_ptr<robo::SearchMethod>> methods;
-    methods["BFS"] = std::make_unique<robo::BreadthFirst>();
-
+    MethodMap methods;
     robo::CLIParser cli("Executes several search methods");
-    auto results = cli.parse(argc, argv);
+    robo::FileParser parser(cli.app_name());
 
-    auto method = methods.find(results.method);
-    if ( method == methods.end() ) {
+    populate_search_methods(methods);
+
+    auto results = cli.parse(argc, argv);
+    if ( methods.find(results.method) == methods.end() ) {
         cli.print_error("'" + results.method + "' is not a supported search method");
         return 0;
     }
 
-    robo::FileParser parser(cli.app_name());
+    auto& method = *methods.find(results.method)->second;
     auto env = parser.parse(results.filepath);
     env.step_cost = 1;
+    auto path = method.search(env);
 
-    if ( env.valid() ) {
-        std::cout << env.to_string() << std::endl;
-    }
-
-    auto& path = method->second->search(env);
-
-    print_output(results.filename, results.method, method->second->size(), path);
+    print_output(results.filename, results.method, path);
 
     return 0;
 }

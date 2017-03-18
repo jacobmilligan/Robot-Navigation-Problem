@@ -17,8 +17,11 @@
 #include "Parsers/FileParser.hpp"
 
 
-TEST_CASE("uninformed tests", "[uninformed]")
+TEST_CASE("uninformed search methods execute correctly", "[uninformed]")
 {
+    //================================
+    //      Setup test case
+    //================================
     robo::FileParser parser("Tests");
     auto env = parser.parse(
         "/Users/Jacob/Uni/IntroAI/Assignment1/cmake-build-debug/test.txt"
@@ -41,12 +44,47 @@ TEST_CASE("uninformed tests", "[uninformed]")
     };
 
     robo::BreadthFirst bfs;
-    auto& test = bfs.search(env);
+    robo::DepthFirst dfs;
 
-    SECTION("bfs chooses accurate path")
+    //================================
+    //      BFS Tests
+    //================================
+    SECTION("breadth first search")
     {
-        for ( int i = 0; i < test.size(); ++i ) {
-            REQUIRE(test[i] == path[i]);
+        auto results = bfs.search(env);
+
+        SECTION("bfs has correct path length")
+        {
+            REQUIRE(results.node_count > 1);
+            REQUIRE(results.path.size() == path.size());
+        }
+
+        SECTION("bfs has correct path")
+        {
+            for ( int i = 0; i < path.size(); ++i ) {
+                REQUIRE(results.path[i] == path[i]);
+            }
+        }
+    }
+
+    //================================
+    //      DFS Tests
+    //================================
+    SECTION("depth first search")
+    {
+        auto results = dfs.search(env);
+
+        SECTION("dfs has correct path length")
+        {
+            REQUIRE(results.node_count > 1);
+            REQUIRE(results.path.size() == path.size());
+        }
+
+        SECTION("dfs has correct path")
+        {
+            for ( int i = 0; i < path.size(); ++i ) {
+                REQUIRE(results.path[i] == path[i]);
+            }
         }
     }
 }

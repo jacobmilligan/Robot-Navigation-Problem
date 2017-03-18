@@ -29,6 +29,18 @@ std::string direction_to_string(const Direction dir)
     }
 }
 
+SearchResults::SearchResults(const bool is_succesful, const unsigned int count, Node& end)
+    : success(is_succesful), node_count(count)
+{
+    path.clear();
+    auto node = &end;
+    while ( node->parent != nullptr ) {
+        path.push_back(node->action);
+        node = node->parent;
+    }
+    std::reverse(path.begin(), path.end());
+}
+
 Environment::Environment()
     : valid_(false), step_cost(0)
 {}
@@ -60,32 +72,30 @@ bool Environment::goal_test(const Point& pos) const
     return grid_[pos.y][pos.x] == Cell::goal;
 }
 
-Node Environment::get_child(const Node& parent, const Direction action) const
+Node Environment::get_child(Node& parent, const Direction action) const
 {
-    auto child = parent;
-    child.action = action;
-    child.cost = parent.cost + step_cost;
+    auto state = parent.state;
+
     switch (action) {
         case Direction::up:
-            child.state.y -= 1;
+            state.y -= 1;
             break;
         case Direction::left:
-            child.state.x -= 1;
+            state.x -= 1;
             break;
         case Direction::down:
-            child.state.y += 1;
+            state.y += 1;
             break;
         case Direction::right:
-            child.state.x += 1;
+            state.x += 1;
             break;
-        default:
-            child = parent;
+        default: break;
     }
 
-    if ( passable(child.state) )
-        return child;
+    if ( passable(state) )
+        return Node(state, &parent, parent.cost + step_cost, action);
 
-    return parent;
+    return Node(parent.state, nullptr, 1, Direction::unknown);
 }
 
 
