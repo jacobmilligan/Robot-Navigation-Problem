@@ -15,7 +15,7 @@ void print_output(const std::string& filename, const std::string& method,
 {
     std::cout << filename << " " << method << " " << results.node_count << " ";
     for ( auto& d : results.path ) {
-        std::cout << robo::direction_to_string(d) << ";";
+        std::cout << robo::direction_to_string(d.action) << ";";
     }
 }
 

@@ -172,6 +172,7 @@ bool FileParser::parse_goal(Environment& env, const int pos)
     auto row = tok.values[1];
 
     env[row][col] = Cell::goal;
+    env.goal = Point(col, row);
 
     return true;
 }

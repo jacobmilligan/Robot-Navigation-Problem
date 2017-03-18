@@ -16,6 +16,7 @@
 #include <vector>
 #include <array>
 #include <functional>
+#include <cmath>
 
 namespace robo {
 
@@ -46,9 +47,16 @@ struct Point {
         : x(xpos), y(ypos)
     {}
 
-    bool operator==(const Point& other)
+    bool operator==(const Point& other) const
     {
         return x == other.x && y == other.y;
+    }
+
+    double distance(const Point& other)
+    {
+        auto xsqr = (other.x - x) * (other.x - x);
+        auto ysqr = (other.y - y) * (other.y - y);
+        return sqrt(xsqr + ysqr);
     }
 
     int x;
@@ -60,13 +68,6 @@ struct PointHash {
     {
         return (60 + std::hash<int>()(point.y))
             * 60 + std::hash<int>()(point.x);
-    }
-};
-
-struct PointEquals {
-    bool operator()(const Point& lhs, const Point& rhs) const
-    {
-        return lhs.x == rhs.x && lhs.y == rhs.y;
     }
 };
 
@@ -84,7 +85,12 @@ struct Node {
           action(direction)
     {}
 
-    int cost;
+    bool operator>(const Node& rhs) const
+    {
+        return cost > rhs.cost;
+    }
+
+    double cost;
     Direction action;
     Point state;
     Node* parent;
@@ -99,13 +105,14 @@ struct SearchResults {
 
     bool success;
     unsigned int node_count;
-    std::vector<Direction> path;
+    std::vector<Node> path;
 };
 
 class Environment {
 public:
-    Point start;
     int step_cost;
+    Point start;
+    Point goal;
 
     Environment();
 
@@ -143,7 +150,10 @@ public:
         return in_bounds(p) && grid_[p.y][p.x] != Cell::wall;
     }
 
-    Node get_child(Node& parent, const Direction action) const;
+    inline Cell get_cell(const Point& p) const
+    {
+        return grid_[p.y][p.x];
+    }
 
     bool goal_test(const Point& pos) const;
 

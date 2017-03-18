@@ -24,10 +24,32 @@ struct Solution;
 class Graph;
 class Environment;
 
+struct ExploredSet {
+    void add(const Node& node)
+    {
+        operations_.push_back(node);
+        explored_[node.state] = operations_.size() - 1;
+    }
+
+    void clear()
+    {
+        operations_.clear();
+        explored_.clear();
+    }
+
+    bool contains(const Node& node) const
+    {
+        return explored_[node.state] != explored_.end();
+    }
+
+private:
+    std::unordered_map<Point, unsigned long, PointHash> explored_;
+    std::vector<Node> operations_;
+};
 
 class SearchMethod {
 public:
-    virtual SearchResults search(const Environment& env) = 0;
+    virtual SearchResults search(const Environment& env);
 
     inline unsigned long size()
     {
@@ -35,22 +57,111 @@ public:
     }
 
 protected:
-    std::unordered_map<Point, Node, PointHash, PointEquals> explored_;
+    std::unordered_map<Point, Node, PointHash> explored_;
+    std::vector<Node> operations_;
+    ExploredSet set_;
+
+    virtual Node get_child(const Environment& env, Node& parent, const Direction action);
+    virtual void frontier_add(const Node& node) = 0;
+    virtual void frontier_clear() = 0;
+    virtual Node frontier_remove() = 0;
+    virtual bool frontier_empty() = 0;
 };
 
 class BreadthFirst : public SearchMethod {
-public:
-    SearchResults search(const Environment& env) override;
+protected:
+    void frontier_clear() override
+    {
+        while ( !frontier_.empty() ) {
+            frontier_.pop();
+        }
+    }
+
+    void frontier_add(const Node& node) override
+    {
+        frontier_.push(node);
+    }
+
+    Node frontier_remove() override
+    {
+        auto node = frontier_.front();
+        frontier_.pop();
+        return node;
+    }
+
+    bool frontier_empty() override
+    {
+        return frontier_.empty();
+    }
+
 private:
     std::queue<Node> frontier_;
 };
 
 class DepthFirst : public SearchMethod {
-public:
-    SearchResults search(const Environment& env) override;
+protected:
+    void frontier_clear() override
+    {
+        frontier_.clear();
+    }
+
+    void frontier_add(const Node& node) override
+    {
+        frontier_.push_back(node);
+    }
+
+    Node frontier_remove() override
+    {
+        auto node = frontier_.back();
+        frontier_.pop_back();
+        return node;
+    }
+
+    bool frontier_empty() override
+    {
+        return frontier_.empty();
+    }
 private:
     std::vector<Node> frontier_;
 };
+
+class GreedyBestFirst : public SearchMethod {
+public:
+protected:
+    Node get_child(const Environment& env, Node& parent, const Direction action) override
+    {
+        auto result = SearchMethod::get_child(env, parent, action);
+        result.cost = result.state.distance(env.goal);
+        return result;
+    }
+
+    void frontier_clear() override
+    {
+        while ( !frontier_.empty() ) {
+            frontier_.pop();
+        }
+    }
+
+    void frontier_add(const Node& node) override
+    {
+        frontier_.push(node);
+    }
+
+    Node frontier_remove() override
+    {
+        auto node = frontier_.top();
+        frontier_.pop();
+        return node;
+    }
+
+    bool frontier_empty() override
+    {
+        return frontier_.empty();
+    }
+private:
+    std::priority_queue<Node, std::vector<Node>, std::greater<Node>> frontier_;
+};
+
 
 
 }

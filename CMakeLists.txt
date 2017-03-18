@@ -11,5 +11,5 @@ set(SOURCE_FILES
 add_executable(${PROJECT_NAME} ${SOURCE_FILES} main.cpp)
 target_include_directories(${PROJECT_NAME} PUBLIC Source)
 
-add_executable(tests ${SOURCE_FILES} Tests/UninformedTests.cpp)
+add_executable(tests ${SOURCE_FILES} Tests/Tests.cpp)
 target_include_directories(tests PUBLIC Source Tests)

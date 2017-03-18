@@ -35,7 +35,7 @@ SearchResults::SearchResults(const bool is_succesful, const unsigned int count, 
     path.clear();
     auto node = &end;
     while ( node->parent != nullptr ) {
-        path.push_back(node->action);
+        path.push_back(*node);
         node = node->parent;
     }
     std::reverse(path.begin(), path.end());
@@ -70,32 +70,6 @@ std::string Environment::to_string()
 bool Environment::goal_test(const Point& pos) const
 {
     return grid_[pos.y][pos.x] == Cell::goal;
-}
-
-Node Environment::get_child(Node& parent, const Direction action) const
-{
-    auto state = parent.state;
-
-    switch (action) {
-        case Direction::up:
-            state.y -= 1;
-            break;
-        case Direction::left:
-            state.x -= 1;
-            break;
-        case Direction::down:
-            state.y += 1;
-            break;
-        case Direction::right:
-            state.x += 1;
-            break;
-        default: break;
-    }
-
-    if ( passable(state) )
-        return Node(state, &parent, parent.cost + step_cost, action);
-
-    return Node(parent.state, nullptr, 1, Direction::unknown);
 }
 
 
