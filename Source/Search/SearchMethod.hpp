@@ -1,5 +1,5 @@
 //
-//  Uninformed.hpp
+//  SearchMethod.hpp
 //  COS30019 Intro To AI - Assignment 1
 //  Robot Navigation
 //
@@ -24,7 +24,8 @@ struct Solution;
 class Graph;
 class Environment;
 
-struct ExploredSet {
+class ExploredSet {
+public:
     void add(const Node& node)
     {
         operations_.push_back(node);
@@ -76,7 +77,7 @@ private:
 
 class SearchMethod {
 public:
-    virtual SearchResults search(const Environment& env);
+    virtual SearchResults search(const Environment& env) = 0;
 
     inline unsigned long size()
     {
@@ -92,104 +93,8 @@ protected:
     ExploredSet explored_;
 
     virtual Node get_child(const Environment& env, Node& parent, const Direction action);
-    virtual void frontier_add(const Node& node) = 0;
     virtual void frontier_clear() = 0;
     virtual Node frontier_remove() = 0;
-    virtual bool frontier_empty() = 0;
-};
-
-class BreadthFirst : public SearchMethod {
-protected:
-    void frontier_clear() override
-    {
-        while ( !frontier_.empty() ) {
-            frontier_.pop();
-        }
-    }
-
-    void frontier_add(const Node& node) override
-    {
-        frontier_.push(node);
-    }
-
-    Node frontier_remove() override
-    {
-        auto node = frontier_.front();
-        frontier_.pop();
-        return node;
-    }
-
-    bool frontier_empty() override
-    {
-        return frontier_.empty();
-    }
-
-private:
-    std::queue<Node> frontier_;
-};
-
-class DepthFirst : public SearchMethod {
-protected:
-    void frontier_clear() override
-    {
-        frontier_.clear();
-    }
-
-    void frontier_add(const Node& node) override
-    {
-        frontier_.push_back(node);
-    }
-
-    Node frontier_remove() override
-    {
-        auto node = frontier_.back();
-        frontier_.pop_back();
-        return node;
-    }
-
-    bool frontier_empty() override
-    {
-        return frontier_.empty();
-    }
-private:
-    std::vector<Node> frontier_;
-};
-
-class GreedyBestFirst : public SearchMethod {
-public:
-protected:
-    Node get_child(const Environment& env, Node& parent, const Direction action) override
-    {
-        auto result = SearchMethod::get_child(env, parent, action);
-        result.cost = result.state.distance(env.goal);
-        return result;
-    }
-
-    void frontier_clear() override
-    {
-        while ( !frontier_.empty() ) {
-            frontier_.pop();
-        }
-    }
-
-    void frontier_add(const Node& node) override
-    {
-        frontier_.push(node);
-    }
-
-    Node frontier_remove() override
-    {
-        auto node = frontier_.top();
-        frontier_.pop();
-        return node;
-    }
-
-    bool frontier_empty() override
-    {
-        return frontier_.empty();
-    }
-private:
-    std::priority_queue<Node, std::vector<Node>, std::greater<Node>> frontier_;
 };
 
 

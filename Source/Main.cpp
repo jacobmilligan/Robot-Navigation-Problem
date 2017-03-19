@@ -2,6 +2,10 @@
 #include "Parsers/FileParser.hpp"
 #include "Visualizer/VisualizerApp.hpp"
 
+#include "Search/Methods/BreadthFirst.hpp"
+#include "Search/Methods/DepthFirst.hpp"
+#include "Search/Methods/GreedyBestFirst.hpp"
+
 using MethodMap = std::unordered_map<std::string, std::unique_ptr<robo::SearchMethod>>;
 
 void populate_search_methods(MethodMap& methods)

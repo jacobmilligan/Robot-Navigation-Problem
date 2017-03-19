@@ -11,10 +11,13 @@
 //
 
 #define CATCH_CONFIG_MAIN
-
 #include "catch.hpp"
 #include "Search/SearchMethod.hpp"
 #include "Parsers/FileParser.hpp"
+
+#include "Search/Methods/BreadthFirst.hpp"
+#include "Search/Methods/DepthFirst.hpp"
+#include "Search/Methods/GreedyBestFirst.hpp"
 
 
 TEST_CASE("uninformed search methods execute correctly", "[uninformed]")
