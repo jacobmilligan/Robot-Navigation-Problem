@@ -12,7 +12,7 @@
 
 #pragma once
 
-#include <Skyrocket/IO/Path.hpp>
+#include <Path.hpp>
 
 #include <string>
 #include <iostream>

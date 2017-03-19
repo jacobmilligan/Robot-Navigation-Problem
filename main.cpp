@@ -1,7 +1,8 @@
+#include <Visualizer/VisualizerApp.hpp>
 #include "Parsers/CLIParser.hpp"
 #include "Parsers/FileParser.hpp"
 #include "Search/SearchMethod.hpp"
-#include "Visualizer/App.hpp"
+#include "Visualizer/VisualizerApp.hpp"
 
 using MethodMap = std::unordered_map<std::string, std::unique_ptr<robo::SearchMethod>>;
 
@@ -42,8 +43,10 @@ int main(int argc, char** argv)
 
     print_output(results.filename, results.method, path);
 
-    robo::VisualizerApp app(sky::Path::bin_path(argv), env, method.explored(), path);
-    app.start();
+    robo::VisualizerApp app(cli.app_name(), env, method.explored(), path);
+    app.set_speed(3);
+    app.set_tilesize(80);
+    app.run();
 
     return 0;
 }
