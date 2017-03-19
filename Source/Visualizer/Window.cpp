@@ -29,14 +29,14 @@ bool Window::initialize()
 {
     if ( !SDL_WasInit(SDL_INIT_VIDEO) ) {
         if ( SDL_Init(SDL_INIT_VIDEO) != 0 ) {
-            print_error("SDL_Init", SDL_GetError());
+            error_callback_("SDL_Init", SDL_GetError());
             return false;
         }
     }
 
     window_ = SDL_CreateWindow(title_.c_str(), x_, y_, width_, height_, SDL_WINDOW_SHOWN);
     if ( window_ == nullptr ) {
-        print_error("Window creation", SDL_GetError());
+        error_callback_("Window creation", SDL_GetError());
         return false;
     }
 
@@ -64,10 +64,9 @@ SDL_Window* Window::sdl_window()
     return window_;
 }
 
-void Window::print_error(const std::string& type, const std::string& msg)
+void Window::set_error_callback(Window::error_callback_t error_callback)
 {
-    std::cerr << "[" << title_ << "] " << type
-              << " error occurred: " << msg << std::endl;
+    error_callback_ = error_callback;
 }
 
 }

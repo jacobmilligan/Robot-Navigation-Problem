@@ -161,6 +161,11 @@ public:
         return grid_[p.y][p.x];
     }
 
+    inline void set_cell(const int x, const int y, const Cell cell)
+    {
+        grid_[y][x] = cell;
+    }
+
     bool goal_test(const Point& pos) const;
 
 private:

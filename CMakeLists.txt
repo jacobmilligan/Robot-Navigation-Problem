@@ -10,6 +10,7 @@ set(SOURCE_FILES
         Source/Search/Environment.cpp
         Source/Search/SearchMethod.cpp
         Source/Visualizer/VisualizerApp.cpp
+        Source/Visualizer/Text.cpp
         Source/Visualizer/Color.cpp
         Source/Visualizer/GraphicsDriver.cpp
         Source/Visualizer/Window.cpp)
@@ -21,19 +22,37 @@ set(SOURCE_FILES ${SOURCE_FILES}
         Source/Search/Methods/GreedyBestFirst.cpp
         Source/Search/Methods/AStar.cpp)
 
-add_subdirectory(Deps/SDL2-2.0.5)
+LINK_DIRECTORIES(Deps)
+
 add_subdirectory(Deps/Path)
 
-FIND_PACKAGE(SDL2 REQUIRED)
-include_directories(${SDL2_INCLUDE_DIR})
+include_directories(Deps/SDL2-2.0.5/include)
 include_directories(Deps/Path)
 
+# Main project
 add_executable(${PROJECT_NAME} ${SOURCE_FILES} Source/Main.cpp)
 target_include_directories(${PROJECT_NAME} PUBLIC Source Deps/Skyrocket/Source)
-target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARY})
+target_link_libraries(${PROJECT_NAME} SDL2)
 target_link_libraries(${PROJECT_NAME} skyrocket_path)
 
+# Tests
 add_executable(tests ${SOURCE_FILES} Tests/Tests.cpp)
 target_include_directories(tests PUBLIC Source Tests Deps/Skyrocket/Source)
-target_link_libraries(tests ${SDL2_LIBRARY})
+target_link_libraries(tests SDL2)
 target_link_libraries(tests skyrocket_path)
+
+# Visualizer
+add_executable(robovisualizer ${SOURCE_FILES} Source/VisualizerMain.cpp)
+target_include_directories(robovisualizer PUBLIC Source Deps/Skyrocket/Source)
+target_link_libraries(robovisualizer SDL2)
+target_link_libraries(robovisualizer skyrocket_path)
+
+
+# Win32
+if (WIN32)
+    include_directories(Deps/SDL2_ttf-2.0.14/Win32/include)
+    target_link_libraries(robovisualizer SDL2_ttf.lib)
+else()
+    include_directories(Deps/SDL2_ttf-2.0.14/macOS/SDL2_ttf.framework/Headers)
+    target_link_libraries(robovisualizer SDL2_ttf)
+endif()

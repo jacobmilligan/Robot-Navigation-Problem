@@ -158,7 +158,7 @@ bool FileParser::parse_position(Environment& env, const int pos)
     auto col = tok.values[0];
     auto row = tok.values[1];
 
-    env[row][col] = Cell::start;
+    env.set_cell(col, row, Cell::start);
     env.start = Point(col, row);
 
     return true;
@@ -175,7 +175,7 @@ bool FileParser::parse_goal(Environment& env, const int pos)
     auto col = tok.values[0];
     auto row = tok.values[1];
 
-    env[row][col] = Cell::goal;
+    env.set_cell(col, row, Cell::goal);
     env.goal = Point(col, row);
 
     return true;
@@ -198,7 +198,7 @@ bool FileParser::parse_wall(Environment& env, const int pos)
 
     for ( int i = 0; i < height; ++i ) {
         for ( int j = 0; j < width; ++j ) {
-            env[row + i][col + j] = Cell::wall;
+            env.set_cell(col + j, row + i, Cell::wall);
         }
     }
 

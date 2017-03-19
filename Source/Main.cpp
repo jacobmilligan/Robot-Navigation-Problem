@@ -47,10 +47,5 @@ int main(int argc, char** argv)
 
     print_output(results.filename, results.method, path);
 
-    robo::VisualizerApp app(cli.app_name(), env, method.explored(), path);
-    app.set_speed(1);
-    app.set_tilesize(32);
-    app.run();
-
     return 0;
 }

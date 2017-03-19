@@ -21,8 +21,10 @@
 
 namespace robo {
 
+class VisualizerApp;
 
 class GraphicsDriver {
+    typedef void (* error_callback_t)(const std::string&, const std::string&);
 public:
     GraphicsDriver(const std::string& app_name);
 
@@ -49,15 +51,29 @@ public:
 
     SDL_Rect get_rect(const int x, const int y, const int width, const int height);
 
+    void set_error_callback(error_callback_t error_callback);
 
+    SDL_Texture* generate_texture(SDL_Surface* surface)
+    {
+        return SDL_CreateTextureFromSurface(renderer_, surface);
+    }
+
+    void draw_texture(SDL_Texture* texture, const int x, const int y)
+    {
+        SDL_Rect dest;
+        dest.x = x;
+        dest.y = y;
+        SDL_QueryTexture(texture, nullptr, nullptr, &dest.w, &dest.h);
+        SDL_RenderCopy(renderer_, texture, nullptr, &dest);
+    }
 private:
     std::string app_name_;
     SDL_Color clear_color_;
     SDL_Renderer* renderer_;
 
-    void print_error(const std::string& type, const std::string& msg);
     void reset_color();
 
+    error_callback_t error_callback_;
 };
 
 

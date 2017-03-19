@@ -10,6 +10,8 @@
 
 #include "Visualizer/GraphicsDriver.hpp"
 
+#include <SDL_ttf.h>
+
 namespace robo {
 
 
@@ -20,6 +22,7 @@ GraphicsDriver::GraphicsDriver(const std::string& app_name)
 GraphicsDriver::~GraphicsDriver()
 {
     SDL_DestroyRenderer(renderer_);
+    TTF_Quit();
 }
 
 bool GraphicsDriver::initialize(Window& window)
@@ -28,7 +31,12 @@ bool GraphicsDriver::initialize(Window& window)
                                    -1,
                                    SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if ( renderer_ == nullptr ) {
-        print_error("SDL_CreateRenderer", SDL_GetError());
+        error_callback_("SDL_CreateRenderer", SDL_GetError());
+        return false;
+    }
+
+    if ( TTF_Init() != 0 ) {
+        error_callback_("SDL_ttf", "Initialization failed");
         return false;
     }
 
@@ -121,12 +129,6 @@ GraphicsDriver::get_rect(const int x, const int y, const int width, const int he
     return rect;
 }
 
-void GraphicsDriver::print_error(const std::string& type, const std::string& msg)
-{
-    std::cerr << "[" << app_name_ << "] " << type
-              << " error occurred: " << msg << std::endl;
-}
-
 void GraphicsDriver::reset_color()
 {
     SDL_SetRenderDrawColor(renderer_,
@@ -134,6 +136,11 @@ void GraphicsDriver::reset_color()
                            clear_color_.g,
                            clear_color_.b,
                            clear_color_.a);
+}
+
+void GraphicsDriver::set_error_callback(error_callback_t error_callback)
+{
+    error_callback_ = error_callback;
 }
 
 
