@@ -161,7 +161,7 @@ TEST_CASE("all search methods return failure if the goal can't be found", "[fail
     //================================
     robo::FileParser parser("Tests");
     auto env = parser.parse(
-        "/Users/Jacob/Uni/IntroAI/Assignment1/cmake-build-debug/test4.txt"
+        "/Users/Jacob/Uni/IntroAI/Assignment1/cmake-build-debug/failure.txt"
     );
 
     robo::BreadthFirst bfs;
