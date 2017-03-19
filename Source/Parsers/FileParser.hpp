@@ -43,7 +43,7 @@ struct Token {
 class FileParser {
 public:
     FileParser(const std::string& app_name)
-        : pos_(0), app_name_(app_name)
+        : pos_(0), app_name_(app_name), newlines_(0)
     {}
 
     Environment parse(const std::string& filepath)
@@ -51,7 +51,7 @@ public:
         std::ifstream file(filepath);
 
         if ( !file ) {
-            print_error("Parse", "No such file found with the specified name");
+            print_error("File parsing", "No such file found with the specified name");
             return Environment();
         }
 
@@ -66,6 +66,7 @@ public:
 private:
     std::vector<Token> tokens_;
     int pos_;
+    int newlines_;
     std::string app_name_;
 
     void print_error(const std::string& type, const std::string& msg);

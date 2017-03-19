@@ -71,7 +71,7 @@ void VisualizerApp::process_input()
 
 void VisualizerApp::update()
 {
-    if ( timer_ < 0 ) {
+    if ( timer_ <= 0 ) {
         timer_ = speed_;
 
         if ( current_node_ < explored_.size() - 1 ) {

@@ -96,6 +96,7 @@ struct Node {
 
     int id;
     int parent_id;
+    double g;
     double cost;
     Direction action;
     Point state;

@@ -5,6 +5,7 @@
 #include "Search/Methods/BreadthFirst.hpp"
 #include "Search/Methods/DepthFirst.hpp"
 #include "Search/Methods/GreedyBestFirst.hpp"
+#include "Search/Methods/AStar.hpp"
 
 using MethodMap = std::unordered_map<std::string, std::unique_ptr<robo::SearchMethod>>;
 
@@ -13,6 +14,7 @@ void populate_search_methods(MethodMap& methods)
     methods["BFS"] = std::make_unique<robo::BreadthFirst>();
     methods["DFS"] = std::make_unique<robo::DepthFirst>();
     methods["GBFS"] = std::make_unique<robo::GreedyBestFirst>();
+    methods["AS"] = std::make_unique<robo::AStar>();
 }
 
 void print_output(const std::string& filename, const std::string& method,
@@ -28,7 +30,6 @@ int main(int argc, char** argv)
 {
     MethodMap methods;
     robo::CLIParser cli("Executes several search methods");
-    robo::FileParser parser(cli.app_name());
 
     populate_search_methods(methods);
 
@@ -38,6 +39,7 @@ int main(int argc, char** argv)
         return 0;
     }
 
+    robo::FileParser parser(cli.app_name());
     auto& method = *methods.find(results.method)->second;
     auto env = parser.parse(results.filepath);
     env.step_cost = 1;
@@ -46,8 +48,8 @@ int main(int argc, char** argv)
     print_output(results.filename, results.method, path);
 
     robo::VisualizerApp app(cli.app_name(), env, method.explored(), path);
-    app.set_speed(3);
-    app.set_tilesize(80);
+    app.set_speed(1);
+    app.set_tilesize(32);
     app.run();
 
     return 0;

@@ -27,8 +27,6 @@ protected:
         result.cost = result.state.distance(env.goal);
         return result;
     }
-private:
-    std::priority_queue<Node, std::vector<Node>, std::greater<Node>> frontier_;
 
     void frontier_clear() override
     {
@@ -43,6 +41,8 @@ private:
         frontier_.pop();
         return node;
     }
+private:
+    std::priority_queue<Node, std::vector<Node>, std::greater<Node>> frontier_;
 };
 
 

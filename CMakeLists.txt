@@ -9,13 +9,17 @@ set(SOURCE_FILES
         Source/Parsers/FileParser.cpp
         Source/Search/Environment.cpp
         Source/Search/SearchMethod.cpp
-        Source/Search/Methods/BreadthFirst.cpp
-        Source/Search/Methods/DepthFirst.cpp
-        Source/Search/Methods/GreedyBestFirst.cpp
         Source/Visualizer/VisualizerApp.cpp
         Source/Visualizer/Color.cpp
         Source/Visualizer/GraphicsDriver.cpp
         Source/Visualizer/Window.cpp)
+
+# Add search methods
+set(SOURCE_FILES ${SOURCE_FILES}
+        Source/Search/Methods/BreadthFirst.cpp
+        Source/Search/Methods/DepthFirst.cpp
+        Source/Search/Methods/GreedyBestFirst.cpp
+        Source/Search/Methods/AStar.cpp)
 
 add_subdirectory(Deps/SDL2-2.0.5)
 add_subdirectory(Deps/Path)

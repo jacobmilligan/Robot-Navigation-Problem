@@ -18,7 +18,6 @@ namespace robo {
 void FileParser::lex(std::string env_str)
 {
     pos_ = 0;
-    int newlines = 0;
     char cur = env_str[pos_];
     Token tok;
 
@@ -27,20 +26,23 @@ void FileParser::lex(std::string env_str)
             case '[':
                 tok = scan_tuple(env_str, TokenType::grid_definition, ']');
                 tokens_.push_back(tok);
-                newlines++;
+                newlines_++;
                 break;
             case '(':
                 tok = scan_tuple(env_str, TokenType::wall, ')');
                 if ( tok.values.size() < 3 ) {
-                    if ( newlines == 1 )
+                    if ( newlines_ == 1 )
                         tok.type = TokenType::start_position;
-                    if ( newlines == 2 )
+                    if ( newlines_ == 2 )
                         tok.type = TokenType::goal_position;
-                    if ( newlines > 2 )
+                    if ( newlines_ > 2 )
                         tok.type = TokenType::unknown;
                 }
                 tokens_.push_back(tok);
-                newlines++;
+                newlines_++;
+                break;
+            case '\n':
+                newlines_++;
                 break;
         }
         pos_++;
@@ -78,6 +80,9 @@ Token FileParser::scan_tuple(const std::string& str, TokenType type, char closin
         }
     }
 
+    if ( cur != closing_char )
+        return Token(TokenType::unknown);
+
     return tok;
 }
 
@@ -106,9 +111,8 @@ Environment FileParser::parse_tokens()
                 valid = parse_wall(env, t);
                 break;
             case TokenType::unknown:
-                std::string msg("Syntax error at line ");
-                msg += t;
-                print_error("Parse", msg);
+                print_error("File parsing",
+                            "Syntax error at line " + std::to_string(newlines_));
                 valid = false;
                 break;
         }
@@ -130,7 +134,7 @@ void FileParser::print_error(const std::string& type, const std::string& msg)
 bool FileParser::parse_definition(Environment& env, const int pos)
 {
     if ( pos != 0 ) {
-        print_error("Parse", "Line 1 must be a grid size in the form [N,M]");
+        print_error("File parsing", "Line 1 must be a grid size in the form [N,M]");
         return false;
     }
 
@@ -146,7 +150,7 @@ bool FileParser::parse_definition(Environment& env, const int pos)
 bool FileParser::parse_position(Environment& env, const int pos)
 {
     if ( pos != 1 ) {
-        print_error("Parse", "Line 2 must be a starting position in the form (x,y)");
+        print_error("File parsing", "Line 2 must be a starting position in the form (x,y)");
         return false;
     }
 
@@ -163,7 +167,7 @@ bool FileParser::parse_position(Environment& env, const int pos)
 bool FileParser::parse_goal(Environment& env, const int pos)
 {
     if ( pos != 2 ) {
-        print_error("Parse", "Line 3 must be a goal position in the form (x,y)");
+        print_error("File parsing", "Line 3 must be a goal position in the form (x,y)");
         return false;
     }
 
@@ -181,8 +185,8 @@ bool FileParser::parse_wall(Environment& env, const int pos)
 {
     if ( pos < 3 ) {
         std::string msg("Expected a wall definition at line ");
-        msg += pos;
-        print_error("Parse", msg);
+        msg += std::to_string(pos);
+        print_error("File parsing", msg);
         return false;
     }
 
