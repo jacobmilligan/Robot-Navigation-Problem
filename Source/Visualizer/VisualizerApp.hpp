@@ -1,11 +1,13 @@
 //
 //  VisualizerApp.hpp
-//  robonav
+//  COS30019 Intro To AI - Assignment 1
+//  Robot Navigation
 //
 //  --------------------------------------------------------------
 //
-//  Created by Jacob Milligan on 19/03/2017.
-//  Copyright (c) 2017 Jacob Milligan. All rights reserved.
+//  Created by
+//  Jacob Milligan 100660682
+//  19/03/2017
 //
 
 #pragma once

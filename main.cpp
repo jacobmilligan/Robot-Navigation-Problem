@@ -1,7 +1,5 @@
-#include <Visualizer/VisualizerApp.hpp>
 #include "Parsers/CLIParser.hpp"
 #include "Parsers/FileParser.hpp"
-#include "Search/SearchMethod.hpp"
 #include "Visualizer/VisualizerApp.hpp"
 
 using MethodMap = std::unordered_map<std::string, std::unique_ptr<robo::SearchMethod>>;

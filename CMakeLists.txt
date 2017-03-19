@@ -10,7 +10,9 @@ set(SOURCE_FILES
         Source/Search/Environment.cpp
         Source/Search/SearchMethod.cpp
         Source/Visualizer/VisualizerApp.cpp
-        Source/Visualizer/Color.cpp)
+        Source/Visualizer/Color.cpp
+        Source/Visualizer/GraphicsDriver.cpp
+        Source/Visualizer/Window.cpp)
 
 add_subdirectory(Deps/SDL2-2.0.5)
 add_subdirectory(Deps/Path)
