@@ -30,6 +30,7 @@ VisualizerApp::VisualizerApp(const std::string& app_name, const int speed, const
       window_(app_name, 100, 100, 1024, 800),
       graphics_(app_name),
       text_(graphics_),
+      last_time_(0),
       is_evaluating_(false),
       tilesize_(tilesize),
       speed_(speed),
@@ -107,7 +108,9 @@ void VisualizerApp::process_input()
                 case SDLK_RETURN:
                     current_node_ = 0;
                     current_method_ = methods_[method_str_].get();
+                    auto start = SDL_GetPerformanceCounter();
                     results_ = current_method_->search(env_);
+                    last_time_ = get_delta(start);
                     is_evaluating_ = true;
                     path_.clear();
                     break;
@@ -115,6 +118,7 @@ void VisualizerApp::process_input()
                     current_method_ = nullptr;
                     current_node_ = 0;
                     is_evaluating_ = false;
+                    last_time_ = 0.0;
                     path_.clear();
                     break;
                 default: break;
@@ -187,6 +191,7 @@ void VisualizerApp::draw()
     path_.draw_endpoints();
 
     text_.draw_string(1, 1, method_str_, font_, Colors::black);
+    text_.draw_string(1, 750, "Execution time: " + std::to_string(last_time_), font_, Colors::black);
 }
 
 void VisualizerApp::draw_tiles()

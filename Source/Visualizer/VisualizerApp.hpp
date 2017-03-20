@@ -58,6 +58,7 @@ private:
     Font font_;
 
     SDL_Event event_;
+    double last_time_;
 
     bool is_evaluating_;
     int tilesize_;
@@ -79,8 +80,12 @@ private:
     void process_input();
     void update();
     void draw();
-
     void draw_tiles();
+
+    double get_delta(const double last)
+    {
+        return ((SDL_GetPerformanceCounter() - last) * 1000) / SDL_GetPerformanceFrequency();
+    }
 };
 
 
