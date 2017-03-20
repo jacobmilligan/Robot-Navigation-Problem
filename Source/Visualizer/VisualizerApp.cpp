@@ -64,12 +64,18 @@ void VisualizerApp::run()
 
     while ( window_.is_open() ) {
         process_input();
+
+        if ( !window_.is_open() )
+            break;
+
         update();
 
         graphics_.clear();
         draw();
         graphics_.refresh();
     }
+
+    path_.clear();
 }
 
 void VisualizerApp::initialize()
@@ -191,7 +197,10 @@ void VisualizerApp::draw()
     path_.draw_endpoints();
 
     text_.draw_string(1, 1, method_str_, font_, Colors::black);
-    text_.draw_string(1, 750, "Execution time: " + std::to_string(last_time_), font_, Colors::black);
+    text_.draw_string(1, 750, "Execution time: " + std::to_string(last_time_) + "ms",
+                      font_, Colors::black);
+    text_.draw_string(800, 750, "Path length: " + std::to_string(results_.path.size()),
+                      font_, Colors::black);
 }
 
 void VisualizerApp::draw_tiles()

@@ -11,6 +11,7 @@
 #include "Visualizer/GraphicsDriver.hpp"
 
 #include <SDL_ttf.h>
+#include <thread>
 
 namespace robo {
 

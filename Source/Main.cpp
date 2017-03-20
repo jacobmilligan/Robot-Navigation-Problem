@@ -34,6 +34,10 @@ int main(int argc, char** argv)
     populate_search_methods(methods);
 
     auto results = cli.parse(argc, argv);
+    if ( results.method.size() <= 0 ) {
+        return 0;
+    }
+
     if ( methods.find(results.method) == methods.end() ) {
         cli.print_error("'" + results.method + "' is not a supported search method");
         return 0;
@@ -42,6 +46,11 @@ int main(int argc, char** argv)
     robo::FileParser parser(cli.app_name());
     auto& method = *methods.find(results.method)->second;
     auto env = parser.parse(results.filepath);
+
+    if ( !env.valid() ) {
+        return 0;
+    }
+
     env.step_cost = 1;
     auto path = method.search(env);
 

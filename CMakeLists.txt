@@ -8,13 +8,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/CMake/Modules)
 set(SOURCE_FILES
         Source/Parsers/FileParser.cpp
         Source/Search/Environment.cpp
-        Source/Search/SearchMethod.cpp
-        Source/Visualizer/VisualizerApp.cpp
-        Source/Visualizer/Text.cpp
-        Source/Visualizer/Color.cpp
-        Source/Visualizer/PathVisualizer.cpp
-        Source/Visualizer/GraphicsDriver.cpp
-        Source/Visualizer/Window.cpp)
+        Source/Search/SearchMethod.cpp)
 
 # Add search methods
 set(SOURCE_FILES ${SOURCE_FILES}
@@ -43,7 +37,14 @@ target_link_libraries(tests SDL2)
 target_link_libraries(tests skyrocket_path)
 
 # Visualizer
-add_executable(robovisualizer ${SOURCE_FILES} Source/VisualizerMain.cpp)
+add_executable(robovisualizer ${SOURCE_FILES}
+        Source/VisualizerMain.cpp
+        Source/Visualizer/VisualizerApp.cpp
+        Source/Visualizer/Text.cpp
+        Source/Visualizer/Color.cpp
+        Source/Visualizer/PathVisualizer.cpp
+        Source/Visualizer/GraphicsDriver.cpp
+        Source/Visualizer/Window.cpp)
 target_include_directories(robovisualizer PUBLIC Source Deps/Skyrocket/Source)
 target_link_libraries(robovisualizer SDL2)
 target_link_libraries(robovisualizer skyrocket_path)

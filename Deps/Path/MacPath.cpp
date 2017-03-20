@@ -44,13 +44,13 @@ std::string Path::bin_path(char** argv)
         printf("Path error: Unable to locate binary get_relative");
         return "";
     }
-    
-    std::string binpath = realpath(buffer, argv[0]);
+
+    std::string binpath = realpath(argv[0], buffer);
     auto lastslash = binpath.rfind(separator_);
     
     if ( lastslash != std::string::npos )
         binpath.replace(lastslash, binpath.length(), "");
-    
+
     return binpath;
 }
 

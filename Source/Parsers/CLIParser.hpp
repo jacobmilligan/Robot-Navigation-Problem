@@ -19,7 +19,13 @@
 
 namespace robo {
 
-struct Results {
+struct CLIResults {
+    CLIResults() {}
+
+    CLIResults(const std::string &file, const std::string &path,
+               const std::string &method_used)
+        : filename(file), filepath(path), method(method_used)
+    {}
     std::string filename;
     std::string filepath;
     std::string method;
@@ -31,25 +37,24 @@ public:
         : desc_(desc)
     {}
 
-    Results parse(int argc, char** argv)
+    CLIResults parse(int argc, char** argv)
     {
         bin_name_ = sky::Path(argv[0]).filename();
 
-        if ( argc > 3 || argc <= 1 ) {
-            print_error("Incorrect number of arguments");
-            return Results();
+        if ( strcmp(argv[1], "--help") == 0 || strcmp(argv[1], "-h") == 0 ) {
+            print_help();
+            return CLIResults();
         }
 
-        for ( int i = 0; i < argc; ++i ) {
-            if ( strcmp(argv[1], "--help") == 0 || strcmp(argv[1], "-h") == 0 ) {
-                print_help();
-                return Results();
-            }
+        if ( argc != 3 ) {
+            print_error("Incorrect number of arguments");
+            return CLIResults();
         }
 
         sky::Path filepath = sky::Path::bin_path(argv);
         filepath.append(argv[1]);
-        return Results { filepath.filename(), filepath.str(), argv[2] };
+
+        return CLIResults(filepath.filename(), filepath.str(), argv[2]);
     }
 
     void print_error(const std::string& msg)

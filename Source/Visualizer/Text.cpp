@@ -32,7 +32,9 @@ void Font::set_error_callback(Font::error_callback_t error_callback)
 
 Font::~Font()
 {
-    TTF_CloseFont(ttf_);
+    if ( TTF_WasInit() ) {
+        TTF_CloseFont(ttf_);
+    }
 }
 
 
