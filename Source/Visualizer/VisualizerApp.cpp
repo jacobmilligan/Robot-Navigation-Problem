@@ -49,6 +49,7 @@ VisualizerApp::VisualizerApp(const std::string& app_name, const int speed, const
     methods_["A*"] = std::make_unique<robo::AStar>();
 
     env_.start = Point(1, 1);
+    env_.goal = Point(10, 10);
     env_.set_cell(1, 1, Cell::start);
     env_.set_cell(10, 10, Cell::goal);
     start_ = get_tile(1, 1);
@@ -278,6 +279,7 @@ void VisualizerApp::batch_place_walls()
         env_.set_cell(goal_.x / tilesize_, goal_.y / tilesize_, Cell::empty);
         goal_.x = x * tilesize_;
         goal_.y = y * tilesize_;
+        env_.goal = Point(x, y);
         env_.set_cell(x, y, Cell::goal);
     } else {
         env_.set_cell(x, y, Cell::wall);
@@ -289,5 +291,6 @@ SDL_Rect VisualizerApp::get_tile(const int x, const int y)
 {
     return graphics_.get_rect(x * tilesize_, y * tilesize_, tilesize_, tilesize_);
 }
+
 
 }
