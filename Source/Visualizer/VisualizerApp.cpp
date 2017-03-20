@@ -108,9 +108,9 @@ void VisualizerApp::process_input()
                 case SDLK_RETURN:
                     current_node_ = 0;
                     current_method_ = methods_[method_str_].get();
-                    auto start = SDL_GetPerformanceCounter();
+                    last_time_ = SDL_GetPerformanceCounter();
                     results_ = current_method_->search(env_);
-                    last_time_ = get_delta(start);
+                    last_time_ = get_delta(last_time_);
                     is_evaluating_ = true;
                     path_.clear();
                     break;
