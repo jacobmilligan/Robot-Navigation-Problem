@@ -12,22 +12,42 @@
 
 #pragma once
 
-#include "Visualizer/GraphicsDriver.hpp"
 #include "Search/SearchMethod.hpp"
 #include "Visualizer/Text.hpp"
-
-#include <unordered_map>
+#include "Visualizer/PathVisualizer.hpp"
 
 namespace robo {
 
 void print_error(const std::string& type, const std::string& msg);
 
+class InputState {
+public:
+    InputState() {}
+
+    void toggle_all(const bool state);
+
+    void toggle_walls(const Cell cell);
+
+    inline bool moving_start()
+    {
+        return moving_start_;
+    }
+
+    inline bool moving_goal()
+    {
+        return moving_goal_;
+    }
+
+private:
+    bool placing_walls_;
+    bool moving_start_;
+    bool moving_goal_;
+};
+
 class VisualizerApp {
 public:
     VisualizerApp(const std::string& app_name, const int speed, const int tilesize, char** argv);
-
     void run();
-
 private:
     using MethodMap = std::unordered_map<std::string, std::unique_ptr<robo::SearchMethod>>;
 
@@ -40,19 +60,13 @@ private:
     SDL_Event event_;
 
     bool is_evaluating_;
-    bool is_start_moving_;
-    bool is_goal_moving_;
-    bool placing_walls_;
-    int tilesize_ = 64;
-    int speed_ = 2;
+    int tilesize_;
+    int speed_;
     int timer_;
     int current_node_;
 
-    SDL_Rect start_;
-    SDL_Rect goal_;
-    SDL_Rect node_rect_;
-
-    std::unordered_map<Point, bool, PointHash> visited_;
+    PathVisualizer path_;
+    InputState input_;
     MethodMap methods_;
 
     Environment env_;
@@ -67,13 +81,6 @@ private:
     void draw();
 
     void draw_tiles();
-    void draw_path();
-    void update_path();
-
-    void toggle_wall();
-    void batch_place_walls();
-
-    SDL_Rect get_tile(const int x, const int y);
 };
 
 

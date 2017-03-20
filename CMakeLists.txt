@@ -12,6 +12,7 @@ set(SOURCE_FILES
         Source/Visualizer/VisualizerApp.cpp
         Source/Visualizer/Text.cpp
         Source/Visualizer/Color.cpp
+        Source/Visualizer/PathVisualizer.cpp
         Source/Visualizer/GraphicsDriver.cpp
         Source/Visualizer/Window.cpp)
 

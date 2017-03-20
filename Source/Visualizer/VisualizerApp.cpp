@@ -31,13 +31,11 @@ VisualizerApp::VisualizerApp(const std::string& app_name, const int speed, const
       graphics_(app_name),
       text_(graphics_),
       is_evaluating_(false),
-      is_start_moving_(false),
-      is_goal_moving_(false),
-      placing_walls_(false),
       tilesize_(tilesize),
       speed_(speed),
       timer_(speed_),
       current_node_(0),
+      path_(graphics_, tilesize),
       env_(1024 / tilesize, 800 / tilesize),
       current_method_(nullptr),
       method_str_("Breadth-first"),
@@ -48,12 +46,10 @@ VisualizerApp::VisualizerApp(const std::string& app_name, const int speed, const
     methods_["Greedy Best-First"] = std::make_unique<robo::GreedyBestFirst>();
     methods_["A*"] = std::make_unique<robo::AStar>();
 
-    env_.start = Point(1, 1);
-    env_.goal = Point(10, 10);
-    env_.set_cell(1, 1, Cell::start);
-    env_.set_cell(10, 10, Cell::goal);
-    start_ = get_tile(1, 1);
-    goal_ = get_tile(10, 10);
+    path_.update_goal_position(env_, 10, 10);
+    path_.update_start_position(env_, 1, 1);
+    path_.update_current_node_position(0, 0);
+    path_.clear();
 
     graphics_.set_error_callback(&print_error);
     window_.set_error_callback(&print_error);
@@ -113,13 +109,13 @@ void VisualizerApp::process_input()
                     current_method_ = methods_[method_str_].get();
                     results_ = current_method_->search(env_);
                     is_evaluating_ = true;
-                    visited_.clear();
+                    path_.clear();
                     break;
                 case SDLK_SPACE:
                     current_method_ = nullptr;
                     current_node_ = 0;
                     is_evaluating_ = false;
-                    visited_.clear();
+                    path_.clear();
                     break;
                 default: break;
             }
@@ -127,21 +123,32 @@ void VisualizerApp::process_input()
 
         if ( event_.type == SDL_MOUSEBUTTONDOWN ) {
             if ( event_.button.button == SDL_BUTTON_LEFT ) {
-                toggle_wall();
+                auto x = event_.button.x / tilesize_;
+                auto y = event_.button.y / tilesize_;
+                input_.toggle_walls(env_.get_cell(Point(x, y)));
+                path_.toggle_wall(env_, x, y);
             }
         }
 
         if ( event_.type == SDL_MOUSEMOTION ) {
             if ( event_.button.button == SDL_BUTTON_LEFT ) {
-                batch_place_walls();
+                auto x = event_.button.x / tilesize_;
+                auto y = event_.button.y / tilesize_;
+                input_.toggle_walls(env_.get_cell(Point(x, y)));
+
+                if ( input_.moving_start() ) {
+                    path_.update_start_position(env_, x, y);
+                } else if ( input_.moving_goal() ) {
+                    path_.update_goal_position(env_, x, y);
+                } else {
+                    path_.update_walls(env_, x, y);
+                }
             }
         }
 
         if ( event_.type == SDL_MOUSEBUTTONUP ) {
             if ( event_.button.button == SDL_BUTTON_LEFT ) {
-                is_start_moving_ = false;
-                is_goal_moving_ = false;
-                placing_walls_ = false;
+                input_.toggle_all(false);
             }
         }
     }
@@ -150,22 +157,34 @@ void VisualizerApp::process_input()
 void VisualizerApp::update()
 {
     if ( is_evaluating_ && current_method_ != nullptr ) {
-        update_path();
+        if ( timer_ <= 0 ) {
+            timer_ = speed_;
+
+            if ( current_node_ < current_method_->explored().size() - 1 ) {
+                current_node_++;
+                auto node = current_method_->explored().get(current_node_);
+                path_.update_current_node_position(node.state.x, node.state.y);
+            } else {
+                is_evaluating_ = false;
+            }
+        }
+
+        timer_--;
     }
 }
 
 void VisualizerApp::draw()
 {
     draw_tiles();
-    if ( current_method_ != nullptr )
-        draw_path();
-
-    if ( is_evaluating_ ) {
-        graphics_.fill_rectangle(node_rect_, Colors::orange);
+    if ( current_method_ != nullptr ) {
+        path_.draw(results_, current_node_, current_method_->explored().size());
     }
 
-    graphics_.fill_rectangle(start_, Colors::red);
-    graphics_.fill_rectangle(goal_, Colors::light_green);
+    if ( is_evaluating_ ) {
+        path_.draw_evaluating();
+    }
+
+    path_.draw_endpoints();
 
     text_.draw_string(1, 1, method_str_, font_, Colors::black);
 }
@@ -186,110 +205,34 @@ void VisualizerApp::draw_tiles()
                 graphics_.fill_rectangle(current, Colors::gray);
             }
 
-            if ( visited_.find(Point(x, y)) != visited_.end() ) {
+            if ( path_.has_visited(Point(x, y)) ) {
                 graphics_.fill_rectangle(current, Colors::light_blue);
             }
         }
     }
 }
 
-void VisualizerApp::draw_path()
+void InputState::toggle_all(const bool state)
 {
-    SDL_Rect rect;
-    for ( auto& n : results_.path ) {
-        rect.x = n.state.x * tilesize_;
-        rect.y = n.state.y * tilesize_;
-        rect.w = tilesize_;
-        rect.h = tilesize_;
-
-        if ( visited_.find(n.state) != visited_.end() ) {
-            if ( current_node_ >= current_method_->explored().size() - 1 ) {
-                graphics_.fill_rectangle(rect, Colors::green);
-            } else {
-                graphics_.fill_rectangle(rect, Colors::light_yellow);
-            }
-        }
-    }
+    placing_walls_ = state;
+    moving_goal_ = state;
+    moving_start_ = state;
 }
 
-void VisualizerApp::update_path()
+void InputState::toggle_walls(const Cell cell)
 {
-    if ( timer_ <= 0 ) {
-        timer_ = speed_;
-
-        if ( current_node_ < current_method_->explored().size() - 1 ) {
-            current_node_++;
-            auto node = current_method_->explored().get(current_node_).state;
-            node_rect_.x = node.x * tilesize_;
-            node_rect_.y = node.y * tilesize_;
-            visited_[node] = true;
-        } else {
-            is_evaluating_ = false;
-        }
-    }
-
-    timer_--;
-}
-
-void VisualizerApp::toggle_wall()
-{
-    auto x = event_.button.x / tilesize_;
-    auto y = event_.button.y / tilesize_;
-    auto cell = env_.get_cell(Point(x, y));
-
-    if ( is_start_moving_ || is_goal_moving_ ) {
+    if ( moving_goal_ || moving_start_ ) {
         return;
     }
 
     if ( !placing_walls_ ) {
         if ( cell == Cell::goal || cell == Cell::start ) {
-            is_start_moving_ = cell == Cell::start;
-            is_goal_moving_ = cell == Cell::goal;
+            moving_start_ = cell == Cell::start;
+            moving_goal_ = cell == Cell::goal;
         }
 
         placing_walls_ = true;
     }
-
-    auto new_val = ( cell == Cell::wall ) ? Cell::empty : Cell::wall;
-    env_.set_cell(x, y, new_val);
-}
-
-void VisualizerApp::batch_place_walls()
-{
-    auto x = event_.button.x / tilesize_;
-    auto y = event_.button.y / tilesize_;
-
-    auto cell = env_.get_cell(Point(x, y));
-    if ( !placing_walls_ ) {
-        if ( cell == Cell::goal || cell == Cell::start ) {
-            is_start_moving_ = cell == Cell::start;
-            is_goal_moving_ = cell == Cell::goal;
-        }
-
-        placing_walls_ = true;
-    }
-
-    if ( is_start_moving_ ) {
-        env_.set_cell(start_.x / tilesize_, start_.y / tilesize_, Cell::empty);
-        start_.x = x * tilesize_;
-        start_.y = y * tilesize_;
-        env_.start = Point(x, y);
-        env_.set_cell(x, y, Cell::start);
-    } else if ( is_goal_moving_ ) {
-        env_.set_cell(goal_.x / tilesize_, goal_.y / tilesize_, Cell::empty);
-        goal_.x = x * tilesize_;
-        goal_.y = y * tilesize_;
-        env_.goal = Point(x, y);
-        env_.set_cell(x, y, Cell::goal);
-    } else {
-        env_.set_cell(x, y, Cell::wall);
-    }
-
-}
-
-SDL_Rect VisualizerApp::get_tile(const int x, const int y)
-{
-    return graphics_.get_rect(x * tilesize_, y * tilesize_, tilesize_, tilesize_);
 }
 
 
