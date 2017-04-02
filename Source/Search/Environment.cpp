@@ -55,18 +55,6 @@ Environment::Environment(const unsigned int cols, const unsigned int rows)
     }
 }
 
-std::string Environment::to_string()
-{
-    std::stringstream ss;
-    for ( auto& c : grid_ ) {
-        for ( auto& r : c ) {
-            ss << static_cast<int>(r) << " ";
-        }
-        ss << "\n";
-    }
-    return ss.str();
-}
-
 
 bool Environment::goal_test(const Point& pos) const
 {

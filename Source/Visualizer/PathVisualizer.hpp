@@ -14,6 +14,7 @@
 
 #include "Visualizer/GraphicsDriver.hpp"
 #include "Search/Environment.hpp"
+#include "Search/SearchMethod.hpp"
 
 #include <SDL.h>
 

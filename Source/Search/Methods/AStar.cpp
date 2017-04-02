@@ -70,9 +70,8 @@ Node AStar::frontier_remove()
 Node AStar::get_child(const Environment& env, Node& parent, const Direction action)
 {
     auto child = SearchMethod::get_child(env, parent, action);
-    auto g = parent.g + child.state.distance(parent.state);
+    auto g = parent.cost + env.step_cost;
     auto h = child.state.distance(env.goal);
-    child.g = g;
     child.cost = g + h;
     return child;
 

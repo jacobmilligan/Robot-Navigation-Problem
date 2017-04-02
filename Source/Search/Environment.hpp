@@ -96,22 +96,9 @@ struct Node {
 
     int id;
     int parent_id;
-    double g;
     double cost;
     Direction action;
     Point state;
-};
-
-struct SearchResults {
-    SearchResults()
-        : success(false), node_count(0)
-    {}
-
-    SearchResults(const bool is_succesful, const ExploredSet& explored, const Node& end);
-
-    bool success;
-    unsigned int node_count;
-    std::vector<Node> path;
 };
 
 class Environment {
@@ -123,8 +110,6 @@ public:
     Environment();
 
     Environment(const unsigned int cols, const unsigned int rows);
-
-    std::string to_string();
 
     inline Point size()
     {
@@ -173,12 +158,9 @@ private:
     Point size_;
     std::vector<std::vector<Cell>> grid_;
 
-    std::array<Direction, 4> actions_ = {{
-                                             Direction::up,
-                                             Direction::left,
-                                             Direction::down,
-                                             Direction::right
-                                         }};
+    std::array<Direction, 4> actions_ = {
+        {Direction::up, Direction::left, Direction::down, Direction::right}
+    };
 };
 
 

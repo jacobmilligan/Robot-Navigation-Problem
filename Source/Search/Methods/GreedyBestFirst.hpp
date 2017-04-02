@@ -16,11 +16,22 @@
 
 namespace robo {
 
-
+/// @brief GreedyBestFirst is an implementation of iterative greedy best-first
+/// search method
 class GreedyBestFirst : public SearchMethod {
 public:
+    /// @brief Searches the given environment using the greedy best-first
+    /// algorithm
+    /// @param env Environment to search
+    /// @return The results of the search
     SearchResults search(const Environment& env) override;
 protected:
+    /// @brief Gets a child and it's heuristic value from the environment based
+    /// off the current action. Uses euclidean distance as a heuristic
+    /// @param env The environment to get the child from
+    /// @param parent The parent of the child
+    /// @param action The action being taken
+    /// @return The child node
     Node get_child(const Environment& env, Node& parent, const Direction action) override
     {
         auto result = SearchMethod::get_child(env, parent, action);
@@ -28,6 +39,7 @@ protected:
         return result;
     }
 
+    /// @brief Clears the frontier of all nodes
     void frontier_clear() override
     {
         while ( !frontier_.empty() ) {
@@ -35,6 +47,8 @@ protected:
         }
     }
 
+    /// @brief Removes the next node from the top of the queue
+    /// @return The next node
     Node frontier_remove() override
     {
         auto node = frontier_.top();
@@ -42,6 +56,7 @@ protected:
         return node;
     }
 private:
+    /// @brief The frontier, stored as a priority queue, ordered by lowest cost
     std::priority_queue<Node, std::vector<Node>, std::greater<Node>> frontier_;
 };
 
