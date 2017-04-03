@@ -16,7 +16,7 @@ set(SOURCE_FILES ${SOURCE_FILES}
         Source/Search/Methods/DepthFirst.cpp
         Source/Search/Methods/GreedyBestFirst.cpp
         Source/Search/Methods/AStar.cpp
-        Source/Search/Methods/IterativeDeepeningSearch.cpp)
+        Source/Search/Methods/IDS.cpp)
 
 LINK_DIRECTORIES(Deps)
 

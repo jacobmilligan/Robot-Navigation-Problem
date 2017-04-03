@@ -1,3 +1,4 @@
+#include <Search/Methods/IDS.hpp>
 #include "Parsers/CLIParser.hpp"
 #include "Parsers/FileParser.hpp"
 #include "Visualizer/VisualizerApp.hpp"
@@ -15,6 +16,7 @@ void populate_search_methods(MethodMap& methods)
     methods["DFS"] = std::make_unique<robo::DepthFirst>();
     methods["GBFS"] = std::make_unique<robo::GreedyBestFirst>();
     methods["AS"] = std::make_unique<robo::AStar>();
+    methods["IDS"] = std::make_unique<robo::IDS>();
 }
 
 void print_output(const std::string& filename, const std::string& method,

@@ -48,7 +48,6 @@ public:
     /// @return SearchResults
     virtual SearchResults search(const Environment& env) = 0;
 
-    virtual /// @brief Gets the search methods explored set
     /// @return Reference to the explored set
     ExploredSet& explored()
     {

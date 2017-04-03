@@ -16,6 +16,7 @@
 #include "Search/Methods/DepthFirst.hpp"
 #include "Search/Methods/GreedyBestFirst.hpp"
 #include "Search/Methods/AStar.hpp"
+#include "Search/Methods/IDS.hpp"
 
 namespace robo {
 
@@ -46,6 +47,7 @@ VisualizerApp::VisualizerApp(const std::string& app_name, const int speed, const
     methods_["Depth-first"] = std::make_unique<robo::DepthFirst>();
     methods_["Greedy Best-First"] = std::make_unique<robo::GreedyBestFirst>();
     methods_["A*"] = std::make_unique<robo::AStar>();
+    methods_["IDS"] = std::make_unique<robo::IDS>();
 
     path_.update_goal_position(env_, 10, 10);
     path_.update_start_position(env_, 1, 1);
@@ -108,6 +110,9 @@ void VisualizerApp::process_input()
                     break;
                 case SDLK_4:
                     method_str_ = "A*";
+                    break;
+                case SDLK_5:
+                    method_str_ = "IDS";
                     break;
                 case SDLK_ESCAPE:
                     window_.close();
