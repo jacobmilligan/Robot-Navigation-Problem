@@ -1,27 +1,26 @@
 //
-//  AStar.cpp
-//  COS30019 Intro To AI - Assignment 1
-//  Robot Navigation
+//  IterativeDeepeningSearch.cpp
+//  robonav
 //
 //  --------------------------------------------------------------
 //
 //  Created by
-//  Jacob Milligan 100660682
-//  19/03/2017
+//  Jacob Milligan on 3/04/2017
+//  Copyright (c) 2016 Jacob Milligan. All rights reserved.
 //
 
-#include "AStar.hpp"
+#include "IterativeDeepeningSearch.hpp"
 
 namespace robo {
 
 
-SearchResults AStar::search(const Environment& env)
+SearchResults IterativeDeepeningSearch::search(const Environment& env)
 {
     frontier_.clear();
     explored_.clear();
 
     Node node(env.start, -1, 0, Action::none);
-    if ( env.goal_test(node.state) ) {
+    if ( env.goal_test(env.start) ) {
         return SearchResults(true, explored_, node);
     }
 
@@ -32,15 +31,10 @@ SearchResults AStar::search(const Environment& env)
     while ( !frontier_.empty() ) {
         node = frontier_.remove();
 
-        if ( env.goal_test(node.state) ) {
-            return SearchResults(true, explored_, node);
-        }
-
         for ( auto& a : env.actions() ) {
             child = get_child(env, explored_.get(node.state), a);
             if ( !explored_.contains(child) ) {
                 explored_.add(child);
-
                 if ( env.goal_test(child.state) ) {
                     return SearchResults(true, explored_, child);
                 }
@@ -53,14 +47,15 @@ SearchResults AStar::search(const Environment& env)
     return SearchResults(false, explored_, child);
 }
 
-Node AStar::get_child(const Environment& env, Node& parent, const Action action)
+ExploredSet& IterativeDeepeningSearch::explored()
 {
-    auto child = SearchMethod::get_child(env, parent, action);
-    auto g = parent.cost + env.step_cost;
-    auto h = child.state.distance(env.goal);
-    child.cost = g + h;
-    return child;
+    return SearchMethod::explored();
+}
 
+Node IterativeDeepeningSearch::get_child(const Environment& env, Node& parent,
+                                         const Action action)
+{
+    return SearchMethod::get_child(env, parent, action);
 }
 
 

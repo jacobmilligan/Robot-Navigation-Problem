@@ -12,7 +12,7 @@
 
 #pragma once
 
-#include "Search/SearchMethod.hpp"
+#include "Search/Core/SearchMethod.hpp"
 
 namespace robo {
 
@@ -32,32 +32,16 @@ protected:
     /// @param parent The parent of the child
     /// @param action The action being taken
     /// @return The child node
-    Node get_child(const Environment& env, Node& parent, const Direction action) override
+    Node get_child(const Environment& env, Node& parent, const Action action) override
     {
         auto result = SearchMethod::get_child(env, parent, action);
         result.cost = result.state.distance(env.goal);
         return result;
     }
-
-    /// @brief Clears the frontier of all nodes
-    void frontier_clear() override
-    {
-        while ( !frontier_.empty() ) {
-            frontier_.pop();
-        }
-    }
-
-    /// @brief Removes the next node from the top of the queue
-    /// @return The next node
-    Node frontier_remove() override
-    {
-        auto node = frontier_.top();
-        frontier_.pop();
-        return node;
-    }
 private:
     /// @brief The frontier, stored as a priority queue, ordered by lowest cost
-    std::priority_queue<Node, std::vector<Node>, std::greater<Node>> frontier_;
+    Frontier<std::priority_queue> frontier_;
+
 };
 
 

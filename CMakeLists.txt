@@ -7,15 +7,16 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/CMake/Modules)
 
 set(SOURCE_FILES
         Source/Parsers/FileParser.cpp
-        Source/Search/Environment.cpp
-        Source/Search/SearchMethod.cpp)
+        Source/Search/Core/Environment.cpp
+        Source/Search/Core/SearchMethod.cpp)
 
 # Add search methods
 set(SOURCE_FILES ${SOURCE_FILES}
         Source/Search/Methods/BreadthFirst.cpp
         Source/Search/Methods/DepthFirst.cpp
         Source/Search/Methods/GreedyBestFirst.cpp
-        Source/Search/Methods/AStar.cpp)
+        Source/Search/Methods/AStar.cpp
+        Source/Search/Methods/IterativeDeepeningSearch.cpp)
 
 LINK_DIRECTORIES(Deps)
 

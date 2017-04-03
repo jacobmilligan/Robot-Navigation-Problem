@@ -13,8 +13,8 @@
 #pragma once
 
 #include "Visualizer/GraphicsDriver.hpp"
-#include "Search/Environment.hpp"
-#include "Search/SearchMethod.hpp"
+#include "Search/Core/Environment.hpp"
+#include "Search/Core/SearchMethod.hpp"
 
 #include <SDL.h>
 

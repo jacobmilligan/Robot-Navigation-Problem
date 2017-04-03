@@ -12,7 +12,7 @@
 
 #pragma once
 
-#include "Search/SearchMethod.hpp"
+#include "Search/Core/SearchMethod.hpp"
 #include "Visualizer/Text.hpp"
 #include "Visualizer/PathVisualizer.hpp"
 

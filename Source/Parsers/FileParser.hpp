@@ -12,7 +12,7 @@
 
 #pragma once
 
-#include "Search/Environment.hpp"
+#include "Search/Core/Environment.hpp"
 
 #include <vector>
 #include <fstream>

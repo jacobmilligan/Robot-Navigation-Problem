@@ -12,7 +12,7 @@
 
 #pragma once
 
-#include "Search/SearchMethod.hpp"
+#include "Search/Core/SearchMethod.hpp"
 
 
 namespace robo {
@@ -27,22 +27,7 @@ public:
     SearchResults search(const Environment& env) override;
 private:
     /// @brief The frontier used for the search, stored as a LIFO queue
-    std::vector<Node> frontier_;
-
-    /// @brief Clears the frontier of all nodes
-    void frontier_clear() override
-    {
-        frontier_.clear();
-    }
-
-    /// @brief Removes the next node from the back of the frontier
-    /// @return The next node
-    Node frontier_remove() override
-    {
-        auto node = frontier_.back();
-        frontier_.pop_back();
-        return node;
-    }
+    Frontier<std::vector> frontier_;
 };
 
 

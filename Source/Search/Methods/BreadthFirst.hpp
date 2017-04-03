@@ -12,7 +12,7 @@
 
 #pragma once
 
-#include "Search/SearchMethod.hpp"
+#include "Search/Core/SearchMethod.hpp"
 
 namespace robo {
 
@@ -26,25 +26,7 @@ public:
     SearchResults search(const Environment& env) override;
 private:
     /// @brief The frontier, stored as a FIFO queue
-    std::queue<Node> frontier_;
-
-    /// @brief Clears the search methods implementation-specific frontier
-    /// container
-    void frontier_clear() override
-    {
-        while ( !frontier_.empty() ) {
-            frontier_.pop();
-        }
-    }
-
-    /// @brief Removes the next node from the front of the frontier
-    /// @return The next node in the queue
-    Node frontier_remove() override
-    {
-        auto node = frontier_.front();
-        frontier_.pop();
-        return node;
-    }
+    Frontier<std::queue> frontier_;
 };
 
 

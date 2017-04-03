@@ -18,20 +18,20 @@ namespace robo {
 
 SearchResults BreadthFirst::search(const Environment& env)
 {
-    frontier_clear();
+    frontier_.clear();
     explored_.clear();
 
-    Node node(env.start, -1, 0, Direction::none);
+    Node node(env.start, -1, 0, Action::none);
     if ( env.goal_test(env.start) ) {
         return SearchResults(true, explored_, node);
     }
 
-    frontier_.push(node);
+    frontier_.add(node);
     explored_.add(node);
 
     Node child;
     while ( !frontier_.empty() ) {
-        node = frontier_remove();
+        node = frontier_.remove();
 
         for ( auto& a : env.actions() ) {
             child = get_child(env, explored_.get(node.state), a);
@@ -41,7 +41,7 @@ SearchResults BreadthFirst::search(const Environment& env)
                     return SearchResults(true, explored_, child);
                 }
 
-                frontier_.push(child);
+                frontier_.add(child);
             }
         }
     }

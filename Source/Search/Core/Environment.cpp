@@ -18,15 +18,15 @@
 namespace robo {
 
 
-std::string direction_to_string(const Direction dir)
+std::string direction_to_string(const Action dir)
 {
     switch (dir) {
-        case Direction::unknown: return "unknown";
-        case Direction::none: return "none";
-        case Direction::up: return "up";
-        case Direction::left: return "left";
-        case Direction::down: return "down";
-        case Direction::right: return "right";
+        case Action::unknown: return "unknown";
+        case Action::none: return "none";
+        case Action::up: return "up";
+        case Action::left: return "left";
+        case Action::down: return "down";
+        case Action::right: return "right";
     }
 }
 
