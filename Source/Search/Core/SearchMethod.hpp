@@ -18,18 +18,17 @@
 
 namespace robo {
 
-struct Solution;
 class Graph;
 class Environment;
 
 /// @brief SearchResults is a struct containing the results of a search methods
 /// algorithm containing success, the path taken and the amount of nodes expanded
-struct SearchResults {
-    SearchResults()
+struct Solution {
+    Solution()
         : success(false), node_count(0)
     {}
 
-    SearchResults(const bool is_succesful, const ExploredSet& explored, const Node& end);
+    Solution(const bool is_succesful, const ExploredSet& explored, const Node& end);
 
     /// @brief Whether the search method was successful in finding a solution
     bool success;
@@ -46,7 +45,7 @@ public:
     /// @brief Executes the methods search algorithm
     /// @param env The environment to search
     /// @return SearchResults
-    virtual SearchResults search(const Environment& env) = 0;
+    virtual Solution search(const Environment& env) = 0;
 
     /// @return Reference to the explored set
     ExploredSet& explored()
@@ -64,7 +63,7 @@ protected:
     /// @param parent The childs parent node
     /// @param action The current action being observed
     /// @return The child node
-    virtual Node get_child(const Environment& env, Node& parent, const Action action);
+    virtual Node get_child(const Environment& env, const Node& parent, const Action action);
 };
 
 

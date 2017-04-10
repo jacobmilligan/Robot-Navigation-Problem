@@ -24,7 +24,7 @@ public:
     /// algorithm
     /// @param env Environment to search
     /// @return The results of the search
-    SearchResults search(const Environment& env) override;
+    Solution search(const Environment& env) override;
 protected:
     /// @brief Gets a child and it's heuristic value from the environment based
     /// off the current action. Uses euclidean distance as a heuristic
@@ -32,7 +32,7 @@ protected:
     /// @param parent The parent of the child
     /// @param action The action being taken
     /// @return The child node
-    Node get_child(const Environment& env, Node& parent, const Action action) override
+    Node get_child(const Environment& env, const Node& parent, const Action action) override
     {
         auto result = SearchMethod::get_child(env, parent, action);
         result.cost = result.state.distance(env.goal);

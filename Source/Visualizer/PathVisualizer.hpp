@@ -41,7 +41,7 @@ public:
     void update_goal_position(Environment& env, const int x, const int y);
     void update_current_node_position(const int x, const int y);
 
-    void draw(const SearchResults& results, const int current, const int node_count);
+    void draw(const Solution& results, const int current, const int node_count);
 
     void draw_evaluating();
 

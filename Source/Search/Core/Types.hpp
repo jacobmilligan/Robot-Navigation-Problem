@@ -41,7 +41,7 @@ struct Point {
         return x == other.x && y == other.y;
     }
 
-    double distance(const Point& other)
+    double distance(const Point& other) const
     {
         auto xsqr = (other.x - x) * (other.x - x);
         auto ysqr = (other.y - y) * (other.y - y);
@@ -79,6 +79,11 @@ struct Node {
     bool operator>(const Node& rhs) const
     {
         return cost > rhs.cost;
+    }
+
+    bool operator<(const Node& rhs) const
+    {
+        return cost < rhs.cost;
     }
 
     int id;

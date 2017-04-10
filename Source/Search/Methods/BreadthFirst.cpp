@@ -16,15 +16,14 @@
 namespace robo {
 
 
-SearchResults BreadthFirst::search(const Environment& env)
+Solution BreadthFirst::search(const Environment& env)
 {
     frontier_.clear();
     explored_.clear();
 
     Node node(env.start, -1, 0, Action::none);
-    if ( env.goal_test(env.start) ) {
-        return SearchResults(true, explored_, node);
-    }
+    if ( env.goal_test(env.start) )
+        return Solution(true, explored_, node);
 
     frontier_.add(node);
     explored_.add(node);
@@ -37,16 +36,16 @@ SearchResults BreadthFirst::search(const Environment& env)
             child = get_child(env, explored_.get(node.state), a);
             if ( !explored_.contains(child) ) {
                 explored_.add(child);
-                if ( env.goal_test(child.state) ) {
-                    return SearchResults(true, explored_, child);
-                }
+
+                if ( env.goal_test(child.state) )
+                    return Solution(true, explored_, child);
 
                 frontier_.add(child);
             }
         }
     }
 
-    return SearchResults(false, explored_, child);
+    return Solution(false, explored_, child);
 }
 
 

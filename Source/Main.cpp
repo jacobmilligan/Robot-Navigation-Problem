@@ -20,7 +20,7 @@ void populate_search_methods(MethodMap& methods)
 }
 
 void print_output(const std::string& filename, const std::string& method,
-                  const robo::SearchResults& results)
+                  const robo::Solution& results)
 {
     std::cout << filename << " " << method << " " << results.node_count << " ";
     for ( auto& d : results.path ) {

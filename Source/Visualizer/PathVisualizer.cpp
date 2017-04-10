@@ -15,7 +15,7 @@
 namespace robo {
 
 
-void PathVisualizer::draw(const SearchResults& results, const int current, const int node_count)
+void PathVisualizer::draw(const Solution& results, const int current, const int node_count)
 {
     SDL_Rect rect;
     for ( auto& n : results.path ) {

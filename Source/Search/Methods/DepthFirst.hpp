@@ -24,7 +24,7 @@ public:
     /// @brief Searches the given environment using the depth-first algorithm
     /// @param env The environment to search
     /// @return The results of the search
-    SearchResults search(const Environment& env) override;
+    Solution search(const Environment& env) override;
 private:
     /// @brief The frontier used for the search, stored as a LIFO queue
     Frontier<std::vector> frontier_;

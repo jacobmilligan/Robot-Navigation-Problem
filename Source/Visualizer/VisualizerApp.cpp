@@ -17,6 +17,7 @@
 #include "Search/Methods/GreedyBestFirst.hpp"
 #include "Search/Methods/AStar.hpp"
 #include "Search/Methods/IDS.hpp"
+#include "Search/Methods/IDAStar.hpp"
 
 namespace robo {
 
@@ -48,6 +49,7 @@ VisualizerApp::VisualizerApp(const std::string& app_name, const int speed, const
     methods_["Greedy Best-First"] = std::make_unique<robo::GreedyBestFirst>();
     methods_["A*"] = std::make_unique<robo::AStar>();
     methods_["IDS"] = std::make_unique<robo::IDS>();
+    methods_["IDAStar"] = std::make_unique<robo::IDAStar>();
 
     path_.update_goal_position(env_, 10, 10);
     path_.update_start_position(env_, 1, 1);
@@ -113,6 +115,9 @@ void VisualizerApp::process_input()
                     break;
                 case SDLK_5:
                     method_str_ = "IDS";
+                    break;
+                case SDLK_6:
+                    method_str_ = "IDAStar";
                     break;
                 case SDLK_ESCAPE:
                     window_.close();
@@ -206,6 +211,10 @@ void VisualizerApp::draw()
                       font_, Colors::black);
     text_.draw_string(800, 750, "Path length: " + std::to_string(results_.path.size()),
                       font_, Colors::black);
+    if ( current_method_ != nullptr ) {
+        text_.draw_string(750, 700, "Nodes contained: " + std::to_string(results_.node_count),
+                          font_, Colors::black);
+    }
 }
 
 void VisualizerApp::draw_tiles()

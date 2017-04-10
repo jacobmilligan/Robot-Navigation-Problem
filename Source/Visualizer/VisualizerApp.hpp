@@ -71,7 +71,7 @@ private:
     MethodMap methods_;
 
     Environment env_;
-    SearchResults results_;
+    Solution results_;
     robo::SearchMethod* current_method_;
     std::string method_str_;
     sky::Path root_;

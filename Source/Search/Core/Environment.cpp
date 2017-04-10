@@ -30,18 +30,6 @@ std::string direction_to_string(const Action dir)
     }
 }
 
-SearchResults::SearchResults(const bool is_succesful, const ExploredSet& explored, const Node& end)
-    : success(is_succesful), node_count(explored.size())
-{
-    path.clear();
-    auto node = end;
-    while ( node.parent_id >= 0 ) {
-        path.push_back(node);
-        node = explored.get(node.parent_id);
-    }
-    std::reverse(path.begin(), path.end());
-}
-
 Environment::Environment()
     : step_cost(0), valid_(false)
 {}

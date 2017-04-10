@@ -23,7 +23,7 @@ public:
     /// @brief Executes the breadth-first algorithm
     /// @param env The environment to search
     /// @return The results of the search
-    SearchResults search(const Environment& env) override;
+    Solution search(const Environment& env) override;
 private:
     /// @brief The frontier, stored as a FIFO queue
     Frontier<std::queue> frontier_;

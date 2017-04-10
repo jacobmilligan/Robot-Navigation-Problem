@@ -15,13 +15,16 @@
 
 #include <queue>
 #include <unordered_map>
+#include <cassert>
+#include <limits>
 
 namespace robo {
 
 
 template <template <typename...> class Container>
-class Frontier {
-public:
+struct Frontier {
+    Container<Node> _container_;
+
     void clear();
 
     Node remove();
@@ -30,10 +33,11 @@ public:
 
     bool empty();
 
-private:
-    Container<Node> container_;
+    const unsigned long size()
+    {
+        return _container_.size();
+    }
 };
-
 
 /// @brief Explored set is a container for storing explored nodes. Internally
 /// it maintains a hashmap of indices into a vector of Node objects, allowing
@@ -68,7 +72,8 @@ public:
     /// @return True if the set contains the node, false otherwise
     bool contains(const Node& node) const
     {
-        return explored_.find(node.state) != explored_.end();
+        auto n  = explored_.find(node.state);
+        return n != explored_.end();
     }
 
     /// @brief Gets a node using it's state as a lookup
@@ -76,6 +81,8 @@ public:
     /// @return The node
     Node& get(const Point& state)
     {
+        assert(operations_.size() > 0);
+
         auto index = explored_[state];
         return operations_[index];
     }
@@ -85,6 +92,8 @@ public:
     /// @return The node
     const Node& get(const int id) const
     {
+        assert(operations_.size() > 0);
+
         return operations_[id];
     }
 
