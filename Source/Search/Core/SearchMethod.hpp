@@ -63,7 +63,7 @@ protected:
     /// @param parent The childs parent node
     /// @param action The current action being observed
     /// @return The child node
-    virtual Node get_child(const Environment& env, const Node* parent, const Action action);
+    Node get_child(const Environment& env, const Node* parent, const Action action);
 };
 
 

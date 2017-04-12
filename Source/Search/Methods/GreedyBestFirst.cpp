@@ -33,6 +33,7 @@ Solution GreedyBestFirst::search(const Environment& env)
 
         for ( auto& a : env.actions() ) {
             child = get_child(env, explored_.get(node), a);
+            child.cost = get_heuristic(env, child);
             if ( !explored_.contains(child) ) {
                 explored_.add(child);
 
@@ -46,6 +47,12 @@ Solution GreedyBestFirst::search(const Environment& env)
 
     return Solution(false, explored_, &child);
 }
+
+double GreedyBestFirst::get_heuristic(const Environment& env, const Node& node)
+{
+    return node.state.distance(env.goal, dist_func_);
+}
+
 
 
 }
