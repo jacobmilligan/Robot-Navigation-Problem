@@ -33,6 +33,7 @@ Solution AStar::search(const Environment& env)
 
         for ( auto& a : env.actions() ) {
             child = get_child(env, explored_.get(node), a);
+            child.cost = get_heuristic(env, child);
             if ( !explored_.contains(child) ) {
                 if ( env.goal_test(child.state) )
                     return Solution(true, explored_, &child);
@@ -46,13 +47,12 @@ Solution AStar::search(const Environment& env)
     return Solution(false, explored_, &child);
 }
 
-Node AStar::get_child(const Environment& env, const Node* parent, const Action action)
+double AStar::get_heuristic(const Environment& env, const Node& node)
 {
-    auto child = SearchMethod::get_child(env, parent, action);
-    auto g = parent->cost + env.step_cost;
-    auto h = child.state.distance(env.goal);
-    child.cost = g + h;
-    return child;
+    auto parent_cost = (node.parent_ptr == nullptr) ? 0 : node.parent_ptr->cost;
+    auto g = parent_cost + env.step_cost;
+    auto h = node.state.distance(env.goal, dist_func_);
+    return g + h;
 }
 
 

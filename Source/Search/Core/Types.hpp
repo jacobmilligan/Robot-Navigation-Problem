@@ -27,6 +27,11 @@ enum class Action {
     right
 };
 
+enum class DistanceFunction {
+    euclidean,
+    manhattan
+};
+
 
 struct Point {
     Point()
@@ -42,15 +47,24 @@ struct Point {
         return x == other.x && y == other.y;
     }
 
-    double distance(const Point& other) const
+    double distance(const Point& other,
+                    const DistanceFunction distance_function) const
     {
-//        auto xsqr = (other.x - x) * (other.x - x);
-//        auto ysqr = (other.y - y) * (other.y - y);
-//        return sqrt(xsqr + ysqr);
+        switch (distance_function) {
 
-        auto xresult = abs(x - other.x);
-        auto yresult = abs(y - other.y);
-        return xresult + yresult;
+            case DistanceFunction::euclidean:
+            {
+                auto xsqr = (other.x - x) * (other.x - x);
+                auto ysqr = (other.y - y) * (other.y - y);
+                return sqrt(xsqr + ysqr);
+            };
+            case DistanceFunction::manhattan:
+            {
+                auto xresult = abs(x - other.x);
+                auto yresult = abs(y - other.y);
+                return xresult + yresult;
+            };
+        }
     }
 
     int x;

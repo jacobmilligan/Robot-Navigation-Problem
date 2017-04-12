@@ -20,21 +20,24 @@ namespace robo {
 /// environments
 class AStar : public SearchMethod {
 public:
+    AStar()
+        : dist_func_(DistanceFunction::euclidean)
+    {}
+
+    AStar(const DistanceFunction distance_function)
+        : dist_func_(distance_function)
+    {}
+
     /// @brief Executes A* on an environment
     /// @param env The environment to search
     /// @return The results of the search
     Solution search(const Environment& env) override;
-protected:
-    /// @brief Gets the next child from the environment as well as it's heuristic
-    /// cost
-    /// @param env Environment to get the child from
-    /// @param parent The childs parent node
-    /// @param action The action being taken
-    /// @return The child node
-    Node get_child(const Environment& env, const Node* parent, const Action action) override;
 private:
     /// @brief The frontier, stored as a priority queue, ordered by lowest cost
     Frontier<std::priority_queue> frontier_;
+    DistanceFunction dist_func_;
+
+    double get_heuristic(const Environment& env, const Node& node);
 };
 
 

@@ -20,6 +20,14 @@ namespace robo {
 /// search method
 class GreedyBestFirst : public SearchMethod {
 public:
+    GreedyBestFirst()
+        : dist_func_(DistanceFunction::euclidean)
+    {}
+
+    GreedyBestFirst(const DistanceFunction distance_function)
+        : dist_func_(distance_function)
+    {}
+
     /// @brief Searches the given environment using the greedy best-first
     /// algorithm
     /// @param env Environment to search
@@ -35,13 +43,13 @@ protected:
     Node get_child(const Environment& env, const Node* parent, const Action action) override
     {
         auto result = SearchMethod::get_child(env, parent, action);
-        result.cost = result.state.distance(env.goal);
+        result.cost = result.state.distance(env.goal, dist_func_);
         return result;
     }
 private:
     /// @brief The frontier, stored as a priority queue, ordered by lowest cost
     Frontier<std::priority_queue> frontier_;
-
+    DistanceFunction dist_func_;
 };
 
 

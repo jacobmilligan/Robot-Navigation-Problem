@@ -20,6 +20,13 @@ namespace robo {
 /// environments
 class IDAStar : public SearchMethod {
 public:
+    IDAStar()
+        : dist_func_(DistanceFunction::euclidean)
+    {}
+
+    IDAStar(const DistanceFunction distance_function)
+        : dist_func_(distance_function)
+    {}
     /// @brief Executes A* on an environment
     /// @param env The environment to search
     /// @return The results of the search
@@ -33,6 +40,7 @@ private:
     IDAStar::RBFSResults ida(const Environment& env, const Node& node, const double limit);
 
     Frontier<std::set> frontier_;
+    DistanceFunction dist_func_;
 };
 
 
