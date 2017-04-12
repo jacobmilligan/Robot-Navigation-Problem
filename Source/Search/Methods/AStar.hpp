@@ -31,7 +31,7 @@ protected:
     /// @param parent The childs parent node
     /// @param action The action being taken
     /// @return The child node
-    Node get_child(const Environment& env, const Node& parent, const Action action) override;
+    Node get_child(const Environment& env, const Node* parent, const Action action) override;
 private:
     /// @brief The frontier, stored as a priority queue, ordered by lowest cost
     Frontier<std::priority_queue> frontier_;

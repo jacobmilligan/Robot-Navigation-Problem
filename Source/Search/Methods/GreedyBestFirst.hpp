@@ -32,7 +32,7 @@ protected:
     /// @param parent The parent of the child
     /// @param action The action being taken
     /// @return The child node
-    Node get_child(const Environment& env, const Node& parent, const Action action) override
+    Node get_child(const Environment& env, const Node* parent, const Action action) override
     {
         auto result = SearchMethod::get_child(env, parent, action);
         result.cost = result.state.distance(env.goal);

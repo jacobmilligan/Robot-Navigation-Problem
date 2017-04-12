@@ -68,14 +68,14 @@ struct PointHash {
 struct Node {
     Node()
         : id(-1),
-          parent_id(-1),
+          parent_ptr(nullptr),
           cost(0),
           action(Action::unknown)
     {}
 
-    Node(const Point& node_state, const int parent,
+    Node(const Point& node_state, const Node* parent,
          const int path_cost, const Action direction)
-        : parent_id(parent),
+        : parent_ptr(parent),
           cost(path_cost),
           action(direction),
           state(node_state)
@@ -92,8 +92,7 @@ struct Node {
     }
 
     int id;
-    int parent_id;
-    std::unique_ptr<Node> parent_ptr;
+    const Node* parent_ptr;
     double cost;
     Action action;
     Point state;

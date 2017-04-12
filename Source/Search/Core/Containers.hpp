@@ -50,7 +50,7 @@ public:
     {
         operations_.push_back(node);
         operations_.back().id = static_cast<int>(operations_.size() - 1);
-        explored_[node.state] = operations_.size() - 1;
+        explored_[node.state] = std::make_unique<Node>(node);
     }
 
     /// @brief Gets the current size of the explored set
@@ -77,14 +77,14 @@ public:
     }
 
     /// @brief Gets a node using it's state as a lookup
-    /// @param state State to get a node from
+    /// @param node The node to find
     /// @return The node
-    Node& get(const Point& state)
+    Node* get(const Node& node)
     {
         assert(operations_.size() > 0);
 
-        auto index = explored_[state];
-        return operations_[index];
+        auto result = explored_.find(node.state);
+        return result->second.get();
     }
 
     /// @brief Gets a node by ID (index)
@@ -105,7 +105,7 @@ public:
 private:
     /// @brief Maps points to indices into the operations container.
     /// For quick lookup of nodes
-    std::unordered_map<Point, unsigned long, PointHash> explored_;
+    std::unordered_map<Point, std::unique_ptr<Node>, PointHash> explored_;
 
     /// @brief For contiguous storage of the operations in the order they
     /// occurred

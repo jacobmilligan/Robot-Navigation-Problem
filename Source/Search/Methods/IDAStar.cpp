@@ -17,7 +17,7 @@ namespace robo {
 
 Solution IDAStar::search(const Environment& env)
 {
-    auto node = Node(env.start, -1, 0, Action::none);
+    auto node = Node(env.start, nullptr, 0, Action::none);
     node.cost = node.state.distance(env.goal);
 
     RBFSResults results;
@@ -38,21 +38,22 @@ IDAStar::RBFSResults IDAStar::ida(const Environment& env, const Node& node,
     if ( explored_.contains(node) )
         return { MAXFLOAT };
 
-    explored_.add(node);
-
-    if ( node.cost > limit )
-        return { node.cost };
+    if ( node.cost > limit ) {
+        return {node.cost};
+    }
 
     if ( env.goal_test(node.state) ) {
-        return { node.cost, Solution(true, explored_, explored_.get(node.state)) };
+        return { node.cost, Solution(true, explored_, &node) };
     }
+
+    explored_.add(node);
 
     double next = MAXFLOAT;
     RBFSResults result;
     Node successor;
     for ( auto& a : env.actions() ) {
-        successor = get_child(env, explored_.get(node.state), a);
-        successor.cost = successor.state.distance(env.start) + successor.state.distance(env.goal);
+        successor = get_child(env, &node, a);
+        successor.cost = node.cost + successor.state.distance(env.goal);
         result = ida(env, successor, limit);
 
         if ( result.solution.success )

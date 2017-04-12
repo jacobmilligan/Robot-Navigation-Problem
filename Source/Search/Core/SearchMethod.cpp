@@ -14,9 +14,9 @@
 
 namespace robo {
 
-Node SearchMethod::get_child(const Environment& env, const Node& parent, const Action action)
+Node SearchMethod::get_child(const Environment& env, const Node* parent, const Action action)
 {
-    auto state = parent.state;
+    auto state = parent->state;
 
     switch (action) {
         case Action::up:
@@ -35,19 +35,19 @@ Node SearchMethod::get_child(const Environment& env, const Node& parent, const A
     }
     auto passable = env.passable(state);
     if ( passable )
-        return Node(state, parent.id, parent.cost + env.step_cost, action);
+        return Node(state, parent, parent->cost + env.step_cost, action);
 
-    return Node(parent.state, -1, 1, Action::unknown);
+    return Node(parent->state, nullptr, 1, Action::unknown);
 }
 
-Solution::Solution(const bool is_succesful, const ExploredSet& explored, const Node& end)
+Solution::Solution(const bool is_succesful, const ExploredSet& explored, const Node* end)
     : success(is_succesful), node_count(explored.size())
 {
     path.clear();
-    auto node = end;
-    while ( node.parent_id >= 0 ) {
-        path.push_back(node);
-        node = explored.get(node.parent_id);
+    auto* node = end->parent_ptr;
+    while ( node != nullptr ) {
+        path.push_back(*node);
+        node = node->parent_ptr;
     }
     std::reverse(path.begin(), path.end());
 }

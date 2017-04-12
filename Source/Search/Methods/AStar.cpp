@@ -20,9 +20,9 @@ Solution AStar::search(const Environment& env)
     frontier_.clear();
     explored_.clear();
 
-    Node node(env.start, -1, 0, Action::none);
+    Node node(env.start, nullptr, 0, Action::none);
     if ( env.goal_test(node.state) )
-        return Solution(true, explored_, node);
+        return Solution(true, explored_, &node);
 
     frontier_.add(node);
     explored_.add(node);
@@ -32,10 +32,10 @@ Solution AStar::search(const Environment& env)
         node = frontier_.remove();
 
         for ( auto& a : env.actions() ) {
-            child = get_child(env, explored_.get(node.state), a);
+            child = get_child(env, explored_.get(node), a);
             if ( !explored_.contains(child) ) {
                 if ( env.goal_test(child.state) )
-                    return Solution(true, explored_, child);
+                    return Solution(true, explored_, &child);
 
                 explored_.add(child);
                 frontier_.add(child);
@@ -43,13 +43,13 @@ Solution AStar::search(const Environment& env)
         }
     }
 
-    return Solution(false, explored_, child);
+    return Solution(false, explored_, &child);
 }
 
-Node AStar::get_child(const Environment& env, const Node& parent, const Action action)
+Node AStar::get_child(const Environment& env, const Node* parent, const Action action)
 {
     auto child = SearchMethod::get_child(env, parent, action);
-    auto g = parent.cost + env.step_cost;
+    auto g = parent->cost + env.step_cost;
     auto h = child.state.distance(env.goal);
     child.cost = g + h;
     return child;

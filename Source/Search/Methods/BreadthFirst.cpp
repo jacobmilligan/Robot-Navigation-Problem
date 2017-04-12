@@ -21,9 +21,9 @@ Solution BreadthFirst::search(const Environment& env)
     frontier_.clear();
     explored_.clear();
 
-    Node node(env.start, -1, 0, Action::none);
+    Node node(env.start, nullptr, 0, Action::none);
     if ( env.goal_test(env.start) )
-        return Solution(true, explored_, node);
+        return Solution(true, explored_, &node);
 
     frontier_.add(node);
     explored_.add(node);
@@ -33,19 +33,19 @@ Solution BreadthFirst::search(const Environment& env)
         node = frontier_.remove();
 
         for ( auto& a : env.actions() ) {
-            child = get_child(env, explored_.get(node.state), a);
+            child = get_child(env, explored_.get(node), a);
             if ( !explored_.contains(child) ) {
                 explored_.add(child);
 
                 if ( env.goal_test(child.state) )
-                    return Solution(true, explored_, child);
+                    return Solution(true, explored_, &child);
 
                 frontier_.add(child);
             }
         }
     }
 
-    return Solution(false, explored_, child);
+    return Solution(false, explored_, &child);
 }
 
 

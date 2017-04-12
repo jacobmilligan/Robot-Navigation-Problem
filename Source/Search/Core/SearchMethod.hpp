@@ -28,7 +28,7 @@ struct Solution {
         : success(false), node_count(0)
     {}
 
-    Solution(const bool is_succesful, const ExploredSet& explored, const Node& end);
+    Solution(const bool is_succesful, const ExploredSet& explored, const Node* end);
 
     /// @brief Whether the search method was successful in finding a solution
     bool success;
@@ -63,7 +63,7 @@ protected:
     /// @param parent The childs parent node
     /// @param action The current action being observed
     /// @return The child node
-    virtual Node get_child(const Environment& env, const Node& parent, const Action action);
+    virtual Node get_child(const Environment& env, const Node* parent, const Action action);
 };
 
 
