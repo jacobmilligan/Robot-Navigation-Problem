@@ -25,13 +25,12 @@ public:
     /// @return The results of the search
     Solution search(const Environment& env) override;
 private:
-    struct IDAStarResults {
+    struct RBFSResults {
         double limit;
         Solution solution;
     };
 
-    IDAStarResults astar(const Environment& env, const Node& node,
-                         const double limit);
+    IDAStar::RBFSResults ida(const Environment& env, const Node& node, const double limit);
 
     Frontier<std::set> frontier_;
 };

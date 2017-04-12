@@ -13,6 +13,7 @@
 
 #include <functional>
 #include <cmath>
+#include <cstdlib>
 
 namespace robo {
 
@@ -43,9 +44,13 @@ struct Point {
 
     double distance(const Point& other) const
     {
-        auto xsqr = (other.x - x) * (other.x - x);
-        auto ysqr = (other.y - y) * (other.y - y);
-        return sqrt(xsqr + ysqr);
+//        auto xsqr = (other.x - x) * (other.x - x);
+//        auto ysqr = (other.y - y) * (other.y - y);
+//        return sqrt(xsqr + ysqr);
+
+        auto xresult = abs(x - other.x);
+        auto yresult = abs(y - other.y);
+        return xresult + yresult;
     }
 
     int x;
@@ -88,6 +93,7 @@ struct Node {
 
     int id;
     int parent_id;
+    std::unique_ptr<Node> parent_ptr;
     double cost;
     Action action;
     Point state;

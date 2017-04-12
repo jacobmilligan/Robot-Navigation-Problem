@@ -31,11 +31,11 @@ std::string direction_to_string(const Action dir)
 }
 
 Environment::Environment()
-    : step_cost(0), valid_(false)
+    : step_cost(1), valid_(false)
 {}
 
 Environment::Environment(const unsigned int cols, const unsigned int rows)
-    : step_cost(0), valid_(true), size_(cols, rows)
+    : step_cost(1), valid_(true), size_(cols, rows)
 {
     grid_.resize(rows);
     for ( auto& row : grid_ ) {

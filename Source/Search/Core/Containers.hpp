@@ -97,6 +97,11 @@ public:
         return operations_[id];
     }
 
+    unsigned int remove(const Node& node)
+    {
+        return explored_.erase(node.state);
+    }
+
 private:
     /// @brief Maps points to indices into the operations container.
     /// For quick lookup of nodes

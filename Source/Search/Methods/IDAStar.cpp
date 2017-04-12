@@ -18,47 +18,50 @@ namespace robo {
 Solution IDAStar::search(const Environment& env)
 {
     auto node = Node(env.start, -1, 0, Action::none);
-    return astar(env, node, MAXFLOAT).solution;
-}
+    node.cost = node.state.distance(env.goal);
 
-IDAStar::IDAStarResults IDAStar::astar(const Environment& env, const Node& node,
-                                       const double limit)
-{
-    if ( env.goal_test(node.state) )
-        return IDAStarResults{ 0, Solution(true, explored_, node) };
-
-    std::vector<Node> successors = {
-        get_child(env, node, Action::up),
-        get_child(env, node, Action::left),
-        get_child(env, node, Action::down),
-        get_child(env, node, Action::right)
-    };
-
-    if ( successors.empty() )
-        return IDAStarResults{ MAXFLOAT, Solution(false, explored_, node) };
-
-    for ( auto& s : successors ) {
-        s.cost = std::max(s.cost + env.step_cost, node.cost);
+    RBFSResults results;
+    results.limit = node.state.distance(env.goal);
+    while ( true ) {
+        explored_.clear();
+        results = ida(env, node, results.limit);
+        if ( results.solution.success || results.limit >= MAXFLOAT )
+            break;
     }
 
-    std::sort(successors.begin(), successors.end(),
-              [](const Node& a, const Node& b) {
-                  return a.cost < b.cost;
-              });
+    return results.solution;
+}
 
-    Node best;
-    Node alternative;
-    while ( true ) {
-        best = successors[0];
-        if ( best.cost > limit )
-            return IDAStarResults{ best.cost, Solution(false, explored_, best) };
+IDAStar::RBFSResults IDAStar::ida(const Environment& env, const Node& node,
+                                const double limit)
+{
+    if ( explored_.contains(node) )
+        return { MAXFLOAT };
 
-        alternative = successors[1];
-        auto result = astar(env, best, std::min(limit, alternative.cost));
+    explored_.add(node);
+
+    if ( node.cost > limit )
+        return { node.cost };
+
+    if ( env.goal_test(node.state) ) {
+        return { node.cost, Solution(true, explored_, explored_.get(node.state)) };
+    }
+
+    double next = MAXFLOAT;
+    RBFSResults result;
+    Node successor;
+    for ( auto& a : env.actions() ) {
+        successor = get_child(env, explored_.get(node.state), a);
+        successor.cost = successor.state.distance(env.start) + successor.state.distance(env.goal);
+        result = ida(env, successor, limit);
 
         if ( result.solution.success )
             return result;
+
+        next = std::min(next, result.limit);
     }
+
+    return { next };
 }
 
 

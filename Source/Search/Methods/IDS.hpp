@@ -20,9 +20,6 @@ namespace robo {
 class IDS : public SearchMethod {
 public:
     Solution search(const Environment& env) override;
-protected:
-    Node get_child(const Environment& env, const Node& parent,
-                   const Action action) override;
 private:
     /// @brief The frontier used for the search, stored as a LIFO queue
     Frontier<std::vector> frontier_;
@@ -34,7 +31,7 @@ private:
 
     IDSResults depth_limited_search(const Environment& env, const unsigned int limit);
 
-    IDSResults recursive_dls(const Node node, const Environment& env,
+    IDSResults recursive_dls(const Node& node, const Environment& env,
                              const int depth);
 };
 

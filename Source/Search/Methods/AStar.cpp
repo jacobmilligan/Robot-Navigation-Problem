@@ -34,11 +34,10 @@ Solution AStar::search(const Environment& env)
         for ( auto& a : env.actions() ) {
             child = get_child(env, explored_.get(node.state), a);
             if ( !explored_.contains(child) ) {
-                explored_.add(child);
-
                 if ( env.goal_test(child.state) )
                     return Solution(true, explored_, child);
 
+                explored_.add(child);
                 frontier_.add(child);
             }
         }

@@ -33,8 +33,8 @@ Node SearchMethod::get_child(const Environment& env, const Node& parent, const A
             break;
         default: break;
     }
-
-    if ( env.passable(state) )
+    auto passable = env.passable(state);
+    if ( passable )
         return Node(state, parent.id, parent.cost + env.step_cost, action);
 
     return Node(parent.state, -1, 1, Action::unknown);
