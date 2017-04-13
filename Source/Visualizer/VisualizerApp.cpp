@@ -78,7 +78,7 @@ void VisualizerApp::initialize()
     graphics_.initialize(window_);
     graphics_.set_clear_color(Colors::white);
 
-    font_.load_from_file(root_.get_relative("SourceCode.ttf"), 24);
+    font_.load_from_file(root_.get_relative("SOURCECODEPRO.ttf"), 24);
 }
 
 void VisualizerApp::process_input()
@@ -217,7 +217,7 @@ void VisualizerApp::draw_information()
 
     if ( path_.size() > 0 ) {
         auto nodes = "Nodes contained: " + std::to_string(results_.node_count);
-        text_.draw_string(750, 700, nodes, font_, Colors::black);
+        text_.draw_string(740, 700, nodes, font_, Colors::black);
     }
 }
 

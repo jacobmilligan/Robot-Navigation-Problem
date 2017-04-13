@@ -25,7 +25,7 @@ Solution IDAStar::search(const Environment& env)
     while ( true ) {
         explored_.clear();
         results = ida(env, node, results.limit);
-        if ( results.solution.success || results.limit >= MAXFLOAT )
+        if ( results.solution.success || results.limit >= infinity_ )
             break;
     }
 
@@ -36,7 +36,7 @@ IDAStar::RBFSResults IDAStar::ida(const Environment& env, const Node& node,
                                 const double limit)
 {
     if ( explored_.contains(node) )
-        return { MAXFLOAT };
+        return { infinity_ };
 
     if ( node.cost > limit ) {
         return {node.cost};
@@ -48,7 +48,7 @@ IDAStar::RBFSResults IDAStar::ida(const Environment& env, const Node& node,
 
     explored_.add(node);
 
-    double next = MAXFLOAT;
+    double next = infinity_;
     RBFSResults result;
     Node successor;
     for ( auto& a : env.actions() ) {

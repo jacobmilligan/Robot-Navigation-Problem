@@ -16,6 +16,7 @@
 #include "Visualizer/Window.hpp"
 
 #include <SDL.h>
+#undef main
 
 #include <string>
 

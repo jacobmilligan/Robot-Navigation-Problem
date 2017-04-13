@@ -43,6 +43,7 @@ private:
 
     Frontier<std::set> frontier_;
     DistanceFunction dist_func_;
+	const double infinity_ = std::numeric_limits<double>::max();
 };
 
 

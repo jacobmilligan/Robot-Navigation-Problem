@@ -17,6 +17,7 @@
 #include <unordered_map>
 #include <cassert>
 #include <limits>
+#include <memory>
 
 namespace robo {
 

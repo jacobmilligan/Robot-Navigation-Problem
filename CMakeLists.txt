@@ -29,37 +29,76 @@ set(VISUALIZER_SOURCE
         Source/Visualizer/GraphicsDriver.cpp
         Source/Visualizer/Window.cpp)
 
-LINK_DIRECTORIES(Deps)
+if (WIN32)
+    LINK_DIRECTORIES(Deps/SDL2-2.0.5/Win32/lib/x86
+        Deps/SDL2_ttf-2.0.14/Win32/lib/x86)
+
+    include_directories(Deps/SDL2_ttf-2.0.14/Win32/include)
+    include_directories(Deps/SDL2-2.0.5/Win32/include)
+endif()
+
 
 add_subdirectory(Deps/Path)
-
-include_directories(Deps/SDL2-2.0.5/include)
 include_directories(Deps/Path)
 include_directories(Deps/catch)
+include_directories(Source)
 
 # Main project
 add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${VISUALIZER_SOURCE} Source/Main.cpp)
-target_include_directories(${PROJECT_NAME} PUBLIC Source Deps/Skyrocket/Source)
-target_link_libraries(${PROJECT_NAME} SDL2)
 target_link_libraries(${PROJECT_NAME} skyrocket_path)
 
 # Tests
 add_executable(tests ${SOURCE_FILES} Tests/Tests.cpp)
-target_include_directories(tests PUBLIC Source Tests Deps/Skyrocket/Source)
-target_link_libraries(tests SDL2)
+target_include_directories(tests PUBLIC Tests)
 target_link_libraries(tests skyrocket_path)
 
 # Standalone visualizer
 add_executable(robovisualizer ${SOURCE_FILES} ${VISUALIZER_SOURCE} Source/VisualizerMain.cpp)
-target_include_directories(robovisualizer PUBLIC Source Deps/Skyrocket/Source)
-target_link_libraries(robovisualizer SDL2)
 target_link_libraries(robovisualizer skyrocket_path)
+
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${PROJECT_SOURCE_DIR}/Resources/SOURCECODEPRO.ttf"
+        $<TARGET_FILE_DIR:${PROJECT_NAME}>
+    )
+
+add_custom_command(TARGET robovisualizer POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+    "${PROJECT_SOURCE_DIR}/Resources/SOURCECODEPRO.ttf"
+    $<TARGET_FILE_DIR:robovisualizer>
+)
 
 # Win32
 if (WIN32)
-    include_directories(Deps/SDL2_ttf-2.0.14/Win32/include)
-    target_link_libraries(robovisualizer SDL2_ttf.lib)
-    target_link_libraries(${PROJECT_NAME} SDL2_ttf.lib)
+    target_link_libraries(robovisualizer SDL2_ttf)
+    target_link_libraries(${PROJECT_NAME} SDL2_ttf)
+
+    target_link_libraries(robovisualizer SDL2)
+    target_link_libraries(${PROJECT_NAME} SDL2)
+
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${PROJECT_SOURCE_DIR}/Deps/SDL2_ttf-2.0.14/Win32/lib/x86/SDL2_ttf.dll"
+        $<TARGET_FILE_DIR:${PROJECT_NAME}>
+    )
+
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${PROJECT_SOURCE_DIR}/Deps/SDL2_ttf-2.0.14/Win32/lib/x86/zlib1.dll"
+        $<TARGET_FILE_DIR:${PROJECT_NAME}>
+    )
+
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${PROJECT_SOURCE_DIR}/Deps/SDL2_ttf-2.0.14/Win32/lib/x86/libfreetype-6.dll"
+        $<TARGET_FILE_DIR:${PROJECT_NAME}>
+    )
+
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "${PROJECT_SOURCE_DIR}/Deps/SDL2-2.0.5/Win32/lib/x86/SDL2.dll"
+        $<TARGET_FILE_DIR:${PROJECT_NAME}>
+    ) 
 else()
     include_directories(Deps/SDL2_ttf-2.0.14/macOS/SDL2_ttf.framework/Headers)
     target_link_libraries(robovisualizer SDL2_ttf)
