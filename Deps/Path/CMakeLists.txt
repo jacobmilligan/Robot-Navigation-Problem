@@ -20,8 +20,7 @@ endif()
 if (WIN32)
     MESSAGE(STATUS "Skyrocket: Compiling for WIN32")
     set(SRC_FILES ${SRC_FILES}
-            ${CMAKE_CURRENT_SOURCE_DIR}/WinPath.cpp
-            Deps/glad/src/glad.c)
+            ${CMAKE_CURRENT_SOURCE_DIR}/WinPath.cpp)
 endif ()
 
 add_library(${LIB_NAME} STATIC ${SRC_FILES})
