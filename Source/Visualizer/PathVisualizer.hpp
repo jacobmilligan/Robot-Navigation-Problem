@@ -56,6 +56,12 @@ public:
     {
         visited_.clear();
     }
+
+    inline unsigned long size()
+    {
+        return visited_.size();
+    }
+
 private:
     int tilesize_;
     bool placing_walls_;
@@ -67,6 +73,8 @@ private:
     std::unordered_map<Point, bool, PointHash> visited_;
 
     GraphicsDriver* graphics_;
+
+    bool is_endpoint(Environment& env, const int x, const int y);
 };
 
 

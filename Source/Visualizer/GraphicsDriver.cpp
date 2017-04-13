@@ -9,6 +9,7 @@
 //
 
 #include "Visualizer/GraphicsDriver.hpp"
+#include "Visualizer/Error.hpp"
 
 #include <SDL_ttf.h>
 #include <thread>
@@ -17,7 +18,7 @@ namespace robo {
 
 
 GraphicsDriver::GraphicsDriver(const std::string& app_name)
-    : app_name_(app_name), clear_color_(Colors::white)
+    : app_name_(app_name), clearcolor(Colors::white)
 {}
 
 GraphicsDriver::~GraphicsDriver()
@@ -32,12 +33,12 @@ bool GraphicsDriver::initialize(Window& window)
                                    -1,
                                    SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
     if ( renderer_ == nullptr ) {
-        error_callback_("SDL_CreateRenderer", SDL_GetError());
+        print_visualizer_error("SDL_CreateRenderer", SDL_GetError());
         return false;
     }
 
     if ( TTF_Init() != 0 ) {
-        error_callback_("SDL_ttf", "Initialization failed");
+        print_visualizer_error("SDL_ttf", "Initialization failed");
         return false;
     }
 
@@ -46,17 +47,14 @@ bool GraphicsDriver::initialize(Window& window)
 
 void GraphicsDriver::clear()
 {
-    SDL_SetRenderDrawColor(renderer_,
-                           clear_color_.r,
-                           clear_color_.g,
-                           clear_color_.b,
-                           clear_color_.a);
+    SDL_SetRenderDrawColor(renderer_, clearcolor.r, clearcolor.g, clearcolor.b,
+                           clearcolor.a);
     SDL_RenderClear(renderer_);
 }
 
 void GraphicsDriver::set_clear_color(const SDL_Color& color)
 {
-    clear_color_ = color;
+    clearcolor = color;
 }
 
 void GraphicsDriver::refresh()
@@ -64,40 +62,9 @@ void GraphicsDriver::refresh()
     SDL_RenderPresent(renderer_);
 }
 
-void
-GraphicsDriver::draw_rectangle(const int x, const int y, const int width, const int height, const SDL_Color& color)
-{
-    SDL_SetRenderDrawColor(renderer_, color.r, color.g, color.b, color.a);
-
-    SDL_Rect rect;
-    rect.x = x;
-    rect.y = y;
-    rect.w = width;
-    rect.h = height;
-
-    SDL_RenderDrawRect(renderer_, &rect);
-
-    reset_color();
-}
-
 void GraphicsDriver::fill_rectangle(const SDL_Rect& rect, const SDL_Color& color)
 {
     SDL_SetRenderDrawColor(renderer_, color.r, color.g, color.b, color.a);
-    SDL_RenderFillRect(renderer_, &rect);
-    reset_color();
-}
-
-void
-GraphicsDriver::fill_rectangle(const int x, const int y, const int width, const int height, const SDL_Color& color)
-{
-    SDL_SetRenderDrawColor(renderer_, color.r, color.g, color.b, color.a);
-
-    SDL_Rect rect;
-    rect.x = x;
-    rect.y = y;
-    rect.w = width;
-    rect.h = height;
-
     SDL_RenderFillRect(renderer_, &rect);
     reset_color();
 }
@@ -109,16 +76,8 @@ void GraphicsDriver::draw_rectangle(const SDL_Rect& rect, const SDL_Color& color
     reset_color();
 }
 
-void
-GraphicsDriver::draw_line(const int x1, const int y1, const int x2, const int y2, const SDL_Color& color)
-{
-    SDL_SetRenderDrawColor(renderer_, color.r, color.g, color.b, color.a);
-    SDL_RenderDrawLine(renderer_, x1, y1, x2, y2);
-    reset_color();
-}
-
-SDL_Rect
-GraphicsDriver::get_rect(const int x, const int y, const int width, const int height)
+SDL_Rect GraphicsDriver::get_rect(const int x, const int y, const int width,
+                                  const int height)
 {
     SDL_Rect rect;
 
@@ -132,16 +91,23 @@ GraphicsDriver::get_rect(const int x, const int y, const int width, const int he
 
 void GraphicsDriver::reset_color()
 {
-    SDL_SetRenderDrawColor(renderer_,
-                           clear_color_.r,
-                           clear_color_.g,
-                           clear_color_.b,
-                           clear_color_.a);
+    SDL_SetRenderDrawColor(renderer_, clearcolor.r, clearcolor.g, clearcolor.b,
+                           clearcolor.a);
 }
 
-void GraphicsDriver::set_error_callback(error_callback_t error_callback)
+void GraphicsDriver::draw_texture(SDL_Texture* texture, const int x,
+                                  const int y)
 {
-    error_callback_ = error_callback;
+    SDL_Rect dest;
+    dest.x = x;
+    dest.y = y;
+    SDL_QueryTexture(texture, nullptr, nullptr, &dest.w, &dest.h);
+    SDL_RenderCopy(renderer_, texture, nullptr, &dest);
+}
+
+SDL_Texture* GraphicsDriver::generate_texture(SDL_Surface* surface)
+{
+    return SDL_CreateTextureFromSurface(renderer_, surface);
 }
 
 

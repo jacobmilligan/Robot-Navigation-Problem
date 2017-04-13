@@ -72,7 +72,8 @@ void PathVisualizer::update_current_node_position(const int x, const int y)
 
 void PathVisualizer::update_walls(Environment& env, const int x, const int y)
 {
-    env.set_cell(x, y, Cell::wall);
+    if ( !is_endpoint(env, x, y) )
+        env.set_cell(x, y, Cell::wall);
 }
 
 void PathVisualizer::toggle_wall(Environment& env, const int x, const int y)
@@ -80,6 +81,12 @@ void PathVisualizer::toggle_wall(Environment& env, const int x, const int y)
     auto cell = env.get_cell(Point(x, y));
     auto new_val = ( cell == Cell::wall ) ? Cell::empty : Cell::wall;
     env.set_cell(x, y, new_val);
+}
+
+bool PathVisualizer::is_endpoint(Environment& env, const int x, const int y)
+{
+    return ( x == env.start.x && y == env.start.y )
+        || ( x == env.goal.x && y == env.goal.y );
 }
 
 

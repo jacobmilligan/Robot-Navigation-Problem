@@ -21,7 +21,6 @@ namespace robo {
 
 
 struct Font {
-    typedef void (* error_callback_t)(const std::string&, const std::string&);
 public:
     Font()
         : ttf_(nullptr), path_("")
@@ -31,9 +30,7 @@ public:
 
     void load_from_file(const sky::Path& path, const int fontsize);
 
-    void set_error_callback(error_callback_t error_callback);
-
-    TTF_Font* ptr()
+    inline TTF_Font* ptr()
     {
         return ttf_;
     }
@@ -41,24 +38,18 @@ public:
 private:
     TTF_Font* ttf_;
     sky::Path path_;
-
-    error_callback_t error_callback_;
 };
 
 class TextRenderer {
-    typedef void (* error_callback_t)(const std::string&, const std::string&);
 public:
     TextRenderer(GraphicsDriver& graphics)
         : graphics_(&graphics)
     {}
 
-    void set_error_callback(error_callback_t error_callback);
-
     void draw_string(const int x, const int y, const std::string& str,
                      Font& font, const SDL_Color& color);
 private:
     GraphicsDriver* graphics_;
-    error_callback_t error_callback_;
 };
 
 

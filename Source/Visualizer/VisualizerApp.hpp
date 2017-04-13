@@ -49,7 +49,7 @@ public:
     VisualizerApp(const std::string& app_name, const int speed, const int tilesize, char** argv);
     void run();
 private:
-    using MethodMap = std::unordered_map<std::string, std::unique_ptr<robo::SearchMethod>>;
+    using MethodKeyMap = std::unordered_map<SDL_Keycode, std::unique_ptr<robo::SearchMethod>>;
 
     std::string app_name_;
     Window window_;
@@ -68,7 +68,7 @@ private:
 
     PathVisualizer path_;
     InputState input_;
-    MethodMap methods_;
+    MethodKeyMap methods_;
 
     Environment env_;
     Solution results_;
@@ -86,6 +86,10 @@ private:
     {
         return ((SDL_GetPerformanceCounter() - last) * 1000) / SDL_GetPerformanceFrequency();
     }
+
+    void evaluate_path();
+    void clear_path();
+    void draw_information();
 };
 
 

@@ -11,6 +11,7 @@
 //
 
 #include "Visualizer/Text.hpp"
+#include "Visualizer/Error.hpp"
 
 namespace robo {
 
@@ -20,14 +21,9 @@ void Font::load_from_file(const sky::Path& path, const int fontsize)
     path_ = path;
     ttf_ = TTF_OpenFont(path_.c_str(), fontsize);
     if ( ttf_ == nullptr ) {
-        error_callback_("Font", TTF_GetError());
+        robo::print_visualizer_error("Font", TTF_GetError());
         return;
     }
-}
-
-void Font::set_error_callback(Font::error_callback_t error_callback)
-{
-    error_callback_ = error_callback;
 }
 
 Font::~Font()
@@ -42,24 +38,20 @@ void TextRenderer::draw_string(const int x, const int y, const std::string& str,
 {
     auto surface = TTF_RenderText_Blended(font.ptr(), str.c_str(), color);
     if ( surface == nullptr ) {
-        error_callback_("Text renderer", "Unable to generate surface for drawing");
+        robo::print_visualizer_error("Text renderer",
+                                     "Unable to generate surface for drawing");
         return;
     }
 
     auto texture = graphics_->generate_texture(surface);
     if ( texture == nullptr ) {
-        error_callback_("Text renderer", "Unable to generate texture for drawing");
+        robo::print_visualizer_error("Text renderer",
+                                     "Unable to generate texture for drawing");
         return;
     }
 
     SDL_FreeSurface(surface);
-
     graphics_->draw_texture(texture, x, y);
-}
-
-void TextRenderer::set_error_callback(error_callback_t error_callback)
-{
-    error_callback_ = error_callback;
 }
 
 

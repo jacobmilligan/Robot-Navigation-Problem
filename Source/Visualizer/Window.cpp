@@ -11,6 +11,7 @@
 //
 
 #include "Visualizer/Window.hpp"
+#include "Visualizer/Error.hpp"
 
 namespace robo {
 
@@ -29,14 +30,14 @@ bool Window::initialize()
 {
     if ( !SDL_WasInit(SDL_INIT_VIDEO) ) {
         if ( SDL_Init(SDL_INIT_VIDEO) != 0 ) {
-            error_callback_("SDL_Init", SDL_GetError());
+            robo::print_visualizer_error("SDL_Init", SDL_GetError());
             return false;
         }
     }
 
     window_ = SDL_CreateWindow(title_.c_str(), x_, y_, width_, height_, SDL_WINDOW_SHOWN);
     if ( window_ == nullptr ) {
-        error_callback_("Window creation", SDL_GetError());
+        robo::print_visualizer_error("Window creation", SDL_GetError());
         return false;
     }
 
@@ -62,11 +63,6 @@ void Window::close()
 SDL_Window* Window::sdl_window()
 {
     return window_;
-}
-
-void Window::set_error_callback(Window::error_callback_t error_callback)
-{
-    error_callback_ = error_callback;
 }
 
 }

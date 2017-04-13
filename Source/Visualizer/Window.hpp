@@ -22,7 +22,6 @@ namespace robo {
 class VisualizerApp;
 
 class Window {
-    typedef void (* error_callback_t)(const std::string&, const std::string&);
 public:
     Window(const std::string& title, const int x, const int y,
            const int width, const int height);
@@ -32,7 +31,6 @@ public:
     bool is_open();
     void close();
     SDL_Window* sdl_window();
-    void set_error_callback(error_callback_t error_callback);
 private:
     std::string title_;
     int x_;
@@ -42,8 +40,6 @@ private:
     SDL_Window* window_;
 
     bool open_;
-
-    error_callback_t error_callback_;
 };
 
 
