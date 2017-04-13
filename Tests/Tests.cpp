@@ -10,9 +10,6 @@
 //  16/03/2017
 //
 
-#define CATCH_CONFIG_MAIN
-
-#include "catch.hpp"
 #include "Search/Core/SearchMethod.hpp"
 #include "Parsers/FileParser.hpp"
 
@@ -20,6 +17,9 @@
 #include "Search/Methods/DepthFirst.hpp"
 #include "Search/Methods/GreedyBestFirst.hpp"
 #include "Search/Methods/AStar.hpp"
+
+#define CATCH_CONFIG_MAIN
+#include <catch.hpp>
 
 
 TEST_CASE("uninformed search methods execute correctly", "[uninformed]")

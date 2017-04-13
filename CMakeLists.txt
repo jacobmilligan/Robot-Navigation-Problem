@@ -35,6 +35,7 @@ add_subdirectory(Deps/Path)
 
 include_directories(Deps/SDL2-2.0.5/include)
 include_directories(Deps/Path)
+include_directories(Deps/catch)
 
 # Main project
 add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${VISUALIZER_SOURCE} Source/Main.cpp)
