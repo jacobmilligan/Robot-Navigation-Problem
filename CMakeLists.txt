@@ -35,6 +35,9 @@ if (WIN32)
 
     include_directories(Deps/SDL2_ttf-2.0.14/Win32/include)
     include_directories(Deps/SDL2-2.0.5/Win32/include)
+else()
+    LINK_DIRECTORIES(Deps/SDL2-2.0.5/macOS
+            Deps/SDL2_ttf-2.0.14/macOS)
 endif()
 
 
@@ -103,4 +106,8 @@ else()
     include_directories(Deps/SDL2_ttf-2.0.14/macOS/SDL2_ttf.framework/Headers)
     target_link_libraries(robovisualizer SDL2_ttf)
     target_link_libraries(${PROJECT_NAME} SDL2_ttf)
+
+    include_directories(Deps/SDL2-2.0.5/macOS/SDL2.framework/Headers)
+    target_link_libraries(robovisualizer SDL2)
+    target_link_libraries(${PROJECT_NAME} SDL2)
 endif()
