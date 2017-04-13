@@ -205,5 +205,22 @@ bool FileParser::parse_wall(Environment& env, const int pos)
     return true;
 }
 
+Environment FileParser::parse(const std::string& filepath)
+{
+    std::ifstream file(filepath);
+
+    if ( !file ) {
+        print_error("File parsing", "No such file found with the specified name");
+        return Environment();
+    }
+
+    std::stringstream ss;
+    ss << file.rdbuf();
+    file.close();
+
+    lex(ss.str());
+    return parse_tokens();
+}
+
 
 }

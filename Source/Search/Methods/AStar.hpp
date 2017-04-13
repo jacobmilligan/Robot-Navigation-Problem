@@ -21,11 +21,11 @@ namespace robo {
 class AStar : public SearchMethod {
 public:
     AStar()
-        : dist_func_(DistanceFunction::euclidean)
+        : dist_func_(DistanceFunction::euclidean), SearchMethod("A* search")
     {}
 
     AStar(const DistanceFunction distance_function)
-        : dist_func_(distance_function)
+        : dist_func_(distance_function), SearchMethod("A* search")
     {}
 
     /// @brief Executes A* on an environment

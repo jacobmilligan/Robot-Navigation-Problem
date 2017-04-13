@@ -21,11 +21,13 @@ namespace robo {
 class GreedyBestFirst : public SearchMethod {
 public:
     GreedyBestFirst()
-        : dist_func_(DistanceFunction::euclidean)
+        : dist_func_(DistanceFunction::euclidean),
+          SearchMethod("Greedy best-first search")
     {}
 
     GreedyBestFirst(const DistanceFunction distance_function)
-        : dist_func_(distance_function)
+        : dist_func_(distance_function),
+          SearchMethod("Greedy best-first search")
     {}
 
     /// @brief Searches the given environment using the greedy best-first

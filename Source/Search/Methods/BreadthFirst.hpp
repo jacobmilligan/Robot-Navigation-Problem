@@ -20,6 +20,9 @@ namespace robo {
 /// method
 class BreadthFirst : public SearchMethod {
 public:
+    BreadthFirst()
+        : SearchMethod("Breadth-first search")
+    {}
     /// @brief Executes the breadth-first algorithm
     /// @param env The environment to search
     /// @return The results of the search

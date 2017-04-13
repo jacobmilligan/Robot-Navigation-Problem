@@ -19,6 +19,9 @@ namespace robo {
 
 class IDS : public SearchMethod {
 public:
+    IDS()
+        : SearchMethod("Iterative-deepening depth-first search")
+    {}
     Solution search(const Environment& env) override;
 private:
     /// @brief The frontier used for the search, stored as a LIFO queue

@@ -12,6 +12,13 @@
 
 #include "SearchMethod.hpp"
 
+#include "Search/Methods/BreadthFirst.hpp"
+#include "Search/Methods/DepthFirst.hpp"
+#include "Search/Methods/GreedyBestFirst.hpp"
+#include "Search/Methods/AStar.hpp"
+#include "Search/Methods/IDS.hpp"
+#include "Search/Methods/IDAStar.hpp"
+
 namespace robo {
 
 Node SearchMethod::get_child(const Environment& env, const Node* parent, const Action action)
@@ -45,11 +52,34 @@ Solution::Solution(const bool is_succesful, const ExploredSet& explored, const N
 {
     path.clear();
     auto* node = end->parent_ptr;
-    while ( node != nullptr ) {
+    while ( node->parent_ptr != nullptr ) {
         path.push_back(*node);
         node = node->parent_ptr;
     }
     std::reverse(path.begin(), path.end());
+}
+
+std::string Solution::to_string()
+{
+    std::string output = "";
+    for ( auto& d : path ) {
+        output += robo::direction_to_string(d.action) + "; ";
+    }
+    return output;
+}
+
+MethodMap generate_method_map()
+{
+    MethodMap methods;
+
+    methods["BFS"] = std::make_unique<robo::BreadthFirst>();
+    methods["DFS"] = std::make_unique<robo::DepthFirst>();
+    methods["GBFS"] = std::make_unique<robo::GreedyBestFirst>();
+    methods["AS"] = std::make_unique<robo::AStar>();
+    methods["IDS"] = std::make_unique<robo::IDS>();
+    methods["IDAS"] = std::make_unique<robo::IDAStar>();
+
+    return methods;
 }
 
 }

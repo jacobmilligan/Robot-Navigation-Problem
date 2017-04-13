@@ -16,6 +16,9 @@
 #include "Containers.hpp"
 #include "Environment.hpp"
 
+#include <unordered_map>
+#include <string>
+
 namespace robo {
 
 class Graph;
@@ -30,6 +33,8 @@ struct Solution {
 
     Solution(const bool is_succesful, const ExploredSet& explored, const Node* end);
 
+    std::string to_string();
+
     /// @brief Whether the search method was successful in finding a solution
     bool success;
     /// @brief The amount of children expanded
@@ -42,6 +47,9 @@ struct Solution {
 /// inherit from.
 class SearchMethod {
 public:
+    SearchMethod(const char* name)
+        : name_(name)
+    {}
     /// @brief Executes the methods search algorithm
     /// @param env The environment to search
     /// @return SearchResults
@@ -53,9 +61,18 @@ public:
         return explored_;
     }
 
+    /// @brief Gets the search methods algorithm name for printing
+    /// @return The search algorithm name
+    const char* name()
+    {
+        return name_;
+    }
+
 protected:
     /// @brief The set of all explored nodes
     ExploredSet explored_;
+    const char* name_;
+    const char* code_;
 
     /// @brief Gets a child from the environment. Implemented differently for
     /// different search methods
@@ -66,6 +83,9 @@ protected:
     Node get_child(const Environment& env, const Node* parent, const Action action);
 };
 
+using MethodMap = std::unordered_map<std::string, std::unique_ptr<robo::SearchMethod>>;
+
+MethodMap generate_method_map();
 
 
 }

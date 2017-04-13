@@ -7,6 +7,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/CMake/Modules)
 
 set(SOURCE_FILES
         Source/Parsers/FileParser.cpp
+        Source/Parsers/CLIParser.cpp
         Source/Search/Core/Environment.cpp
         Source/Search/Core/SearchMethod.cpp)
 

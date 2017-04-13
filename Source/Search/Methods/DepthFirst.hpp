@@ -21,6 +21,9 @@ namespace robo {
 /// method.
 class DepthFirst : public SearchMethod {
 public:
+    DepthFirst()
+        : SearchMethod("Depth-first search")
+    {}
     /// @brief Searches the given environment using the depth-first algorithm
     /// @param env The environment to search
     /// @return The results of the search

@@ -1,39 +1,21 @@
-#include <Search/Methods/IDS.hpp>
 #include "Parsers/CLIParser.hpp"
 #include "Parsers/FileParser.hpp"
 #include "Visualizer/VisualizerApp.hpp"
 
-#include "Search/Methods/BreadthFirst.hpp"
-#include "Search/Methods/DepthFirst.hpp"
-#include "Search/Methods/GreedyBestFirst.hpp"
-#include "Search/Methods/AStar.hpp"
-
-using MethodMap = std::unordered_map<std::string, std::unique_ptr<robo::SearchMethod>>;
-
-void populate_search_methods(MethodMap& methods)
-{
-    methods["BFS"] = std::make_unique<robo::BreadthFirst>();
-    methods["DFS"] = std::make_unique<robo::DepthFirst>();
-    methods["GBFS"] = std::make_unique<robo::GreedyBestFirst>();
-    methods["AS"] = std::make_unique<robo::AStar>();
-    methods["IDS"] = std::make_unique<robo::IDS>();
-}
-
-void print_output(const std::string& filename, const std::string& method,
-                  const robo::Solution& results)
-{
-    std::cout << filename << " " << method << " " << results.node_count << " ";
-    for ( auto& d : results.path ) {
-        std::cout << robo::direction_to_string(d.action) << ";";
-    }
-}
-
 int main(int argc, char** argv)
 {
-    MethodMap methods;
-    robo::CLIParser cli("Executes several search methods");
+    auto methods = robo::generate_method_map();
 
-    populate_search_methods(methods);
+    std::string description = "Searches for solutions to the Robot Navigation "
+        "problem. The following search algorithms are supported for <method>:"
+        "\n\n";
+
+    for ( auto& m : methods ) {
+        description += "[" + std::string(m.first) + "]\t\t"
+                    + m.second->name() + "\n";
+    }
+
+    robo::CLIParser cli(description.c_str());
 
     auto results = cli.parse(argc, argv);
     if ( results.method.size() <= 0 ) {
@@ -41,22 +23,26 @@ int main(int argc, char** argv)
     }
 
     if ( methods.find(results.method) == methods.end() ) {
-        cli.print_error("'" + results.method + "' is not a supported search method");
+        auto error = "'" + results.method + "' is not a supported search method";
+        cli.print_error(error.c_str());
         return 0;
     }
 
     robo::FileParser parser(cli.app_name());
-    auto& method = *methods.find(results.method)->second;
+    auto& method = *(methods.find(results.method)->second);
     auto env = parser.parse(results.filepath);
 
-    if ( !env.valid() ) {
+    if ( !env.valid() )
         return 0;
-    }
 
     env.step_cost = 1;
     auto path = method.search(env);
 
-    print_output(results.filename, results.method, path);
+    printf("%s %s %d %s",
+           results.filename.c_str(),
+           results.method.c_str(),
+           path.node_count,
+           path.to_string().c_str());
 
     return 0;
 }

@@ -23,8 +23,8 @@ namespace robo {
 struct CLIResults {
     CLIResults() {}
 
-    CLIResults(const std::string &file, const std::string &path,
-               const std::string &method_used)
+    CLIResults(const char* file, const char* path,
+               const char* method_used)
         : filename(file), filepath(path), method(method_used)
     {}
 
@@ -42,63 +42,33 @@ struct CLIResults {
 /// object, printing errors and help messages.
 class CLIParser {
 public:
-    CLIParser(const std::string& description)
-        : description_(description)
+    CLIParser(const char* description)
+        : description_(description), bin_path_("")
     {}
+
+    void set_help_str(const char* help);
 
     /// @brief Parses the command line
     /// @param argc Argument count
     /// @param argv Argument string array
     /// @return The CLIResults
-    CLIResults parse(int argc, char** argv)
-    {
-        bin_name_ = sky::Path(argv[0]).filename();
-
-        // If help flag set, print help, otherwise continue parsing
-        if ( strcmp(argv[1], "--help") == 0 || strcmp(argv[1], "-h") == 0 ) {
-            print_help();
-            return CLIResults();
-        }
-
-        // Check for correct number of arguments
-        if ( argc != 3 ) {
-            print_error("Incorrect number of arguments");
-            return CLIResults();
-        }
-
-        // Get the filepath as a path relative to the current binary directory
-        sky::Path filepath = sky::Path::bin_path(argv);
-        filepath.append(argv[1]);
-
-        return CLIResults(filepath.filename(), filepath.str(), argv[2]);
-    }
+    CLIResults parse(int argc, char** argv);
 
     /// @brief Prints a helpful error to the console in the event that data was
     /// incorrectly input
     /// @param msg The message to print
-    void print_error(const std::string& msg)
-    {
-        std::cout << bin_name_ << ": " << msg << " see '"
-                  << bin_name_ << " --help'" << std::endl;
-    }
+    void print_error(const char* msg);
 
     /// @brief Prints a formatted help message to the console
-    void print_help()
-    {
-        std::cout << "\n";
-        std::cout << "usage: " << bin_name_ << " [-h | --help] " << "<filename> <method>\n\n";
-        std::cout << description_ << "\n";
-    }
+    void print_help();
 
     /// @brief Gets the applications binary name
     /// @return The binary name
-    std::string app_name()
-    {
-        return bin_name_;
-    }
+    std::string app_name();
 private:
-    std::string description_;
-    std::string bin_name_;
+    const char* description_;
+    const char* help_;
+    sky::Path bin_path_;
 };
 
 

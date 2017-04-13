@@ -32,17 +32,13 @@ void Font::set_error_callback(Font::error_callback_t error_callback)
 
 Font::~Font()
 {
-    if ( TTF_WasInit() ) {
+    if ( TTF_WasInit() )
         TTF_CloseFont(ttf_);
-    }
 }
 
 
-void TextRenderer::draw_string(const int x,
-                               const int y,
-                               const std::string& str,
-                               Font& font,
-                               const SDL_Color& color)
+void TextRenderer::draw_string(const int x, const int y, const std::string& str,
+                               Font& font, const SDL_Color& color)
 {
     auto surface = TTF_RenderText_Blended(font.ptr(), str.c_str(), color);
     if ( surface == nullptr ) {

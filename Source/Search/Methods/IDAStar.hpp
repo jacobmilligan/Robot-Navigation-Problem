@@ -21,11 +21,13 @@ namespace robo {
 class IDAStar : public SearchMethod {
 public:
     IDAStar()
-        : dist_func_(DistanceFunction::euclidean)
+        : dist_func_(DistanceFunction::euclidean),
+          SearchMethod("Iterative-deepening A* search")
     {}
 
     IDAStar(const DistanceFunction distance_function)
-        : dist_func_(distance_function)
+        : dist_func_(distance_function),
+          SearchMethod("Iterative-deepening A* search")
     {}
     /// @brief Executes A* on an environment
     /// @param env The environment to search

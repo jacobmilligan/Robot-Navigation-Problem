@@ -24,8 +24,7 @@ struct Font {
     typedef void (* error_callback_t)(const std::string&, const std::string&);
 public:
     Font()
-        : ttf_(nullptr),
-          path_("")
+        : ttf_(nullptr), path_("")
     {}
 
     ~Font();
@@ -51,17 +50,12 @@ class TextRenderer {
 public:
     TextRenderer(GraphicsDriver& graphics)
         : graphics_(&graphics)
-    {
-
-    }
+    {}
 
     void set_error_callback(error_callback_t error_callback);
 
-    void draw_string(const int x,
-                     const int y,
-                     const std::string& str,
-                     Font& font,
-                     const SDL_Color& color);
+    void draw_string(const int x, const int y, const std::string& str,
+                     Font& font, const SDL_Color& color);
 private:
     GraphicsDriver* graphics_;
     error_callback_t error_callback_;

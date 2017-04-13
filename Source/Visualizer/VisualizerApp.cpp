@@ -41,16 +41,10 @@ VisualizerApp::VisualizerApp(const std::string& app_name, const int speed, const
       path_(graphics_, tilesize),
       env_(1024 / tilesize, 800 / tilesize),
       current_method_(nullptr),
-      method_str_("Breadth-first"),
-      root_(sky::Path::bin_path(argv))
+      method_str_("BFS"),
+      root_(sky::Path::bin_path(argv)),
+      methods_(generate_method_map())
 {
-    methods_["Breadth-first"] = std::make_unique<robo::BreadthFirst>();
-    methods_["Depth-first"] = std::make_unique<robo::DepthFirst>();
-    methods_["Greedy Best-First"] = std::make_unique<robo::GreedyBestFirst>();
-    methods_["A*"] = std::make_unique<robo::AStar>();
-    methods_["IDS"] = std::make_unique<robo::IDS>();
-    methods_["IDAStar"] = std::make_unique<robo::IDAStar>();
-
     path_.update_goal_position(env_, 10, 10);
     path_.update_start_position(env_, 1, 1);
     path_.update_current_node_position(0, 0);
@@ -102,26 +96,28 @@ void VisualizerApp::process_input()
         if ( event_.type == SDL_KEYDOWN ) {
             switch (event_.key.keysym.sym) {
                 case SDLK_1:
-                    method_str_ = "Breadth-first";
+                    method_str_ = "BFS";
                     break;
                 case SDLK_2:
-                    method_str_ = "Depth-first";
+                    method_str_ = "DFS";
                     break;
                 case SDLK_3:
-                    method_str_ = "Greedy Best-First";
+                    method_str_ = "GBFS";
                     break;
                 case SDLK_4:
-                    method_str_ = "A*";
+                    method_str_ = "AS";
                     break;
                 case SDLK_5:
                     method_str_ = "IDS";
                     break;
                 case SDLK_6:
-                    method_str_ = "IDAStar";
+                    method_str_ = "IDAS";
                     break;
                 case SDLK_ESCAPE:
                     window_.close();
+                    return;
                 case SDLK_RETURN:
+                {
                     current_node_ = 0;
                     current_method_ = methods_[method_str_].get();
                     last_time_ = SDL_GetPerformanceCounter();
@@ -129,14 +125,15 @@ void VisualizerApp::process_input()
                     last_time_ = get_delta(last_time_);
                     is_evaluating_ = true;
                     path_.clear();
-                    break;
+                } break;
                 case SDLK_SPACE:
+                {
                     current_method_ = nullptr;
                     current_node_ = 0;
                     is_evaluating_ = false;
                     last_time_ = 0.0;
                     path_.clear();
-                    break;
+                } break;
                 default: break;
             }
         }
@@ -206,7 +203,7 @@ void VisualizerApp::draw()
 
     path_.draw_endpoints();
 
-    text_.draw_string(1, 1, method_str_, font_, Colors::black);
+    text_.draw_string(1, 1, methods_[method_str_]->name(), font_, Colors::black);
     text_.draw_string(1, 750, "Execution time: " + std::to_string(last_time_) + "ms",
                       font_, Colors::black);
     text_.draw_string(800, 750, "Path length: " + std::to_string(results_.path.size()),

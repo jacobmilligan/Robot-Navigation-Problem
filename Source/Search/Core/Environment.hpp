@@ -14,6 +14,7 @@
 #pragma once
 
 #include "Search/Core/Types.hpp"
+#include "SearchMethod.hpp"
 
 #include <vector>
 #include <array>
