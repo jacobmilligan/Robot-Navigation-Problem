@@ -46,8 +46,6 @@ public:
         : description_(description), bin_path_("")
     {}
 
-    void set_help_str(const char* help);
-
     /// @brief Parses the command line
     /// @param argc Argument count
     /// @param argv Argument string array
@@ -67,7 +65,13 @@ public:
     std::string app_name();
 private:
     const char* description_;
-    const char* help_;
+
+    const char* opts_ =     "[-h | --help] [-v | --visualizer] <filename> <method>";
+
+    const char* flags_ =    "[-h | --help]      \t\tPrints help information\n"
+                            "[-v | --visualizer]\t\tRuns the interactive "
+                            "visualizer instead,\n\t\t\t\tdisplaying changes within "
+                            "the search tree and building/testing new problems";
     sky::Path bin_path_;
 };
 

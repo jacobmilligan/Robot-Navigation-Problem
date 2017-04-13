@@ -11,19 +11,29 @@
 
 #include "CLIParser.hpp"
 
-robo::CLIResults robo::CLIParser::parse(int argc, char** argv)
+namespace robo {
+
+
+CLIResults CLIParser::parse(int argc, char** argv)
 {
     bin_path_ = sky::Path(argv[0]);
 
-    // Check for correct number of arguments
-    if ( argc != 3 ) {
-        print_error("Incorrect number of arguments. Expected <filename> and <method> strings");
-        return CLIResults();
+    for ( int a = 1; a < argc; ++a ) {
+        // If help flag set, print help, otherwise continue parsing
+        if ( strcmp(argv[a], "--help") == 0 || strcmp(argv[a], "-h") == 0 ) {
+            print_help();
+            return CLIResults();
+        }
+
+        if ( strcmp(argv[a], "--visualizer") == 0 || strcmp(argv[a], "-v") == 0 ) {
+            return CLIResults("", "", "VISUALIZER");
+        }
     }
 
-    // If help flag set, print help, otherwise continue parsing
-    if ( strcmp(argv[1], "--help") == 0 || strcmp(argv[1], "-h") == 0 ) {
-        print_help();
+    // Check for correct number of arguments
+    if ( argc != 3 ) {
+        print_error(
+            "Incorrect number of arguments. Expected <filename> and <method> strings");
         return CLIResults();
     }
 
@@ -34,7 +44,7 @@ robo::CLIResults robo::CLIParser::parse(int argc, char** argv)
     return CLIResults(filepath.filename().c_str(), filepath.c_str(), argv[2]);
 }
 
-void robo::CLIParser::print_error(const char* msg)
+void CLIParser::print_error(const char* msg)
 {
     printf("%s: %s. See '%s --help'\n",
            bin_path_.filename().c_str(),
@@ -42,18 +52,16 @@ void robo::CLIParser::print_error(const char* msg)
            bin_path_.filename().c_str());
 }
 
-void robo::CLIParser::print_help()
+void CLIParser::print_help()
 {
-    printf("\nusage: %s [-h | --help] <filename> <method>\n\n%s\n",
-           bin_path_.filename().c_str(), description_);
+    printf("usage: %s %s\n\n%s\nWith the following options supported:\n%s\n",
+           bin_path_.filename().c_str(), opts_, description_, flags_);
 }
 
-std::string robo::CLIParser::app_name()
+std::string CLIParser::app_name()
 {
     return bin_path_.filename();
 }
 
-void robo::CLIParser::set_help_str(const char* help)
-{
-    help_ = help;
+
 }

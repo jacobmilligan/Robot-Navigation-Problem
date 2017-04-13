@@ -7,7 +7,7 @@ int main(int argc, char** argv)
     auto methods = robo::generate_method_map();
 
     std::string description = "Searches for solutions to the Robot Navigation "
-        "problem. The following search algorithms are supported for <method>:"
+        "problem.\nThe following search algorithms are supported for <method>:"
         "\n\n";
 
     for ( auto& m : methods ) {
@@ -19,6 +19,12 @@ int main(int argc, char** argv)
 
     auto results = cli.parse(argc, argv);
     if ( results.method.size() <= 0 ) {
+        return 0;
+    }
+
+    if ( results.method == "VISUALIZER" ) {
+        robo::VisualizerApp app("Robo-visualizer", 1, 32, argv);
+        app.run();
         return 0;
     }
 

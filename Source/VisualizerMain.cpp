@@ -10,7 +10,6 @@
 //  19/03/2017
 //
 
-#include "Search/Methods/AStar.hpp"
 #include "Visualizer/VisualizerApp.hpp"
 
 int main(int argc, char** argv)
