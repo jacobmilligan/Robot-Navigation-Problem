@@ -29,10 +29,11 @@ class Environment;
 /// algorithm containing success, the path taken and the amount of nodes expanded
 struct Solution {
     Solution()
-        : success(false), node_count(0)
+        : success(false), node_count(0), largest_frontier(0)
     {}
 
-    Solution(const bool is_succesful, const ExploredSet& explored, const Node* end);
+    Solution(const bool is_succesful, const ExploredSet& explored,
+             const Node* end, const unsigned long frontiermax);
 
     std::string to_string();
 
@@ -40,6 +41,9 @@ struct Solution {
     bool success;
     /// @brief The amount of children expanded
     unsigned int node_count;
+
+    unsigned int largest_frontier;
+
     /// @brief The path taken in order
     std::vector<Node> path;
 };

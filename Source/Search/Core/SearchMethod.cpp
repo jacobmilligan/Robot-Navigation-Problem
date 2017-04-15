@@ -48,8 +48,10 @@ Node SearchMethod::get_child(const Environment& env, const Node* parent, const A
 }
 
 Solution::Solution(const bool is_succesful, const ExploredSet& explored,
-                   const Node* end)
-    : success(is_succesful), node_count(explored.num_operations())
+                   const Node* end, const unsigned long frontiermax)
+    : success(is_succesful),
+      node_count(explored.num_operations()),
+      largest_frontier(frontiermax)
 {
     path.clear();
     if ( !end )

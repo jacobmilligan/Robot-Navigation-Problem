@@ -41,7 +41,7 @@ IDAStar::RBFSResults IDAStar::ida(const Environment& env, const Node& node,
     explored_.append(node);
 
     if ( env.goal_test(node.state) )
-        return { node.cost, Solution(true, explored_, &node) };
+        return { node.cost, Solution(true, explored_, &node, frontier_.largest_size()) };
 
     Node successor;
     for ( auto& a : env.actions() ) {

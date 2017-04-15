@@ -24,7 +24,9 @@ namespace robo {
 
 template <template <typename...> class Container>
 struct Frontier {
-    Container<Node> _container_;
+    Frontier()
+        : largest_(0)
+    {}
 
     void clear();
 
@@ -34,12 +36,14 @@ struct Frontier {
 
     bool empty();
 
-    bool contains(const Node& node);
-
-    const unsigned long size()
+    const unsigned long largest_size()
     {
-        return _container_.size();
+        return largest_;
     }
+
+private:
+    Container<Node> container_;
+    unsigned long largest_;
 };
 
 /// @brief Explored set is a container for storing explored nodes. Internally

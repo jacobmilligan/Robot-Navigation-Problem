@@ -93,8 +93,10 @@ void VisualizerApp::process_input()
             auto key = event_.key.keysym.sym;
             auto method = methods_.find(key);
 
-            if ( method != methods_.end() )
+            if ( method != methods_.end() ) {
+                is_evaluating_ = false;
                 current_method_ = method->second.get();
+            }
 
             if ( key == SDLK_ESCAPE ) {
                 window_.close();
@@ -241,6 +243,9 @@ void VisualizerApp::draw_information()
     if ( path_.size() > 0 ) {
         auto nodes = "Nodes expanded: " + std::to_string(results_.node_count);
         text_.draw_string(720, 700, nodes, font_, Colors::black);
+
+        auto frontier = "Largest frontier: " + std::to_string(results_.largest_frontier);
+        text_.draw_string(720, 650, frontier, font_, Colors::black);
     }
 }
 

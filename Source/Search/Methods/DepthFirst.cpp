@@ -22,7 +22,7 @@ Solution DepthFirst::search(const Environment& env)
 
     Node node(env.start, nullptr, 1, Action::none);
     if ( env.goal_test(env.start) )
-        return Solution(true, explored_, &node);
+        return Solution(true, explored_, &node, frontier_.largest_size());
 
     frontier_.add(node);
     explored_.append(node);
@@ -37,14 +37,14 @@ Solution DepthFirst::search(const Environment& env)
                 explored_.append(child);
 
                 if ( env.goal_test(child.state) )
-                    return Solution(true, explored_, &child);
+                    return Solution(true, explored_, &child, frontier_.largest_size());
 
                 frontier_.add(child);
             }
         }
     }
 
-    return Solution(false, explored_, &child);
+    return Solution(false, explored_, &child, frontier_.largest_size());
 }
 
 

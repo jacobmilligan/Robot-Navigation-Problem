@@ -22,7 +22,7 @@ Solution AStar::search(const Environment& env)
 
     Node node(env.start, nullptr, 0, Action::none);
     if ( env.goal_test(node.state) )
-        return Solution(true, explored_, &node);
+        return Solution(true, explored_, &node, frontier_.largest_size());
 
     frontier_.add(node);
     explored_.overwrite(node);
@@ -37,7 +37,7 @@ Solution AStar::search(const Environment& env)
 
             if ( !explored_.contains(child) ) {
                 if ( env.goal_test(child.state) )
-                    return Solution(true, explored_, &child);
+                    return Solution(true, explored_, &child, frontier_.largest_size());
 
                 explored_.overwrite(child);
                 frontier_.add(child);
@@ -45,7 +45,7 @@ Solution AStar::search(const Environment& env)
         }
     }
 
-    return Solution(false, explored_, &child);
+    return Solution(false, explored_, &child, frontier_.largest_size());
 }
 
 double AStar::get_heuristic(const Environment& env, const Node& node)

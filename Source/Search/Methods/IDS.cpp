@@ -20,18 +20,18 @@ Solution IDS::search(const Environment& env)
     results.cutoff = true;
 
     unsigned int depth = 1;
-
-    while ( results.cutoff ) {
+    explored_.clear();
+    while ( !results.solution.success ) {
         results = depth_limited_search(env, depth++);
     }
 
+    results.solution.largest_frontier = depth;
     return results.solution;
 }
 
 IDS::IDSResults IDS::depth_limited_search(const Environment& env, const unsigned int depth)
 {
     auto node = Node(env.start, nullptr, 0, Action::none);
-    explored_.clear();
     return recursive_dls(node, env, depth);
 }
 
@@ -40,11 +40,17 @@ IDS::IDSResults IDS::recursive_dls(const Node& node, const Environment& env,
 {
     explored_.append(node);
 
-    if ( env.goal_test(node.state) )
-        return IDSResults { Solution(true, explored_, &node), false };
+    if ( env.goal_test(node.state) && depth < 1 )
+        return IDSResults {
+            Solution( true, explored_, &node, depth ),
+            false
+        };
 
-    if ( depth <= 0 )
-        return IDSResults { Solution(false, explored_, nullptr), true };
+    if ( depth < 1 )
+        return IDSResults {
+            Solution( false, explored_, nullptr, depth ),
+            true
+        };
 
     bool cutoff_occurred = false;
     Node child;
@@ -64,7 +70,10 @@ IDS::IDSResults IDS::recursive_dls(const Node& node, const Environment& env,
         }
     }
 
-    return IDSResults { Solution(false, explored_, nullptr), cutoff_occurred };
+    return IDSResults {
+        Solution( false, explored_, nullptr, depth ),
+        cutoff_occurred
+    };
 }
 
 
