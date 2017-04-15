@@ -38,10 +38,10 @@ IDAStar::RBFSResults IDAStar::ida(const Environment& env, const Node& node,
     if ( node.cost > limit )
         return { node.cost };
 
+    explored_.append(node);
+
     if ( env.goal_test(node.state) )
         return { node.cost, Solution(true, explored_, &node) };
-
-    explored_.append(node);
 
     Node successor;
     for ( auto& a : env.actions() ) {
