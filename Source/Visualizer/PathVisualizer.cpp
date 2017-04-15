@@ -15,7 +15,8 @@
 namespace robo {
 
 
-void PathVisualizer::draw(const Solution& results, const int current, const int node_count)
+void PathVisualizer::draw(const Solution& results, const Node& current,
+                          const Environment& env)
 {
     SDL_Rect rect;
     for ( auto& n : results.path ) {
@@ -25,7 +26,7 @@ void PathVisualizer::draw(const Solution& results, const int current, const int 
         rect.h = tilesize_;
 
         if ( visited_.find(n.state) != visited_.end() ) {
-            if ( current >= node_count - 1 ) {
+            if ( current.state == env.goal ) {
                 graphics_->fill_rectangle(rect, Colors::green);
             } else {
                 graphics_->fill_rectangle(rect, Colors::light_yellow);

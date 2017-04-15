@@ -71,8 +71,18 @@ void GraphicsDriver::fill_rectangle(const SDL_Rect& rect, const SDL_Color& color
 
 void GraphicsDriver::draw_rectangle(const SDL_Rect& rect, const SDL_Color& color)
 {
+    auto left = rect.x;
+    auto right = rect.x + rect.w;
+    auto top = rect.y;
+    auto bottom = rect.y + rect.h;
+
     SDL_SetRenderDrawColor(renderer_, color.r, color.g, color.b, color.a);
-    SDL_RenderDrawRect(renderer_, &rect);
+
+    SDL_RenderDrawLine(renderer_, left, top, right, top);
+    SDL_RenderDrawLine(renderer_, right, top, right, bottom);
+    SDL_RenderDrawLine(renderer_, right, bottom, left, bottom);
+    SDL_RenderDrawLine(renderer_, left, bottom, left, top);
+
     reset_color();
 }
 

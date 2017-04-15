@@ -41,7 +41,7 @@ private:
 
     IDAStar::RBFSResults ida(const Environment& env, const Node& node, const double limit);
 
-    Frontier<std::set> frontier_;
+    Frontier<std::priority_queue> frontier_;
     DistanceFunction dist_func_;
 	const double infinity_ = std::numeric_limits<double>::max();
 };

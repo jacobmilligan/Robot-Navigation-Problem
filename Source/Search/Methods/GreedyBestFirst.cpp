@@ -25,7 +25,7 @@ Solution GreedyBestFirst::search(const Environment& env)
         return Solution(true, explored_, &node);
 
     frontier_.add(node);
-    explored_.add(node);
+    explored_.append(node);
 
     Node child;
     while ( !frontier_.empty() ) {
@@ -35,7 +35,7 @@ Solution GreedyBestFirst::search(const Environment& env)
             child = get_child(env, explored_.get(node), a);
             child.cost = get_heuristic(env, child);
             if ( !explored_.contains(child) ) {
-                explored_.add(child);
+                explored_.append(child);
 
                 if ( env.goal_test(child.state) )
                     return Solution(true, explored_, &child);

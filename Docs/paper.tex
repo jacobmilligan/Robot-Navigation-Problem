@@ -1,0 +1,38 @@
+\documentclass{unipaper}
+
+\input{Structure/preamble}
+\input{info}
+
+\begin{document}	
+	\maketitle
+
+	\thispagestyle{empty}
+
+	\clearpage
+	
+	\vspace*{\fill}
+	\input{Content/acknowledgements}
+	\vspace*{\fill}
+	
+	\clearpage
+	
+	\thispagestyle{empty}
+	\tableofcontents
+
+	\clearpage
+
+	\setcounter{page}{1}
+
+	\input{Content/body}
+
+	\clearpage
+	
+	\printbibliography
+
+	\phantomsection
+	\label{glossaries}
+	\printglossary[type=\acronymtype]
+	\printglossary
+
+	\input{Content/appendix}
+\end{document}

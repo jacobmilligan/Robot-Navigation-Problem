@@ -1,0 +1,2042 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"tex",
+				"tex_build"
+			],
+			[
+				"sender",
+				"senderCountry"
+			],
+			[
+				"Proper",
+				"PropertyGroup"
+			],
+			[
+				"GPIO",
+				"GPIO_OFFSET"
+			],
+			[
+				"loop",
+				"loopt3"
+			],
+			[
+				"file",
+				"filename\tstatement"
+			],
+			[
+				"get",
+				"get_yaxis"
+			],
+			[
+				"al",
+				"alpha"
+			],
+			[
+				"color",
+				"colorB\tstatement"
+			],
+			[
+				"colo",
+				"colorA\tstatement"
+			],
+			[
+				"L",
+				"legend〔function〕"
+			],
+			[
+				"li",
+				"list\tclass"
+			],
+			[
+				"py",
+				"pyplot\tmodule"
+			],
+			[
+				"gen",
+				"genfromtxt\tfunction"
+			],
+			[
+				"one",
+				"oneThousand"
+			],
+			[
+				"EM",
+				"EmployeeDepartment"
+			],
+			[
+				"role",
+				"role_id"
+			],
+			[
+				"pro",
+				"proj_id"
+			],
+			[
+				"S",
+				"Subject"
+			],
+			[
+				"s",
+				"subj_code"
+			],
+			[
+				"ar",
+				"args〔variable〕"
+			],
+			[
+				"sam",
+				"sampleSize〔argument〕"
+			],
+			[
+				"c",
+				"confidenceInterval"
+			],
+			[
+				"sce",
+				"sceneManager"
+			],
+			[
+				"game",
+				"gameData"
+			],
+			[
+				"remo",
+				"removedirs〔function〕"
+			],
+			[
+				"B",
+				"BLACK_LOOP"
+			],
+			[
+				"scr",
+				"scr_addr"
+			],
+			[
+				"chec",
+				"checkall"
+			],
+			[
+				"zr",
+				"zrcheck"
+			],
+			[
+				"not",
+				"notzxout"
+			],
+			[
+				"zx",
+				"zxout"
+			],
+			[
+				"nota",
+				"notanotb"
+			],
+			[
+				"meta",
+				"meta"
+			],
+			[
+				"html",
+				"htmltemplate\thtml5template"
+			],
+			[
+				"player",
+				"playerY"
+			],
+			[
+				"if",
+				"if\tstatement"
+			],
+			[
+				"Scree",
+				"ScreenHeight\t screen height in px"
+			],
+			[
+				"Screen",
+				"ScreenWidth\t screen width in px"
+			],
+			[
+				"Write",
+				"WriteLn\t Output to console followed by newline"
+			],
+			[
+				"Ser",
+				"ServerName"
+			],
+			[
+				"font-",
+				"font-size"
+			],
+			[
+				"Server",
+				"ServerAlias"
+			],
+			[
+				"All",
+				"AllowOverride"
+			],
+			[
+				"Virtua",
+				"VirtualHost"
+			],
+			[
+				"Vir",
+				"VirtualHost"
+			],
+			[
+				"EOI",
+				"EOINumber"
+			],
+			[
+				"E",
+				"EOINumber"
+			],
+			[
+				"re",
+				"result\tAssign result"
+			],
+			[
+				"Sc",
+				"ScreenHeight\t screen height in px"
+			],
+			[
+				"Scr",
+				"ScreenWidth\t screen width in px"
+			],
+			[
+				"offset",
+				"offsetY"
+			],
+			[
+				"Sr",
+				"SpriteX"
+			],
+			[
+				"Map",
+				"MapPtr"
+			],
+			[
+				"Sprite",
+				"SpriteX"
+			],
+			[
+				"smoothee",
+				"smoothener"
+			],
+			[
+				"smoothe",
+				"smoothener"
+			],
+			[
+				"Check",
+				"CheckSurroundingFlags"
+			],
+			[
+				"halfC",
+				"halfScreenX"
+			],
+			[
+				"Scre",
+				"ScreenWidth\t screen width in px"
+			],
+			[
+				"halfS",
+				"halfScreenX"
+			],
+			[
+				"haf",
+				"halfScreenX"
+			],
+			[
+				"be",
+				"begin\tcompound statement"
+			],
+			[
+				"Draw",
+				"DrawText\t (text, color, font, size, x, y)"
+			],
+			[
+				"midpoi",
+				"midpointVal"
+			],
+			[
+				"corner",
+				"cornerCount"
+			],
+			[
+				"Wir",
+				"WriteLn\t Output to console followed by newline"
+			],
+			[
+				"max",
+				"maxHeight"
+			],
+			[
+				"midpo",
+				"midpointVal"
+			],
+			[
+				"mi",
+				"midpointVal"
+			],
+			[
+				"newA",
+				"newActiveState"
+			],
+			[
+				"cas",
+				"case\tstatement with else"
+			],
+			[
+				"pr",
+				"ProcessEvents()\t poll events"
+			],
+			[
+				"State",
+				"StateManager"
+			],
+			[
+				"cl",
+				"ClearScreen\t (color)"
+			],
+			[
+				"w",
+				"WindowCloseRequested()\t window close event"
+			],
+			[
+				"HyperG",
+				"HyperGameLoadResources"
+			],
+			[
+				"game_scor",
+				"game_score_data"
+			],
+			[
+				"avera",
+				"average"
+			],
+			[
+				"read_se",
+				"read_sensor_kind"
+			],
+			[
+				"for",
+				"for\tFor Loop"
+			],
+			[
+				"sensor",
+				"sensor_array"
+			],
+			[
+				"fo",
+				"for\tFor Loop"
+			],
+			[
+				"read_sen",
+				"read_sensor_data"
+			],
+			[
+				"sensor_",
+				"sensor_data"
+			],
+			[
+				"read_sensor",
+				"read_sensor_kind"
+			],
+			[
+				"print",
+				"print_usage〔function〕"
+			],
+			[
+				"Life",
+				"LifeGrid"
+			],
+			[
+				"el",
+				"elif〔keyword〕"
+			],
+			[
+				"Ar",
+				"ArgumentParser〔class〕"
+			],
+			[
+				"Funti",
+				"function1"
+			],
+			[
+				"pivot",
+				"pivotIndex"
+			],
+			[
+				"Show",
+				"ShowPanel"
+			],
+			[
+				"fi",
+				"FillRectangle\t (color, x, y, width, height)"
+			],
+			[
+				"backg",
+				"background-color"
+			],
+			[
+				"shut",
+				"shutdown"
+			],
+			[
+				"FoodHU",
+				"FoodHunterData"
+			],
+			[
+				"FoodHun",
+				"FoodHunterData"
+			],
+			[
+				"Wrap",
+				"WrapCharacter"
+			],
+			[
+				"fom",
+				"formattedNum〔variable〕"
+			],
+			[
+				"format",
+				"formattedNum〔variable〕"
+			],
+			[
+				"form",
+				"formattedNum〔variable〕"
+			],
+			[
+				"num",
+				"number"
+			],
+			[
+				"conver",
+				"convert_to_decimal"
+			],
+			[
+				"Wri",
+				"WriteLn\t Output to console followed by newline"
+			],
+			[
+				"Wr",
+				"WriteLn\t Output to console followed by newline"
+			],
+			[
+				"Sensor",
+				"SensorData"
+			],
+			[
+				"case",
+				"case\tstatement"
+			],
+			[
+				"ReadSensor",
+				"ReadSensorData"
+			],
+			[
+				"ReadInte",
+				"ReadInteger"
+			],
+			[
+				"tr",
+				"try\tTry/Except"
+			],
+			[
+				"int",
+				"inputtype\tinputtype"
+			],
+			[
+				"newM",
+				"newMbHeight"
+			],
+			[
+				"Mouse",
+				"MouseClicked"
+			],
+			[
+				"Re",
+				"RefreshScreen\t (fps)"
+			],
+			[
+				"Fill",
+				"FillRectangle\t (color, x, y, width, height)"
+			],
+			[
+				"zoom",
+				"zoomDir"
+			],
+			[
+				"curr",
+				"currPixel"
+			],
+			[
+				"MBP",
+				"MBpixel"
+			],
+			[
+				"Writ",
+				"WriteLn\t Output to console followed by newline"
+			],
+			[
+				"startM",
+				"startMbx"
+			],
+			[
+				"mouse",
+				"MouseX"
+			],
+			[
+				"startMb",
+				"startMby"
+			],
+			[
+				"start",
+				"startMby"
+			],
+			[
+				"newMb",
+				"newMbWidth"
+			],
+			[
+				"scale",
+				"scaleHeight"
+			],
+			[
+				"Man",
+				"MandelbrotColor"
+			],
+			[
+				"mb",
+				"mbHeight"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "paper.tex",
+			"settings":
+			{
+				"buffer_size": 486,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Structure/preamble.tex",
+			"settings":
+			{
+				"buffer_size": 127,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Content/Sections/search_algorithms.tex",
+			"settings":
+			{
+				"buffer_size": 2565,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Content/Sections/introduction.tex",
+			"settings":
+			{
+				"buffer_size": 1325,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "Structure/glossary.tex",
+			"settings":
+			{
+				"buffer_size": 4867,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/LaTeXTools/LaTeX.sublime-build",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/C++ Starting Kit/C++ - Starting Kit.sublime-build",
+					""
+				],
+				[
+					"Packages/C++ Starting Kit/C++ - Starting Kit.sublime-build",
+					"Run"
+				]
+			],
+			[
+				"Packages/C++ Starting Kit/C++ - Starting Kit.sublime-build",
+				"Run"
+			]
+		],
+		[
+			[
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					""
+				],
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					"Run"
+				]
+			],
+			[
+				"Packages/C++/C++ Single File.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					""
+				],
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					"Run"
+				],
+				[
+					"Packages/C++ Starting Kit/C++ - Starting Kit.sublime-build",
+					""
+				],
+				[
+					"Packages/C++ Starting Kit/C++ - Starting Kit.sublime-build",
+					"Run"
+				]
+			],
+			[
+				"Packages/C++/C++ Single File.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					""
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Traditional"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"PdfLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"XeLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"LuaLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - PdfLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - XeLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Basic Builder - LuaLaTeX"
+				],
+				[
+					"Packages/LaTeXTools/LaTeX.sublime-build",
+					"Script Builder"
+				]
+			],
+			[
+				"Packages/LaTeXTools/LaTeX.sublime-build",
+				"Traditional"
+			]
+		],
+		[
+			[
+				[
+					"Packages/Makefile/Make.sublime-build",
+					""
+				],
+				[
+					"Packages/Makefile/Make.sublime-build",
+					"Clean"
+				]
+			],
+			[
+				"Packages/Makefile/Make.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/User/c++11.sublime-build",
+					""
+				],
+				[
+					"Packages/User/c++11.sublime-build",
+					"Run"
+				]
+			],
+			[
+				"Packages/User/c++11.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/User/c++_fltk.sublime-build",
+					""
+				],
+				[
+					"Packages/User/c++_fltk.sublime-build",
+					"Run"
+				]
+			],
+			[
+				"Packages/User/c++_fltk.sublime-build",
+				"Run"
+			]
+		],
+		[
+			[
+				[
+					"Packages/User/sdl-include.sublime-build",
+					""
+				],
+				[
+					"Packages/User/sdl-include.sublime-build",
+					"Run"
+				]
+			],
+			[
+				"Packages/User/sdl-include.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/User/sdl.sublime-build",
+					""
+				],
+				[
+					"Packages/User/sdl.sublime-build",
+					"Run"
+				]
+			],
+			[
+				"Packages/User/sdl.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 107.0,
+		"last_filter": "remov",
+		"selected_items":
+		[
+			[
+				"remov",
+				"Package Control: Remove Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"latex",
+				"Snippet: Insert a LaTeX environment"
+			],
+			[
+				"packa",
+				"Preferences: Browse Packages"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"pack",
+				"Preferences: Browse Packages"
+			],
+			[
+				"todo",
+				"TodoReview: Open Files"
+			],
+			[
+				"packager",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"google",
+				"Google Spell Check"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"instaL",
+				"Package Control: Install Package"
+			],
+			[
+				"pand",
+				"Pandoc"
+			],
+			[
+				"save",
+				"Markdown Preview: Save to HTML"
+			],
+			[
+				"markdown",
+				"Build With: Markdown"
+			],
+			[
+				"new",
+				"ANF: New File"
+			],
+			[
+				"up",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"c++",
+				"Set Syntax: C++"
+			],
+			[
+				"lint",
+				"SublimeLinter: Toggle Linter"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"linter",
+				"SublimeLinter: Toggle Linter"
+			],
+			[
+				"sublimelinter",
+				"Preferences: SublimeLinter Settings – User"
+			],
+			[
+				"tog",
+				"SublimeLinter: Toggle Linter"
+			],
+			[
+				"todor",
+				"TodoReview: Open Files"
+			],
+			[
+				"key",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"revert to",
+				"Evernote: Open Evernote Note"
+			],
+			[
+				"key binding",
+				"Preferences: Key Bindings - Default"
+			],
+			[
+				"revert t",
+				"Evernote: Revert to version on Evernote"
+			],
+			[
+				"revert",
+				"Evernote: Revert to version on Evernote"
+			],
+			[
+				"pre",
+				"Preferences: Settings - Default"
+			],
+			[
+				"de",
+				"Preferences: Key Bindings - Default"
+			],
+			[
+				"everno",
+				"Evernote Settings: Default"
+			],
+			[
+				"evernote",
+				"Evernote: Revert to version on Evernote"
+			],
+			[
+				"updat",
+				"Evernote: Update Evernote Note"
+			],
+			[
+				"evernote ope",
+				"Evernote: Open Evernote Note"
+			],
+			[
+				"send",
+				"Evernote: Send to Evernote as new note"
+			],
+			[
+				"ever",
+				"Evernote: New empty note"
+			],
+			[
+				"Snippet: add",
+				"Snippet: addEventListener"
+			],
+			[
+				"Snippet: get",
+				"Snippet: getElementsByClassName"
+			],
+			[
+				"sass",
+				"Set Syntax: Sass"
+			],
+			[
+				"pacl",
+				"Package Control: List Packages"
+			],
+			[
+				"prv",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"jshint",
+				"JSHint: Set Linting Preferences"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"package c",
+				"Package Control: List Packages"
+			],
+			[
+				"packade",
+				"Package Control: Disable Package"
+			],
+			[
+				"pac",
+				"Package Control: Remove Package"
+			],
+			[
+				"package control ins",
+				"Package Control: Install Package"
+			],
+			[
+				"toggle",
+				"SublimeLinter: Toggle Linter"
+			],
+			[
+				"terminal",
+				"Preferences: Terminal Settings – User"
+			],
+			[
+				"prefer",
+				"Preferences: Terminal Settings – Default"
+			],
+			[
+				"package control",
+				"Package Control: Install Package"
+			],
+			[
+				"Snippet: ",
+				"Snippet: html5template"
+			]
+		],
+		"width": 572.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"view.encoding()",
+			"sublime.log_commands(True)",
+			"sublime.log_commands(true)",
+			"view.settings().get('font_face')",
+			"jsl",
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/Jacob/Uni/IntroAI/Assignment1/Docs",
+		"/Users/Jacob/Uni/IntroAI/Assignment1/Docs/Content",
+		"/Users/Jacob/Uni/IntroAI/Assignment1/Docs/Content/Sections",
+		"/Users/Jacob/Uni/IntroAI/Assignment1/Docs/Resources",
+		"/Users/Jacob/Uni/IntroAI/Assignment1/Docs/Structure"
+	],
+	"file_history":
+	[
+		"/Users/Jacob/Uni/IntroAI/Assignment1/Docs/Content/body.tex",
+		"/Users/Jacob/Uni/IntroAI/Assignment1/Docs/Structure/preamble.tex",
+		"/Users/Jacob/Uni/IntroAI/Assignment1/Docs/Content/Sections/introduction.tex",
+		"/Users/Jacob/Uni/IntroAI/Assignment1/Docs/unipaper.cls",
+		"/Users/Jacob/Dev/Repos/LaTeX_Template/unipaper.cls",
+		"/Users/Jacob/Uni/IntroAI/Assignment1/Docs/paper.sublime-project",
+		"/Users/Jacob/Uni/IntroAI/Assignment1/Docs/Content/Sections/implementation.tex",
+		"/Users/Jacob/Uni/IntroAI/Assignment1/Docs/Content/Sections/features.tex",
+		"/Users/Jacob/Uni/IntroAI/Assignment1/Docs/Content/Sections/conclusion.tex",
+		"/Users/Jacob/Uni/IntroAI/Assignment1/Docs/Content/Sections/known_issues.tex",
+		"/Users/Jacob/Uni/IntroAI/Assignment1/Docs/Content/Sections/search_algorithms.tex",
+		"/Users/Jacob/Uni/IntroAI/Assignment1/Docs/paper.tex",
+		"/Users/Jacob/Uni/IntroAI/Assignment1/Docs/Structure/glossary.tex",
+		"/Users/Jacob/Uni/IntroAI/Assignment1/Docs/info.tex",
+		"/Users/Jacob/Uni/IntroAI/Assignment1/Docs/.latexmkrc",
+		"/Users/Jacob/Uni/IntroAI/Assignment1/Docs/tex_build/paper.xdy",
+		"/Users/Jacob/Uni/IntroAI/Assignment1/Docs/paper.pdf",
+		"/Users/Jacob/.latexmkrc",
+		"/Users/Jacob/Uni/IntroAI/Assignment1/Docs/.latexmk",
+		"/Users/Jacob/Uni/IntroAI/Assignment1/Docs/Content/abstract.tex",
+		"/Users/Jacob/Uni/IntroAI/Assignment1/Docs/Content/acknowledgements.tex",
+		"/Users/Jacob/Uni/IntroAI/Assignment1/Docs/Content/appendix.tex",
+		"/Users/Jacob/Uni/IntroAI/Assignment1/.gitignore",
+		"/Users/Jacob/Dev/Repos/LaTeX_Template/test/Content/body.tex",
+		"/Users/Jacob/Uni/IntroAI/Assignment1/Docs/.gitignore",
+		"/Users/Jacob/.zshrc",
+		"/Users/Jacob/Dev/Repos/LaTeX_Template/test/Content/Sections/hey.tex",
+		"/Users/Jacob/Dev/Repos/LaTeX_Template/test/Content/acknowledgements.tex",
+		"/Users/Jacob/Dev/Repos/LaTeX_Template/test/info.tex",
+		"/Users/Jacob/Uni/LaTeX_Template/Content/acknowledgements.tex",
+		"/Users/Jacob/Uni/LaTeX_Template/Content/body.tex",
+		"/Users/Jacob/Uni/LaTeX_Template/Content/Sections/section_a.tex",
+		"/Users/Jacob/Uni/LaTeX_Template/Content/Sections/section_b.tex",
+		"/Users/Jacob/Uni/LaTeX_Template/Content/Sections/section_c.tex",
+		"/Users/Jacob/Uni/LaTeX_Template/unipaper.cls",
+		"/Users/Jacob/Uni/LaTeX_Template/Content/appendix.tex",
+		"/Users/Jacob/Uni/LaTeX_Template/template.tex",
+		"/Users/Jacob/Uni/LaTeX_Template/Structure/preamble.tex",
+		"/Users/Jacob/Downloads/OxThesis/Oxford_Thesis.tex",
+		"/Users/Jacob/Work/Dev/ParleChat/.git/rebase-merge/git-rebase-todo",
+		"/Users/Jacob/Uni/DSP/Problem_Set_4/src/IFStream12Bits.cpp",
+		"/Users/Jacob/Downloads/Chapter3_SteeringBehaviors 2/Steering/src/Chapter3Steering/EntityFunctionTemplates.java",
+		"/Users/Jacob/Downloads/Chapter3_SteeringBehaviors 2/Steering/src/Chapter3Steering/GameWorld.java",
+		"/Users/Jacob/Downloads/Chapter3_SteeringBehaviors 2/Steering/src/Chapter3Steering/Vehicle.java",
+		"/Users/Jacob/Downloads/Chapter3_SteeringBehaviors 2/Steering/src/Chapter3Steering/SteeringBehavior.java",
+		"/Users/Jacob/Downloads/Chapter3_SteeringBehaviors 2/Steering/src/common/misc/iniFileLoaderBase.java",
+		"/Users/Jacob/Downloads/Chapter3_SteeringBehaviors 2/Steering/src/common/misc/CppToJava.java",
+		"/Users/Jacob/Downloads/Chapter3_SteeringBehaviors 2/Steering/src/common/D2/Transformation.java",
+		"/Users/Jacob/Downloads/Chapter3_SteeringBehaviors 2/Steering/src/common/D2/Wall2D.java",
+		"/Users/Jacob/Downloads/Chapter3_SteeringBehaviors 2/Steering/src/common/D2/geometry.java",
+		"/Users/Jacob/Downloads/Chapter3_SteeringBehaviors 2/Steering/src/common/D2/C2DMatrix.java",
+		"/Users/Jacob/Downloads/Chapter3_SteeringBehaviors 2/Steering/src/common/misc/CellSpacePartition.java",
+		"/Users/Jacob/Downloads/Chapter3_SteeringBehaviors 2/Steering/src/common/misc/Cgdi.java",
+		"/Users/Jacob/Uni/Buckland_PGAIBE_Source_VC6-VS2010 1/VS2010/Buckland_Chapter3-Steering Behaviors/SteeringBehaviors.cpp",
+		"/Users/Jacob/Uni/Buckland_PGAIBE_Source_VC6-VS2010 1/VS2010/Buckland_Chapter3-Steering Behaviors/Obstacle.h",
+		"/Users/Jacob/Uni/Buckland_PGAIBE_Source_VC6-VS2010 1/VS2010/Common/Game/EntityFunctionTemplates.h",
+		"/Users/Jacob/Uni/Buckland_PGAIBE_Source_VC6-VS2010 1/VS2010/Common/2D/Transformations.h",
+		"/Users/Jacob/Uni/Buckland_PGAIBE_Source_VC6-VS2010 1/VS2010/Buckland_Chapter3-Steering Behaviors/GameWorld.h",
+		"/Users/Jacob/Dev/Repos/Neon Dreamer/Resources/JSON/title.ui.json",
+		"/Users/Jacob/Uni/DSP/Problem_Set_4/cmake-build-debug/sample.lzw",
+		"/Users/Jacob/Uni/DSP/Problem_Set_3/Source/FibonacciIterator.h",
+		"/Users/Jacob/Uni/RTP/Week04/Writing_Task/Week04.tex",
+		"/Users/Jacob/Uni/DSP/tute6/cmake-build-debug/sample.lzw",
+		"/Users/Jacob/Uni/RTP/project/Docs/ref.bib",
+		"/Users/Jacob/Downloads/var/log/nodejs/nodejs.log",
+		"/Users/Jacob/Uni/Buckland_PGAIBE_Source_VC6-VS2010 1/VS2010/Buckland_Chapter3-Steering Behaviors/GameWorld.cpp",
+		"/Users/Jacob/Uni/Buckland_PGAIBE_Source_VC6-VS2010 1/VS2010/Buckland_Chapter3-Steering Behaviors/params.ini",
+		"/Users/Jacob/Uni/Buckland_PGAIBE_Source_VC6-VS2010 1/VS2010/Buckland_Chapter3-Steering Behaviors/MovingEntity.h",
+		"/Users/Jacob/Uni/Buckland_PGAIBE_Source_VC6-VS2010 1/VS2010/Buckland_Chapter3-Steering Behaviors/Vehicle.cpp",
+		"/Users/Jacob/Uni/Buckland_PGAIBE_Source_VC6-VS2010 1/VS2010/Buckland_Chapter3-Steering Behaviors/Vehicle.h",
+		"/Users/Jacob/Uni/Buckland_PGAIBE_Source_VC6-VS2010 1/VS2010/Buckland_Chapter3-Steering Behaviors/BaseGameEntity.h",
+		"/Users/Jacob/Uni/Buckland_PGAIBE_Source_VC6-VS2010 1/VS2010/Buckland_Chapter3-Steering Behaviors/SteeringBehaviors.h",
+		"/Users/Jacob/Uni/Buckland_PGAIBE_Source_VC6-VS2010 1/VS2010/Common/2D/C2DMatrix.h",
+		"/Users/Jacob/Downloads/influence_maps/main.py",
+		"/Users/Jacob/Downloads/influence_maps/tile_world.py",
+		"/Users/Jacob/Downloads/10.1007%2FBF01245300.bib",
+		"/Users/Jacob/Uni/uni_template.tex",
+		"/Users/Jacob/Uni/RTP/Week03/Writing Task/Week03.tex",
+		"/Users/Jacob/Uni/RTP/Week04/Writing_Task/ref.bib",
+		"/Users/Jacob/bin/dynamodb",
+		"/Users/Jacob/Uni/Buckland_PGAIBE_Source_VC6-VS2010 1/VS2010/Common/2D/geometry.h",
+		"/Users/Jacob/Uni/Buckland_PGAIBE_Source_VC6-VS2010 1/VS2010/Common/misc/CellSpacePartition.h",
+		"/Users/Jacob/Uni/Buckland_PGAIBE_Source_VC6-VS2010 1/VS2010/Common/misc/Cgdi.h",
+		"/Users/Jacob/Uni/Buckland_PGAIBE_Source_VC6-VS2010 1/VS2010/Common/Game/BaseGameEntity.h",
+		"/Users/Jacob/Uni/Buckland_PGAIBE_Source_VC6-VS2010 1/VS2010/Common/Game/Region.h",
+		"/Users/Jacob/Uni/Buckland_PGAIBE_Source_VC6-VS2010 1/VS2010/Common/Game/MovingEntity.h",
+		"/Users/Jacob/Uni/Buckland_PGAIBE_Source_VC6-VS2010 1/VS2010/Common/Game/EntityManager.h",
+		"/Users/Jacob/Uni/Buckland_PGAIBE_Source_VC6-VS2010 1/VS2010/Common/Game/EntityManager.cpp",
+		"/Users/Jacob/Uni/Buckland_PGAIBE_Source_VC6-VS2010 1/VS2010/Common/2D/Vector2d.cpp",
+		"/Users/Jacob/Uni/IntroAI/Assignment1/Deps/Path/MacPath.cpp",
+		"/Users/Jacob/Uni/RTP/Week03/simrail2/skel2.adb",
+		"/Users/Jacob/Uni/RTP/Week03/simrail2/raildefs.ads",
+		"/Users/Jacob/Uni/DSP/Problem_Set_2/Tests copy/Tests.cpp",
+		"/Users/Jacob/Uni/DSP/Problem_Set_2/Tests 2/Tests.cpp",
+		"/Users/Jacob/Downloads/1568041citation.bib",
+		"/Users/Jacob/Uni/AIGames/spike_report.txt",
+		"/Users/Jacob/Uni/AIGames/labs/lab5/agent.py",
+		"/Users/Jacob/Downloads/lab06/agent.py",
+		"/Users/Jacob/Uni/AIGames/labs/lab6/agent.py",
+		"/usr/local/lib/node_modules/moxygen/src/parser.js",
+		"/Users/Jacob/Uni/RTP/Week02/Writing_Task/Week2.tex",
+		"/usr/local/lib/node_modules/moxygen/bin/moxygen.js",
+		"/Users/Jacob/Uni/DSP/Problem_Set_2/Tests/ShiftValue.class.txt",
+		"/Users/Jacob/Uni/RTP/project/Docs/ProjectProposalRTP.tex",
+		"/Users/Jacob/Uni/DSP/Problem_Set_2/ShiftValue.class",
+		"/Users/Jacob/Uni/RTP/project/Docs/ProjectProposalRTP.",
+		"/Users/Jacob/Uni/RTP/Week03/Week02",
+		"/Users/Jacob/Work/Dev/ParleChat/app/package.json",
+		"/Users/Jacob/Work/Dev/ParleKeys/ssh-ec2.sh",
+		"/Users/Jacob/Dev/Repos/planning_tool/package.json",
+		"/Users/Jacob/Work/Dev/Parle/Lambda/ParleLambdaUtils/DBConfig.cs",
+		"/Users/Jacob/Dev/Repos/planning_tool/bin/Planning Tool-darwin-x64/version",
+		"/Users/Jacob/Dev/electron/electron-typescript-skeleton/package.json",
+		"/Users/Jacob/Dev/Repos/electron-typescript-skeleton/package.json",
+		"/Users/Jacob/Dev/electron/todo/package.json",
+		"/Users/Jacob/Dev/electron/todo/src/html/index.html",
+		"/Users/Jacob/Downloads/2_Lab/Specextra.txt",
+		"/Users/Jacob/Library/Application Support/MacDown/Styles/GitHub2.css",
+		"/Users/Jacob/Uni/IntroAI/Assignment1/Deps/Path/CMakeLists.txt",
+		"/Users/Jacob/Dev/Repos/Skyrocket/Source/Skyrocket/Platform/MacOSX/MacPath.cpp",
+		"/Users/Jacob/Dev/Repos/Skyrocket/Source/Skyrocket/Platform/MacOSX/MacPath.mm",
+		"/Users/Jacob/Uni/RTP/project/.git/MERGE_MSG",
+		"/Users/Jacob/Uni/RTP/project/Build/build-files-go-here.md",
+		"/Users/Jacob/Uni/RTP/project/Docs/proposal.tex",
+		"/Users/Jacob/Uni/RTP/project/Source/CMakeLists.txt",
+		"/Users/Jacob/Uni/DSP/Problem Set 1/cmake-build-debug/tests",
+		"/Users/Jacob/Uni/RTP/project/.gitignore",
+		"/Users/Jacob/Uni/IntroAI/Assignment1/cmake-build-debug/test.txt"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"*.c, *.h, <open_folders>",
+			"/Users/Jacob/Uni/intro_to_programming/Hypernoise/include",
+			"*.h, <open_folders>",
+			"*.c, <open_folders>",
+			"/Users/Jacob/Uni/intro_to_programming/Hypernoise/include/",
+			"/Users/Jacob/Uni/intro_to_programming/Hypernoise/include/*.h",
+			"<open_folders>.c, <open_folders>.h",
+			"/Users/Jacob/Uni/intro_to_programming/Hypernoise/src, /Users/Jacob/Uni/intro_to_programming/Hypernoise/include",
+			"src, include",
+			"<open folders>",
+			"/Users/Jacob/Uni/intro_to_programming/distinction_tasks/5.4/lib",
+			"/Users/Jacob/Dev/Repos/cronus/app, -*/node_modules/*, -*/models/*, -*.scss, -*.css.orig, -*.css",
+			"/Users/Jacob/Dev/Repos/cronus/, -*/node_modules/*, -*/models/*, -*.scss, -*.css.orig, -*.css",
+			"/Users/Jacob/Dev/Repos/cronus/app, -*/node_modules/*, -*/models/*, -*.scss, -*.css.orig, -*.css",
+			"/Users/Jacob/Dev/Repos/cronus/app, -*/node_modules/*, -*.scss, -*.css.orig, -*.css",
+			"/Users/Jacob/Dev/Repos/cronus/app, -*node_modules*, -*.scss, -*.css.orig, -*.css",
+			"/Users/Jacob/Dev/Repos/cronus/app, -node_modules, -*.scss, -*.css.orig, -*.css",
+			"/Users/Jacob/Dev/Repos/cronus/app, -/Users/Jacob/Dev/Repos/cronus/app, -*.scss, -*.css.orig, -*.css",
+			"/Users/Jacob/Dev/Repos/cronus/app, -*.scss, -*.css.orig, -*.css",
+			"/Users/Jacob/Dev/Repos/cronus/app/bin, /Users/Jacob/Dev/Repos/cronus/app/config, /Users/Jacob/Dev/Repos/cronus/app/controllers, /Users/Jacob/Dev/Repos/cronus/app/helpers, /Users/Jacob/Dev/Repos/cronus/app/models, /Users/Jacob/Dev/Repos/cronus/app/public, /Users/Jacob/Dev/Repos/cronus/app/views, /Users/Jacob/Dev/Repos/cronus/app/app.js, -*.scss, -*.css.orig, -*.css",
+			"/Users/Jacob/Dev/Repos/cronus/app/bin, /Users/Jacob/Dev/Repos/cronus/app/config, /Users/Jacob/Dev/Repos/cronus/app/controllers, /Users/Jacob/Dev/Repos/cronus/app/helpers, /Users/Jacob/Dev/Repos/cronus/app/models, /Users/Jacob/Dev/Repos/cronus/app/public, /Users/Jacob/Dev/Repos/cronus/app/views, /Users/Jacob/Dev/Repos/cronus/app/app.js, -*.scss, -*.scss.orig, -*.css",
+			"*.js, *.html",
+			"/Users/Jacob/Dev/Repos/cronus/app/bin, /Users/Jacob/Dev/Repos/cronus/app/config, /Users/Jacob/Dev/Repos/cronus/app/controllers, /Users/Jacob/Dev/Repos/cronus/app/helpers, /Users/Jacob/Dev/Repos/cronus/app/models, /Users/Jacob/Dev/Repos/cronus/app/public, /Users/Jacob/Dev/Repos/cronus/app/views, /Users/Jacob/Dev/Repos/cronus/app/app.js, -*.scss, -*.scss.orig, -*.css",
+			"/Users/Jacob/Dev/Repos/cronus/app/bin, /Users/Jacob/Dev/Repos/cronus/app/config, /Users/Jacob/Dev/Repos/cronus/app/controllers, /Users/Jacob/Dev/Repos/cronus/app/helpers, /Users/Jacob/Dev/Repos/cronus/app/models, /Users/Jacob/Dev/Repos/cronus/app/public, /Users/Jacob/Dev/Repos/cronus/app/views, /Users/Jacob/Dev/Repos/cronus/app/app.js, -*.scss, -*.scss.orig,",
+			"/Users/Jacob/Dev/Repos/cronus/app/bin, /Users/Jacob/Dev/Repos/cronus/app/config, /Users/Jacob/Dev/Repos/cronus/app/controllers, /Users/Jacob/Dev/Repos/cronus/app/helpers, /Users/Jacob/Dev/Repos/cronus/app/models, /Users/Jacob/Dev/Repos/cronus/app/public, /Users/Jacob/Dev/Repos/cronus/app/views, /Users/Jacob/Dev/Repos/cronus/app/app.js, -*.css, -*.css.orig",
+			"/Users/Jacob/Dev/Repos/cronus/app/bin, /Users/Jacob/Dev/Repos/cronus/app/config, /Users/Jacob/Dev/Repos/cronus/app/controllers, /Users/Jacob/Dev/Repos/cronus/app/helpers, /Users/Jacob/Dev/Repos/cronus/app/models, /Users/Jacob/Dev/Repos/cronus/app/public, /Users/Jacob/Dev/Repos/cronus/app/views, /Users/Jacob/Dev/Repos/cronus/app/app.js, -*.css, -*.orig",
+			"/Users/Jacob/Dev/Repos/cronus/app/bin, /Users/Jacob/Dev/Repos/cronus/app/config, /Users/Jacob/Dev/Repos/cronus/app/controllers, /Users/Jacob/Dev/Repos/cronus/app/helpers, /Users/Jacob/Dev/Repos/cronus/app/models, /Users/Jacob/Dev/Repos/cronus/app/public, /Users/Jacob/Dev/Repos/cronus/app/views, /Users/Jacob/Dev/Repos/cronus/app/app.js, -*.css",
+			"/Users/Jacob/Dev/Repos/cronus/app/bin, /Users/Jacob/Dev/Repos/cronus/app/config, /Users/Jacob/Dev/Repos/cronus/app/controllers, /Users/Jacob/Dev/Repos/cronus/app/helpers, /Users/Jacob/Dev/Repos/cronus/app/models, /Users/Jacob/Dev/Repos/cronus/app/public, /Users/Jacob/Dev/Repos/cronus/app/views, /Users/Jacob/Dev/Repos/cronus/app/app.js",
+			"/Users/Jacob/Dev/Repos/cronus/app, -/Users/Jacob/Dev/Repos/cronus/app/node_modules",
+			"/Users/Jacob/Dev/Repos/cronus/app,- -/Users/Jacob/Dev/Repos/cronus/app/node_modules",
+			"/Users/Jacob/Dev/Repos/cronus/app",
+			"/Users/Jacob/Dev/Repos/cronus/app -/Users/Jacob/Dev/Repos/cronus/app/node_modules",
+			"app",
+			"app -node_modules",
+			"app/ -node_modules/",
+			"/app/ -node_modules/",
+			"-node_modules/",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"breadth_first_search",
+			"-",
+			"\\item",
+			"\\item ",
+			"heuristic",
+			"fifo",
+			"\\Glos",
+			"\\glos",
+			"glos",
+			"Glos",
+			"glos",
+			"Glos",
+			"glos",
+			"bfs",
+			"pdflatex",
+			"itemize",
+			"enumerate",
+			"appendix_a",
+			"ipsum_paragraph",
+			"section_a",
+			"section_b",
+			"sub:code",
+			"Code",
+			"codeblock",
+			"codelisting",
+			"_blocks",
+			"TagObstacles",
+			"obstacleavoi",
+			"obstacleavoidance",
+			"TagNeighbors",
+			"?",
+			">",
+			"hide",
+			"local",
+			"radius",
+			"TagNeighbors",
+			"radius",
+			"local",
+			"obstacleavoidance",
+			"m_dWeightObstacleAvoidance",
+			"obstacleavoidance",
+			"tag",
+			"tagneighbors",
+			"Tag",
+			"LocalPosOfClosestObstacle",
+			"obstacleAvoidance",
+			"obstacle",
+			"local",
+			"Semaphore",
+			"truncate",
+			"wraparound",
+			"pos",
+			"accel",
+			"ref",
+			"#f8f8f8",
+			"background-col",
+			"platform_SRC",
+			"0x",
+			" 0x00000001",
+			"_",
+			"Text_IO",
+			"backcolor",
+			"Less",
+			"less",
+			"Less",
+			"Integer",
+			"strings",
+			"Strings",
+			"characters",
+			"Characters",
+			"gocode",
+			"Skyrocket",
+			"events",
+			"description",
+			"\"",
+			",",
+			":",
+			",",
+			";",
+			"\"",
+			"`",
+			",",
+			"{",
+			"`",
+			",",
+			":",
+			",",
+			"obj",
+			"UpdateSearchList",
+			"sub",
+			"nested",
+			"uri",
+			"sign(",
+			"sign",
+			"_latest",
+			"path",
+			"have_dot",
+			"vert.nx",
+			",",
+			"vertices.push_back({",
+			"split",
+			"equation",
+			"g",
+			"g ",
+			"group",
+			"long",
+			"skeleton",
+			"<",
+			"<=",
+			"concat",
+			"\"",
+			"\\",
+			"'",
+			">",
+			"=>",
+			"#define ",
+			"classdir",
+			"@media",
+			"margin:0 auto",
+			"updateSelectOptions",
+			"data[i].value",
+			"data",
+			"opt",
+			"updateSelectOptions",
+			"updatecountries",
+			"calculator_inat",
+			"updateCountrySelect",
+			"------WebKitFormBoundaryu3QHMlq6B7OAMmDb"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"hyper_game_update",
+			"hyper_game_init",
+			"difficulty",
+			" difficulty",
+			" kind",
+			" difficulty",
+			"%.4f",
+			"dashboard"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "paper.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 486,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								443,
+								443
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										476,
+										484
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/tag.png",
+										"brackethighlighter.default"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										74,
+										82
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"git_gutter_enabled": true,
+							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Structure/preamble.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 127,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								55,
+								55
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										54,
+										55
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"brackethighlighter.default"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										43,
+										44
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"git_gutter_enabled": true,
+							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "Content/Sections/search_algorithms.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2565,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2504,
+								2504
+							]
+						],
+						"settings":
+						{
+							"WordCount":
+							{
+								"changes": 0,
+								"count": 320,
+								"modified": false,
+								"selection": false,
+								"status": -1,
+								"syntax": "plain text"
+							},
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content"
+							],
+							"git_gutter_enabled": true,
+							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "Content/Sections/introduction.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1325,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								491,
+								491
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										499,
+										500
+									]
+								},
+								"icon":
+								{
+									"1":
+									[
+										"Packages/BracketHighlighter/icons/curly_bracket.png",
+										"brackethighlighter.default"
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										491,
+										492
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"git_gutter_enabled": true,
+							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "Structure/glossary.tex",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4867,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4867,
+								4867
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"icon":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content"
+							],
+							"git_gutter_enabled": true,
+							"spell_check": true,
+							"syntax": "Packages/LaTeX/LaTeX.sublime-syntax",
+							"tab_size": 4
+						},
+						"translation.x": 0.0,
+						"translation.y": 1277.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.GoSublime-main-output":
+	{
+		"height": 112.0
+	},
+	"output.MarGo-output":
+	{
+		"height": 112.0
+	},
+	"output.exec":
+	{
+		"height": 100.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.latextools":
+	{
+		"height": 112.0
+	},
+	"output.markdown":
+	{
+		"height": 112.0
+	},
+	"output.sublime_haskell_error_panel":
+	{
+		"height": 112.0
+	},
+	"output.variable_get":
+	{
+		"height": 112.0
+	},
+	"pinned_build_system": "Packages/LaTeXTools/LaTeX.sublime-build",
+	"project": "paper.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 392.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 209.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

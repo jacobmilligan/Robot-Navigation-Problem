@@ -31,7 +31,6 @@ VisualizerApp::VisualizerApp(const std::string& app_name, const int speed, const
       tilesize_(tilesize),
       speed_(speed),
       timer_(speed_),
-      current_node_(0),
       path_(graphics_, tilesize),
       env_(1024 / tilesize, 800 / tilesize),
       method_str_("BFS"),
@@ -85,8 +84,10 @@ void VisualizerApp::process_input()
 {
     while ( window_.poll_events(event_) ) {
 
-        if ( event_.type == SDL_QUIT )
+        if ( event_.type == SDL_QUIT ) {
             window_.close();
+            return;
+        }
 
         if ( event_.type == SDL_KEYDOWN ) {
             auto key = event_.key.keysym.sym;
@@ -140,9 +141,8 @@ void VisualizerApp::update()
     if ( timer_ <= 0 ) {
         timer_ = speed_;
 
-        if ( current_node_ < current_method_->explored().size() - 1 ) {
-            current_node_++;
-            auto node = current_method_->explored().get(current_node_);
+        if ( operations_->state != current_method_->explored().last_state()) {
+            auto node = *operations_++;
             path_.update_current_node_position(node.state.x, node.state.y);
         } else {
             is_evaluating_ = false;
@@ -154,20 +154,46 @@ void VisualizerApp::update()
 
 void VisualizerApp::draw()
 {
-    draw_tiles();
+    draw_features();
 
     if ( path_.size() > 0 )
-        path_.draw(results_, current_node_, current_method_->explored().size());
+        path_.draw(results_, *operations_, env_);
 
     if ( is_evaluating_ )
         path_.draw_evaluating();
 
     path_.draw_endpoints();
 
+    draw_grid();
+
     draw_information();
 }
 
-void VisualizerApp::draw_tiles()
+void VisualizerApp::draw_grid()
+{
+    SDL_Rect current;
+    Cell curcel;
+    Point curpoint;
+    for ( int x = 0; x < env_.size().x; ++x ) {
+        for ( int y = 0; y < env_.size().y; ++y ) {
+            current.x = x * tilesize_;
+            current.y = y * tilesize_;
+            current.w = tilesize_;
+            current.h = tilesize_;
+
+            curpoint = Point(x, y);
+            curcel = env_.get_cell(curpoint);
+
+            if ( curcel == Cell::wall ) {
+                graphics_.draw_rectangle(current, Colors::black);
+            } else {
+                graphics_.draw_rectangle(current, Colors::light_gray);
+            }
+        }
+    }
+}
+
+void VisualizerApp::draw_features()
 {
     SDL_Rect current;
     for ( int x = 0; x < env_.size().x; ++x ) {
@@ -176,8 +202,6 @@ void VisualizerApp::draw_tiles()
             current.y = y * tilesize_;
             current.w = tilesize_;
             current.h = tilesize_;
-
-            graphics_.draw_rectangle(current, Colors::black);
 
             if ( env_.get_cell(Point(x, y)) == Cell::wall )
                 graphics_.fill_rectangle(current, Colors::gray);
@@ -190,7 +214,6 @@ void VisualizerApp::draw_tiles()
 
 void VisualizerApp::clear_path()
 {
-    current_node_ = 0;
     is_evaluating_ = false;
     last_time_ = 0.0;
     path_.clear();
@@ -198,9 +221,9 @@ void VisualizerApp::clear_path()
 
 void VisualizerApp::evaluate_path()
 {
-    current_node_ = 0;
     last_time_ = SDL_GetPerformanceCounter();
     results_ = current_method_->search(env_);
+    operations_ = current_method_->explored().operations_iterator();
     last_time_ = get_delta(last_time_);
     is_evaluating_ = true;
     path_.clear();
@@ -211,13 +234,13 @@ void VisualizerApp::draw_information()
     auto execution = "Execution time: " + std::to_string(last_time_) + "ms";
     auto pathlen = "Path length: " + std::to_string(results_.path.size());
 
-    text_.draw_string(1, 1, current_method_->name(), font_, Colors::black);
-    text_.draw_string(1, 750, execution, font_, Colors::black);
-    text_.draw_string(800, 750, pathlen, font_, Colors::black);
+    text_.draw_string(10, 1, current_method_->name(), font_, Colors::black);
+    text_.draw_string(10, 750, execution, font_, Colors::black);
+    text_.draw_string(720, 750, pathlen, font_, Colors::black);
 
     if ( path_.size() > 0 ) {
-        auto nodes = "Nodes contained: " + std::to_string(results_.node_count);
-        text_.draw_string(740, 700, nodes, font_, Colors::black);
+        auto nodes = "Nodes expanded: " + std::to_string(results_.node_count);
+        text_.draw_string(720, 700, nodes, font_, Colors::black);
     }
 }
 

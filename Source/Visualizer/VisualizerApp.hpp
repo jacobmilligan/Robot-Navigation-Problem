@@ -64,7 +64,6 @@ private:
     int tilesize_;
     int speed_;
     int timer_;
-    int current_node_;
 
     PathVisualizer path_;
     InputState input_;
@@ -75,12 +74,14 @@ private:
     robo::SearchMethod* current_method_;
     std::string method_str_;
     sky::Path root_;
+    std::vector<Node>::iterator operations_;
 
     void initialize();
     void process_input();
     void update();
     void draw();
-    void draw_tiles();
+    void draw_grid();
+    void draw_features();
 
     double get_delta(const double last)
     {

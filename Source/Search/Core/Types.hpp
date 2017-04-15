@@ -47,6 +47,11 @@ struct Point {
         return x == other.x && y == other.y;
     }
 
+    bool operator!=(const Point& other) const
+    {
+        return !(*this == other);
+    }
+
     double distance(const Point& other,
                     const DistanceFunction distance_function) const
     {
@@ -81,8 +86,7 @@ struct PointHash {
 
 struct Node {
     Node()
-        : id(-1),
-          parent_ptr(nullptr),
+        : parent_ptr(nullptr),
           cost(0),
           action(Action::unknown)
     {}
@@ -105,7 +109,6 @@ struct Node {
         return cost < rhs.cost;
     }
 
-    int id;
     const Node* parent_ptr;
     double cost;
     Action action;

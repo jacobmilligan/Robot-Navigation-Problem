@@ -25,7 +25,7 @@ Solution AStar::search(const Environment& env)
         return Solution(true, explored_, &node);
 
     frontier_.add(node);
-    explored_.add(node);
+    explored_.overwrite(node);
 
     Node child;
     while ( !frontier_.empty() ) {
@@ -34,11 +34,12 @@ Solution AStar::search(const Environment& env)
         for ( auto& a : env.actions() ) {
             child = get_child(env, explored_.get(node), a);
             child.cost = get_heuristic(env, child);
+
             if ( !explored_.contains(child) ) {
                 if ( env.goal_test(child.state) )
                     return Solution(true, explored_, &child);
 
-                explored_.add(child);
+                explored_.overwrite(child);
                 frontier_.add(child);
             }
         }
@@ -50,7 +51,7 @@ Solution AStar::search(const Environment& env)
 double AStar::get_heuristic(const Environment& env, const Node& node)
 {
     auto parent_cost = (node.parent_ptr == nullptr) ? 0 : node.parent_ptr->cost;
-    auto g = parent_cost + env.step_cost;
+    auto g = parent_cost;
     auto h = node.state.distance(env.goal, dist_func_);
     return g + h;
 }

@@ -1,0 +1,32 @@
+\section{Search Algorithms} % (fold)
+\label{sec:search_algorithms}
+Tree and graph based search algorithms are generally implemented using a search \gls{tree}, each node corresponding to a \textit{state}; a location in the RNP grid. As the algorithm progresses each node adjacent to the current state, starting from the starting location, is placed into a \Gls{frontier}, which stores all encountered but unexpanded nodes thus far. Once all adjacent nodes have been placed into the frontier, they are taken off it, each of their children expanded and analysed in an order specified by the algorithm. Once the goal state has been found, the parent of each node from the goal will be traversed until no parent is found, creating a direct path from the start location.
+\par
+The following six search algorithms were implemented to provide solutions to the \gls{rnp}, three of which are \gls{informed} methods and three \gls{uninformed} methods.
+
+\subsection{\texorpdfstring{\acrfull{bfs}}{BFS}} % (fold)
+\label{sub:bfs}
+Uses a \acrfull{fifo} as its frontier. This results in each node being expanded in the order it was encountered, meaning the shallowest node in the tree will always be expanded first. In both graph and tree search, BFS is 
+% subsection bfs (end)
+
+\subsection{\texorpdfstring{\acrfull{dfs}}{DFS}} % (fold)
+\label{sub:dfs}
+Uses a \acrfull{lifo} as its frontier, which results in the \textit{deepest node encountered thus far} always being expanded first.
+% subsection dfs (end)
+
+\subsection{\texorpdfstring{\acrfull{gbfs}}{GBFS}} % (fold)
+\label{sub:gbfs}
+A basic \gls{informed} method whose \gls{evaluation} is denoted as $f(n)=h(n)$ where $h(n)$ is a \gls{heuristic} that returns the cost to get from the current node to the goal. Uses a priority queue ordered by lowest $f$ first as its frontier.
+% subsection gbfs (end)
+
+\subsection{\texorpdfstring{\acrfull{as}}{A*}} % (fold)
+\label{sub:as}
+An improved \gls{informed} method whose evaluation function $f(n)$ is a combination of both its heuristic and path cost, denoted as $f(n)=g(n) + h(n)$. Uses a priority queue ordered by lowest $f$ first as its frontier.
+% subsection as (end)
+
+\subsection{\texorpdfstring{\acrfull{iddfs}}{IDDFS}} % (fold)
+\label{sub:iddfs}
+An improved uninformed search which runs iterations of DFS, stopping either once the goal is encountered or some depth-limit $\ell$ is reached, upon which the search tree is cleared, increasing $\ell$ by 1 and running the algorithm again. This method aims to improve memory
+% subsection iddfs (end)
+
+% section search_algorithms (end)

@@ -12,40 +12,11 @@
 #pragma once
 
 #include "Containers.hpp"
+
 #include <set>
 
 
 namespace robo {
-
-//===============================
-// Set specialization
-//===============================
-
-template <>
-inline void Frontier<std::set>::clear()
-{
-    _container_.clear();
-}
-
-template <>
-inline Node Frontier<std::set>::remove()
-{
-    auto node = *_container_.begin();
-    _container_.erase(node);
-    return node;
-}
-
-template <>
-inline void Frontier<std::set>::add(const Node& node)
-{
-    _container_.insert(node);
-}
-
-template <>
-inline bool Frontier<std::set>::empty()
-{
-    return _container_.empty();
-}
 
 //===============================
 // Priority Queue specialization

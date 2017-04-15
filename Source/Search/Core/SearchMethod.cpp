@@ -47,15 +47,20 @@ Node SearchMethod::get_child(const Environment& env, const Node* parent, const A
     return Node(parent->state, nullptr, 1, Action::unknown);
 }
 
-Solution::Solution(const bool is_succesful, const ExploredSet& explored, const Node* end)
-    : success(is_succesful), node_count(explored.size())
+Solution::Solution(const bool is_succesful, const ExploredSet& explored,
+                   const Node* end)
+    : success(is_succesful), node_count(explored.num_operations())
 {
     path.clear();
-    auto* node = end->parent_ptr;
+    if ( !end )
+        return;
+
+    auto* node = end;
     while ( node->parent_ptr != nullptr ) {
         path.push_back(*node);
         node = node->parent_ptr;
     }
+
     std::reverse(path.begin(), path.end());
 }
 

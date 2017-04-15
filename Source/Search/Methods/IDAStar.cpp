@@ -18,15 +18,12 @@ namespace robo {
 Solution IDAStar::search(const Environment& env)
 {
     auto node = Node(env.start, nullptr, 0, Action::none);
-    node.cost = node.state.distance(env.goal, dist_func_);
 
     RBFSResults results;
     results.limit = node.state.distance(env.goal, dist_func_);
-    while ( true ) {
+    while ( !results.solution.success && results.limit < infinity_ ) {
         explored_.clear();
         results = ida(env, node, results.limit);
-        if ( results.solution.success || results.limit >= infinity_ )
-            break;
     }
 
     return results.solution;
@@ -38,22 +35,25 @@ IDAStar::RBFSResults IDAStar::ida(const Environment& env, const Node& node,
     if ( explored_.contains(node) )
         return { infinity_ };
 
-    if ( node.cost > limit ) {
-        return {node.cost};
-    }
+    if ( node.cost > limit )
+        return { node.cost };
 
-    if ( env.goal_test(node.state) ) {
+    if ( env.goal_test(node.state) )
         return { node.cost, Solution(true, explored_, &node) };
-    }
 
-    explored_.add(node);
+    explored_.append(node);
 
-    double next = infinity_;
-    RBFSResults result;
     Node successor;
     for ( auto& a : env.actions() ) {
         successor = get_child(env, &node, a);
         successor.cost = node.cost + successor.state.distance(env.goal, dist_func_);
+        frontier_.add(successor);
+    }
+
+    double next = infinity_;
+    RBFSResults result;
+    while ( !frontier_.empty() ) {
+        successor = frontier_.remove();
         result = ida(env, successor, limit);
 
         if ( result.solution.success )
