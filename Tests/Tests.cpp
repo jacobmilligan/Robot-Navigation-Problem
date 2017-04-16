@@ -22,6 +22,11 @@
 #include <catch.hpp>
 #include <Path.hpp>
 
+struct SearchTestCase {
+    std::string file;
+    int expected_length;
+};
+
 class SearchTestsFixture {
 public:
     static sky::Path root_;
@@ -30,9 +35,12 @@ public:
         : methods_(robo::generate_method_map()),
           parser_("SearchTests")
     {}
+
 protected:
     robo::MethodMap methods_;
     robo::FileParser parser_;
+
+    std::vector<SearchTestCase> test_cases_;
 };
 
 sky::Path SearchTestsFixture::root_ = "";
@@ -41,6 +49,8 @@ int main(int argc, char** argv)
 {
     SearchTestsFixture::root_.assign(sky::Path::bin_path(argv));
     SearchTestsFixture::root_.append("../Tests");
+
+
 
     int result = Catch::Session().run(argc, argv);
 
@@ -56,5 +66,23 @@ TEST_CASE_METHOD(SearchTestsFixture,
     for ( auto& m : methods_ ) {
         solution = m.second->search(env);
         REQUIRE_FALSE(solution.success);
+    }
+}
+
+TEST_CASE_METHOD(SearchTestsFixture, "A* is optimal",
+                 "[as]")
+{
+    test_cases_ = {
+        { root_.get_relative("test.txt"), 12 },
+        { root_.get_relative("test2.txt"), 53 }
+    };
+
+    robo::Solution solution;
+    for ( auto& t : test_cases_ ) {
+        auto env = parser_.parse(t.file);
+        REQUIRE( (env.size().x > 0 && env.size().y > 0) );
+        solution = methods_["AS"]->search(env);
+        REQUIRE(solution.success);
+        REQUIRE(solution.path.size() == t.expected_length);
     }
 }
