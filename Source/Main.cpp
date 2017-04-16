@@ -18,6 +18,10 @@ int main(int argc, char** argv)
     robo::CLIParser cli(description.c_str());
 
     auto results = cli.parse(argc, argv);
+    if ( results.error ) {
+        return 1;
+    }
+
     if ( results.method.size() <= 0 ) {
         return 0;
     }
@@ -44,11 +48,18 @@ int main(int argc, char** argv)
     env.step_cost = 1;
     auto path = method.search(env);
 
-    printf("%s %s %d %s",
-           results.filename.c_str(),
-           results.method.c_str(),
-           path.node_count,
-           path.to_string().c_str());
+    if ( !path.success ) {
+        printf("No solution found\n");
+    } else {
+        printf("%s %s %d %s",
+               results.filename.c_str(),
+               results.method.c_str(),
+               path.node_count,
+               path.to_string().c_str());
+    }
+
+    if ( results.with_stats )
+        printf("\nlargest_frontier: %d", path.largest_frontier);
 
     return 0;
 }

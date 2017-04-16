@@ -21,11 +21,17 @@ namespace robo {
 
 /// @brief CLIResults holds the results of a parsed cli input.
 struct CLIResults {
-    CLIResults() {}
+    CLIResults()
+        : with_stats(false), error(true)
+    {}
 
     CLIResults(const char* file, const char* path,
-               const char* method_used)
-        : filename(file), filepath(path), method(method_used)
+               const char* method_used, const bool stats)
+        : filename(file),
+          filepath(path),
+          method(method_used),
+          with_stats(stats),
+          error(false)
     {}
 
     /// @brief The name of the file to search
@@ -36,6 +42,10 @@ struct CLIResults {
 
     /// @brief The search method requested
     std::string method;
+
+    bool with_stats;
+
+    bool error;
 };
 
 /// @brief CLIParser parses command line input and produces a CLIResults
@@ -66,12 +76,12 @@ public:
 private:
     const char* description_;
 
-    const char* opts_ =     "[-h | --help] [-v | --visualizer] <filename> <method>";
+    const char* opts_ =     "[-h | --help] [-v | --visualizer] [-s | --stats] <filename> <method>";
 
-    const char* flags_ =    "[-h | --help]      \t\tPrints help information\n"
-                            "[-v | --visualizer]\t\tRuns the interactive "
-                            "visualizer instead,\n\t\t\t\tdisplaying changes within "
-                            "the search tree and building/testing new problems";
+    const char* flags_ =    "-h, --help      \t\tPrints help information\n"
+                            "-v, --visualizer\t\tRuns the interactive visualizer instead, showing "
+                                                "changes in the search tree\n"
+                            "-s, --stats     \t\tOutput statistics about the method executed alongside normal output\n";
     sky::Path bin_path_;
 };
 
