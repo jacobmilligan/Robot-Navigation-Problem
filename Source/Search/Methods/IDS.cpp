@@ -21,7 +21,7 @@ Solution IDS::search(const Environment& env)
 
     unsigned int depth = 1;
     explored_.clear();
-    while ( !results.solution.success ) {
+    while ( results.cutoff ) {
         results = depth_limited_search(env, depth++);
     }
 

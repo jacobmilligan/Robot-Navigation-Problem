@@ -36,10 +36,11 @@ Solution AStar::search(const Environment& env)
             child.cost = get_heuristic(env, child);
 
             if ( !explored_.contains(child) ) {
+                explored_.overwrite(child);
+
                 if ( env.goal_test(child.state) )
                     return Solution(true, explored_, &child, frontier_.largest_size());
 
-                explored_.overwrite(child);
                 frontier_.add(child);
             }
         }
