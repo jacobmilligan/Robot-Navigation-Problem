@@ -23,7 +23,6 @@ Window::Window(const std::string& title, const int x, const int y, const int wid
 Window::~Window()
 {
     SDL_DestroyWindow(window_);
-    SDL_Quit();
 }
 
 bool Window::initialize()

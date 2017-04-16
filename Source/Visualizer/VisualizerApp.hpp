@@ -46,7 +46,8 @@ private:
 
 class VisualizerApp {
 public:
-    VisualizerApp(const std::string& app_name, const int speed, const int tilesize, char** argv);
+    VisualizerApp(const std::string& app_name, const int speed,
+                  const int tilesize, char** argv);
     void run();
 private:
     using MethodKeyMap = std::unordered_map<SDL_Keycode, std::unique_ptr<robo::SearchMethod>>;

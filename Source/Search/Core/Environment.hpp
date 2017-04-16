@@ -42,12 +42,17 @@ public:
 
     Environment(const unsigned int cols, const unsigned int rows);
 
-    inline Point size()
+    inline Point size() const
     {
         return size_;
     }
 
     std::vector<Cell>& operator[](const unsigned long index)
+    {
+        return grid_[index];
+    }
+
+    const std::vector<Cell>& operator[](const unsigned long index) const
     {
         return grid_[index];
     }

@@ -45,6 +45,33 @@ protected:
 
 sky::Path SearchTestsFixture::root_ = "";
 
+void print_environment(const robo::Environment& env)
+{
+    char cellchar;
+    for ( unsigned long x = 0; x < env.size().x; ++x ) {
+        for ( unsigned long y = 0; y < env.size().y; ++y ) {
+            switch (env[x][y]) {
+                case robo::Cell::empty:
+                    cellchar = '.';
+                    break;
+                case robo::Cell::start:
+                    cellchar = 'O';
+                    break;
+                case robo::Cell::goal:
+                    cellchar = 'X';
+                    break;
+                case robo::Cell::wall:
+                    cellchar = '*';
+                    break;
+            }
+
+            printf("%c", cellchar);
+        }
+
+        printf("\n");
+    }
+}
+
 int main(int argc, char** argv)
 {
     SearchTestsFixture::root_.assign(sky::Path::bin_path(argv));
@@ -73,9 +100,16 @@ TEST_CASE_METHOD(SearchTestsFixture, "A* is optimal",
                  "[as]")
 {
     test_cases_ = {
-        { root_.get_relative("test.txt"), 12 },
-        { root_.get_relative("test2.txt"), 53 }
+        { root_.get_relative("test1.txt"), 12 },
+        { root_.get_relative("test2.txt"), 53 },
+        { root_.get_relative("test3.txt"), 1599 },
+        { root_.get_relative("test4.txt"), 1988 },
+        { root_.get_relative("test5.txt"), 1998 },
+        { root_.get_relative("test6.txt"), 1998 },
     };
+
+    auto env = parser_.parse(test_cases_[4].file);
+    print_environment(env);
 
     robo::Solution solution;
     for ( auto& t : test_cases_ ) {

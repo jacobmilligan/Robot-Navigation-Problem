@@ -69,6 +69,8 @@ void VisualizerApp::run()
     }
 
     path_.clear();
+
+    SDL_Quit();
 }
 
 void VisualizerApp::initialize()
