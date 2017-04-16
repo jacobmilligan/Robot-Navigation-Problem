@@ -24,9 +24,6 @@ public:
     {}
     Solution search(const Environment& env) override;
 private:
-    /// @brief The frontier used for the search, stored as a LIFO queue
-    Frontier<std::vector> frontier_;
-
     struct IDSResults {
         Solution solution;
         bool cutoff;

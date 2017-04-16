@@ -22,6 +22,8 @@
 #include <catch.hpp>
 #include <Path.hpp>
 
+#include <random>
+
 struct SearchTestCase {
     std::string file;
     int expected_length;
@@ -120,3 +122,72 @@ TEST_CASE_METHOD(SearchTestsFixture, "A* is optimal",
         REQUIRE(solution.path.size() == t.expected_length);
     }
 }
+
+TEST_CASE_METHOD(SearchTestsFixture, "IDS Search", "[ids]")
+{
+    std::random_device seeder;
+    std::mt19937 engine(seeder());
+    std::uniform_int_distribution<int> dist(0, 63);
+    for ( int i = 0; i < 10; ++i ) {
+        robo::Environment env(64, 64);
+        env.start = robo::Point(dist(engine), dist(engine));
+        env.goal = robo::Point(dist(engine), dist(engine));
+        auto lim = dist(engine);
+
+        for ( int j = 0; j < lim; ++j ) {
+            auto point = robo::Point(dist(engine), dist(engine));
+            if ( env[point.x][point.y] == robo::Cell::empty ) {
+                env.set_cell(point.x, point.y, robo::Cell::wall);
+            }
+        }
+
+        auto expected = methods_["AS"]->search(env);
+        auto actual = methods_["IDS"]->search(env);
+
+        SECTION("IDS is complete")
+        {
+            REQUIRE(expected.success == actual.success);
+        }
+
+        SECTION("IDS is optimal")
+        {
+            if ( expected.success )
+                REQUIRE(expected.path.size() == actual.path.size());
+        }
+    }
+}
+
+TEST_CASE_METHOD(SearchTestsFixture, "IDA* Search", "[ida]")
+{
+    std::random_device seeder;
+    std::mt19937 engine(seeder());
+    std::uniform_int_distribution<int> dist(0, 31);
+    for ( int i = 0; i < 10; ++i ) {
+        robo::Environment env(32, 32);
+        env.start = robo::Point(dist(engine), dist(engine));
+        env.goal = robo::Point(dist(engine), dist(engine));
+        auto lim = dist(engine);
+
+        for ( int j = 0; j < lim; ++j ) {
+            auto point = robo::Point(dist(engine), dist(engine));
+            if ( env[point.x][point.y] == robo::Cell::empty ) {
+                env.set_cell(point.x, point.y, robo::Cell::wall);
+            }
+        }
+
+        auto expected = methods_["AS"]->search(env);
+        auto actual = methods_["IDAS"]->search(env);
+
+        SECTION("IDA* is complete")
+        {
+            REQUIRE(expected.success == actual.success);
+        }
+
+        SECTION("IDA* is optimal")
+        {
+            if ( expected.success )
+                REQUIRE(expected.path.size() == actual.path.size());
+        }
+    }
+}
+
