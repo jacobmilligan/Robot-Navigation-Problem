@@ -20,13 +20,21 @@ def get_results(results):
     decoded = results.decode('ascii')
     filtered = ''.join(char for char in decoded if ord(char) > 31 or ord(char) == 91)
     if 'No solution found' in filtered:
-        return 0, 0
+        return 0, 0, None
 
     output = filtered.split()
-    path = output[3:]
+    path = [action for action in output if ';' in action]
     pathlen = len(path)
     expanded = int(output[2])
-    return pathlen, expanded
+
+    stats = {}
+    if 'largest_frontier:' in output:
+        stats['largest_frontier'] = output[output.index('largest_frontier:') + 1]
+
+    if len(stats) <= 0:
+        stats = None
+
+    return pathlen, expanded, stats
 
 
 def run_sample(width, height, start, end, method, exe_path):
@@ -81,7 +89,7 @@ def run_sample(width, height, start, end, method, exe_path):
     proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     results, err = proc.communicate()
     if proc.returncode != 0:
-        return -1, -1
+        return -1, -1, None
 
     return get_results(results)
 
@@ -111,6 +119,7 @@ def parse():
 
     # Get the directory paths for the script and exe
     script_dir = os.path.dirname(__file__)
+    results_dir = os.path.join(script_dir, 'Results')
     exe_path = os.path.realpath(os.path.join(script_dir, '..'))
     exe_path = os.path.join(exe_path, 'cmake-build-debug')
 
@@ -127,7 +136,7 @@ def parse():
     }
 
     for i in range(0, samples):
-        pathlen, expanded = run_sample(
+        pathlen, expanded, stats = run_sample(
             args.width, args.height, start, end, args.method, exe_path
         )
 
@@ -155,6 +164,9 @@ def parse():
                 'end': {'x': end[0], 'y': end[1]},
             })
 
+        if stats is not None:
+            results['samples'][i].update(stats)
+
         # Remove the temp file
         os.remove(os.path.join(exe_path, 'experiment.txt'))
 
@@ -166,7 +178,10 @@ def parse():
     if len(results['samples']) <= 0:
         return
 
-    json_path = os.path.join(script_dir, str(time.time()) + '.json')
+    if not os.path.exists(results_dir):
+        os.makedirs(results_dir)
+
+    json_path = os.path.join(results_dir, str(time.time()) + '.json')
     with open(json_path, 'w+') as json_file:
         json.dump(results, json_file, indent=4, sort_keys=False)
 
