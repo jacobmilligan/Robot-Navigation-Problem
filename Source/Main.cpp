@@ -49,9 +49,9 @@ int main(int argc, char** argv)
     auto path = method.search(env);
 
     if ( !path.success ) {
-        printf("No solution found\n");
+        printf("No solution found \n");
     } else {
-        printf("%s %s %d %s",
+        printf("%s %s %d %s\n",
                results.filename.c_str(),
                results.method.c_str(),
                path.node_count,
@@ -59,7 +59,7 @@ int main(int argc, char** argv)
     }
 
     if ( results.with_stats )
-        printf("\nlargest_frontier: %d", path.largest_frontier);
+        printf("largest_frontier: %d\n", path.largest_frontier);
 
     return 0;
 }

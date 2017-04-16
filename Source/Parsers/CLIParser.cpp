@@ -43,7 +43,7 @@ CLIResults CLIParser::parse(int argc, char** argv)
                             "Expected <filename> and <method> strings");
             return CLIResults();
         }
-        if ( strcmp(argv[3], "--stats") != 0 || strcmp(argv[3], "-s") != 0 ) {
+        if ( strcmp(argv[3], "--stats") != 0 && strcmp(argv[3], "-s") != 0 ) {
             print_error("Invalid option. Option flags must be placed "
                         "after positionals");
             return CLIResults();
@@ -51,7 +51,7 @@ CLIResults CLIParser::parse(int argc, char** argv)
     }
 
     // Check for correct number of arguments
-    if ( argc != 3 ) {
+    if ( argc != 3 && !with_stats ) {
         print_error("Incorrect number of arguments. "
                         "Expected <filename> and <method> strings");
         return CLIResults();

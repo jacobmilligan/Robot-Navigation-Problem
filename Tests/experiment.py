@@ -19,7 +19,7 @@ def get_results(results):
     """
     decoded = results.decode('ascii')
     filtered = ''.join(char for char in decoded if ord(char) > 31 or ord(char) == 91)
-    if str(filtered) == 'No solution found':
+    if 'No solution found' in filtered:
         return 0, 0
 
     output = filtered.split()
@@ -48,6 +48,7 @@ def run_sample(width, height, start, end, method, exe_path):
     :return: Tuple containing the path length and the number of nodes expanded
     :rtype: tuple(int, int)
     """
+    cmd = ['./robonav', 'experiment.txt', method.upper(), '-s']
     placed = set()
     i = 0
     # Generate a number of randomly placed walls equal to the size
@@ -77,7 +78,7 @@ def run_sample(width, height, start, end, method, exe_path):
 
     # Try and get the results from robonavs stdout, if the exe returns non-zero
     # then return an invalid environment (-1, -1)
-    proc = subprocess.Popen(['./robonav', '-s', 'experiment.txt', method.upper()])
+    proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     results, err = proc.communicate()
     if proc.returncode != 0:
         return -1, -1
@@ -156,14 +157,14 @@ def parse():
 
         # Remove the temp file
         os.remove(os.path.join(exe_path, 'experiment.txt'))
-        
-    if len(results['samples']) <= 0:
-        return
 
     results['tests_run'] = len(results['samples'])
     results['solutions_found'] = len([
         s for s in results['samples'] if s['solution']
     ])
+
+    if len(results['samples']) <= 0:
+        return
 
     json_path = os.path.join(script_dir, str(time.time()) + '.json')
     with open(json_path, 'w+') as json_file:
