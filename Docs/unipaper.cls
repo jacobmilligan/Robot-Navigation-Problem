@@ -23,7 +23,7 @@
 \ohead{\headmark}
 
 \definecolor{bluegray}{HTML}{265C83}
-\definecolor{codebackground}{HTML}{F6F8FA}
+\definecolor{codebg}{HTML}{F6F8FA}
 \definecolor{framecolor}{HTML}{DADADA}
 
 \hypersetup {
@@ -35,7 +35,7 @@
 }
 
 \usemintedstyle{vs}
-\setminted{bgcolor=codebackground,breaklines=true}
+\setminted{bgcolor=codebg,breaklines=true}
 \setmonofont[Scale=0.7]{Menlo}
 
 % Info commands
@@ -77,7 +77,7 @@
 }
 
 \BeforeBeginEnvironment{minted}%
-     {\begin{tcolorbox}[colback=codebackground, colframe=framecolor, boxrule=0.08em, arc=0.1em]}%
+     {\begin{tcolorbox}[colback=codebg, colframe=framecolor, boxrule=0.08em, arc=0.1em]}%
 \AfterEndEnvironment{minted}
    {\end{tcolorbox}}%
 

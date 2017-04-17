@@ -45,7 +45,7 @@ Solution GreedyBestFirst::search(const Environment& env)
         }
     }
 
-    return Solution(false, explored_, &child, frontier_.largest_size());
+    return Solution(false, explored_, nullptr, frontier_.largest_size());
 }
 
 double GreedyBestFirst::get_heuristic(const Environment& env, const Node& node)

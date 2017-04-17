@@ -1,0 +1,49 @@
+\section{Research} % (fold)
+\label{sec:research}
+The research component can be split into two components - the GUI \textbf{visualizer} and the search method \textbf{analysis} component.
+
+\subsection{Visualizer} % (fold)
+\label{sub:visualizer}
+To be able to both verify the behavior of each search algorithm and to demonstrate to others how each method affects its search tree, a GUI visualizer was developed as a research component. It can be opened via the same CLI application as the assignment component using the \mintinline[bgcolor=codebg]{shell}{-v} option. This will open the visualizer app - a grid with cells representing states in the search space - black cells are walls, the red cell is the start state, and the green cell is the goal.
+
+\paragraph{Usage} % (fold)
+\label{par:usage}
+Both the start and end state can be moved by clicking and dragging, while walls can be placed and removed by clicking in empty spaces. The keys \textbf{1 - 6} are used to choose each search algorithm, \textbf{space} clears the current path and \textbf{enter} begins a search. To quit press the \textbf{escape} key.
+% paragraph usage (end)
+
+\paragraph{Visuals} % (fold)
+\label{par:visuals}
+The visualization of each search algorithm is not in real-time but in a time proportional to the amount of operations each one made. The visualizer displays each operation as it happened in order as denoted by the moving orange cell (the current node in the search tree), explored nodes are denoted as light blue which are added as the search tree expands. Finally, once the goal is found, the path taken to reach it is highlighted green.
+% paragraph visuals (end)
+
+% subsection visualizer (end)
+
+\subsection{Search Method Analysis} % (fold)
+\label{sub:search_method_analysis}
+While each search method has been described and analysed at a high level, this section analysis in-depth the time and space complexity of each method, and their effectiveness across different search environments. A method for random-generation of search problems with expected optimal paths for testing was developed for the purpose of testing a variety of environments.
+
+\subsubsection{Methodology} % (fold)
+\label{sub:methodology}
+
+100 randomly generated search spaces were generated for grids of sizes $16 \times 16$, $32 \times 32$, and $64 \times 64$, 300 samples in total. Each search method was made to solve the sample with its execution time, number of nodes expanded, largest frontier, and whether a solution was found or not recorded.
+
+\paragraph{Search space generation} % (fold)
+\label{par:search_space_generation}
+A method for generating search spaces and their optimal path, $l_{opt}$, was developed to generate data for the tests. Grids of sizes $16 \times 16$, $32 \times 32$, and $64 \times 64$ were iterated over in a random order, with walls having a 15\% chance of being placed in each cell. Starting and ending positions were placed randomly, ensuring that no cells collided.
+% paragraph search_space_generation (end)
+
+% subsubsection methodology (end)
+
+\subsubsection{Results} % (fold)
+\label{sub:results}
+
+% subsubsection results (end)
+
+\subsubsection{Discussion} % (fold)
+\label{sub:discussion}
+
+% subsubsection discussion (end)
+
+% subsection search_method_analysis (end)
+
+% section research (end)

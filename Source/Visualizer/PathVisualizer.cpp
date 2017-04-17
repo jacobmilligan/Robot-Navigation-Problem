@@ -18,6 +18,9 @@ namespace robo {
 void PathVisualizer::draw(const Solution& results, const Node& current,
                           const Environment& env)
 {
+    if ( current.state != env.goal )
+        return;
+
     SDL_Rect rect;
     for ( auto& n : results.path ) {
         rect.x = n.state.x * tilesize_;
@@ -25,13 +28,8 @@ void PathVisualizer::draw(const Solution& results, const Node& current,
         rect.w = tilesize_;
         rect.h = tilesize_;
 
-        if ( visited_.find(n.state) != visited_.end() ) {
-            if ( current.state == env.goal ) {
-                graphics_->fill_rectangle(rect, Colors::green);
-            } else {
-                graphics_->fill_rectangle(rect, Colors::light_yellow);
-            }
-        }
+        if ( visited_.find(n.state) != visited_.end() )
+            graphics_->fill_rectangle(rect, Colors::green);
     }
 }
 

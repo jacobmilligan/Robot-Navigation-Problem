@@ -83,8 +83,8 @@ MethodMap generate_method_map()
     methods["DFS"] = std::make_unique<robo::DepthFirst>();
     methods["GBFS"] = std::make_unique<robo::GreedyBestFirst>();
     methods["AS"] = std::make_unique<robo::AStar>();
-    methods["IDS"] = std::make_unique<robo::IDS>();
-    methods["IDAS"] = std::make_unique<robo::IDAStar>();
+    methods["CUS1"] = std::make_unique<robo::IDS>();
+    methods["CUS2"] = std::make_unique<robo::IDAStar>();
 
     return methods;
 }

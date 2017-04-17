@@ -44,7 +44,7 @@ Solution DepthFirst::search(const Environment& env)
         }
     }
 
-    return Solution(false, explored_, &child, frontier_.largest_size());
+    return Solution(false, explored_, nullptr, frontier_.largest_size());
 }
 
 

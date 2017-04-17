@@ -119,7 +119,7 @@
 
 \newglossaryentry{complete}
 {
-	name=completene,
+	name=complete,
 	plural=completeness,
 	description={A search algorithm is called \textbf{complete} when it's guaranteed to find a solution as long as one exists}
 }
@@ -129,4 +129,11 @@
 	name=optimal,
 	plural=optimality,
 	description={A search algorithm is called \textbf{optimal} when it is guaranteed to find the solution with the lowest path cost that exists each time it's executed}
+}
+
+\newglossaryentry{admissible}
+{
+	name=admissible,
+	plural=admissibility,
+	description={An admissible heuristic is one that never \textit{over-estimates} the cost to get to the goal, meaning it's estimation is \textbf{never} higher that the \textbf{lowest} possible cost to get to the goal}
 }

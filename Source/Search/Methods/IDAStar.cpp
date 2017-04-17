@@ -32,13 +32,10 @@ Solution IDAStar::search(const Environment& env)
 IDAStar::RBFSResults IDAStar::ida(const Environment& env, const Node& node,
                                 const double limit)
 {
-    if ( explored_.contains(node) )
-        return { infinity_ };
-
     if ( node.cost > limit )
         return { node.cost };
 
-    explored_.append(node);
+    explored_.overwrite(node);
 
     if ( env.goal_test(node.state) )
         return { node.cost, Solution(true, explored_, &node, frontier_.largest_size()) };
@@ -47,13 +44,23 @@ IDAStar::RBFSResults IDAStar::ida(const Environment& env, const Node& node,
     for ( auto& a : env.actions() ) {
         successor = get_child(env, &node, a);
         successor.cost = node.cost + successor.state.distance(env.goal, dist_func_);
-        frontier_.add(successor);
+
+        if ( tentative_.find(successor.state) == tentative_.end() ) {
+            frontier_.add(successor);
+            tentative_[successor.state] = true;
+        }
     }
+
 
     double next = infinity_;
     RBFSResults result;
     while ( !frontier_.empty() ) {
         successor = frontier_.remove();
+        tentative_.erase(successor.state);
+
+        if ( explored_.contains(successor) )
+            continue;
+
         result = ida(env, successor, limit);
 
         if ( result.solution.success )

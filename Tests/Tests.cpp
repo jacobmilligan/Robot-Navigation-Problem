@@ -105,13 +105,12 @@ TEST_CASE_METHOD(SearchTestsFixture, "A* is optimal",
         { root_.get_relative("test1.txt"), 12 },
         { root_.get_relative("test2.txt"), 53 },
         { root_.get_relative("test3.txt"), 1599 },
-        { root_.get_relative("test4.txt"), 1988 },
-        { root_.get_relative("test5.txt"), 1998 },
-        { root_.get_relative("test6.txt"), 1998 },
+        { root_.get_relative("test4.txt"), 1034 },
+        { root_.get_relative("test5.txt"), 978 },
+        { root_.get_relative("test6.txt"), 18 },
     };
 
     auto env = parser_.parse(test_cases_[4].file);
-    print_environment(env);
 
     robo::Solution solution;
     for ( auto& t : test_cases_ ) {
@@ -142,7 +141,7 @@ TEST_CASE_METHOD(SearchTestsFixture, "IDS Search", "[ids]")
         }
 
         auto expected = methods_["AS"]->search(env);
-        auto actual = methods_["IDS"]->search(env);
+        auto actual = methods_["CUS1"]->search(env);
 
         SECTION("IDS is complete")
         {
@@ -176,7 +175,7 @@ TEST_CASE_METHOD(SearchTestsFixture, "IDA* Search", "[ida]")
         }
 
         auto expected = methods_["AS"]->search(env);
-        auto actual = methods_["IDAS"]->search(env);
+        auto actual = methods_["CUS2"]->search(env);
 
         SECTION("IDA* is complete")
         {
