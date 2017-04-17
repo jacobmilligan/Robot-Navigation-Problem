@@ -4,6 +4,7 @@ cmake-build-debug
 .vs
 build/
 Tests/Results
+Tests/Stats
 
 ## TeX files
 
