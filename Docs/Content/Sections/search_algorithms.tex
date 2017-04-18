@@ -15,7 +15,7 @@ Breadth-First search is an uninformed search method that uses a \acrfull{fifo} a
 \begin{figure}[H]
 	\label{fig:expanded_relationship}
 	\centerline{
-		\includegraphics[width=0.75\textwidth]{Stats/expanded_relationship.pdf}
+		\includegraphics[width=0.75\textwidth]{Resources/Stats/expanded_relationship.pdf}
 	}
 	\caption{Linear relationship between size of RNP grid and the number of nodes expanded for each search algorithm}
 \end{figure}
@@ -27,9 +27,9 @@ Depth-First search is an uninformed search method that uses a \acrfull{lifo} as 
 
 \begin{figure}[H]
 	\hfill
-	\subfigure[BFS]{\includegraphics[width=0.45\textwidth]{Stats/Breadth-First-hist-path_length.pdf}}
+	\subfigure[BFS]{\includegraphics[width=0.45\textwidth]{Resources/Stats/Breadth-First-hist-path_length.pdf}}
 	\hfill
-	\subfigure[DFS]{\includegraphics[width=0.45\textwidth]{Stats/Depth-First-hist-path_length.pdf}}
+	\subfigure[DFS]{\includegraphics[width=0.45\textwidth]{Resources/Stats/Depth-First-hist-path_length.pdf}}
 	\caption{Comparison between the distributions of total path length for Breadth-First Search and Depth-First Search}
 	\label{fig:dfs_bfs_length}
 \end{figure}
@@ -42,9 +42,9 @@ Greedy Best-First is an \textit{informed} search method which, like all informed
 
 \begin{figure}[H]
 	\hfill
-	\subfigure[Mean run-times]{\includegraphics[width=0.45\textwidth]{Stats/runtime_bars.pdf}}
+	\subfigure[Mean run-times]{\includegraphics[width=0.45\textwidth]{Resources/Stats/runtime_bars.pdf}}
 	\hfill
-	\subfigure[Mean nodes expanded]{\includegraphics[width=0.45\textwidth]{Stats/expanded_bars.pdf}}
+	\subfigure[Mean nodes expanded]{\includegraphics[width=0.45\textwidth]{Resources/Stats/expanded_bars.pdf}}
 	\caption{The mean number of nodes expanded and mean run-time for the non-custom search methods}
 	\label{fig:mean_runtime_expanded}
 \end{figure}
@@ -63,7 +63,7 @@ Iterative Deepening A* is a search method that attempt to improve the memory req
 \begin{figure}[H]
 	\label{fig:idas_as_expanded}
 	\centerline{
-		\includegraphics[width=0.7\textwidth]{Stats/Iterative-Deepening A*-bar-nodes_expanded.pdf}
+		\includegraphics[width=0.7\textwidth]{Resources/Stats/Iterative-Deepening A*-bar-nodes_expanded.pdf}
 	}
 	\caption{Comparison of mean number of nodes expanded per search between A* and IDA*}
 \end{figure}
@@ -73,7 +73,7 @@ However, while memory requirements are improved, on graph-based searches such as
 \begin{figure}[H]
 	\label{fig:idas_as_runtime}
 	\centerline{
-		\includegraphics[width=0.7\textwidth]{Stats/Iterative-Deepening A*-bar-execution_time.pdf}
+		\includegraphics[width=0.7\textwidth]{Resources/Stats/Iterative-Deepening A*-bar-execution_time.pdf}
 	}
 	\caption{Comparison of mean run-time per search between A* and IDA*}
 \end{figure}

@@ -277,6 +277,32 @@ def generate_statistics(args):
         plt.close()
 
     concat = pd.concat(data_frames)
+    print(concat.groupby('method')['solutions_found'].mean())
+    with open(os.path.join(stats_dir, 'table1.tex'), 'w+') as f:
+        grouped = concat.groupby('method')
+        of_interest = grouped[['execution_time']].agg(
+            [np.mean, np.median, np.std]
+        )
+        of_interest = of_interest.rename(columns={
+                'std': 'Std. Dev',
+                'execution_time': 'Run-time (ms)',
+                'mean': 'Mean',
+                'median': 'Median',
+                'method': 'Method'
+        }).to_latex(float_format='%.2f')
+        f.write(of_interest)
+    with open(os.path.join(stats_dir, 'table2.tex'), 'w+') as f:
+        grouped = concat.groupby('method')
+        of_interest = grouped[['nodes_expanded']].agg([np.mean, np.median, np.std])
+        of_interest = of_interest.rename(columns={
+            'std': 'Std. Dev',
+            'nodes_expanded': 'Number of nodes expanded',
+            'mean': 'Mean',
+            'median': 'Median',
+            'method': 'Method'
+        }).to_latex(float_format='%.2f')
+        f.write(of_interest)
+
     for m in method_map.values():
         method = concat.loc[concat['method'].isin([m, 'A*'])]
 
@@ -386,7 +412,7 @@ def generate_statistics(args):
 
     # Plot runtime relationships
     ax = sb.lmplot(x='grid_size', y='execution_time',
-                   data=concat[concat['method'].isin(['A*', 'Depth-First', 'Breadth-First', 'Greedy Best-First'])],
+                   data=concat[concat['method'].isin(['A*', 'Depth-First', 'Breadth-First', 'Greedy Best-First', ])],
                    hue='method', col='method', col_wrap=2, x_jitter=0.5)
     ax.set_axis_labels('Total nodes in grid', 'Runtime (ms)')
     plt.tight_layout(pad=padding)
@@ -413,11 +439,20 @@ def generate_statistics(args):
 
     # Plot wall relationships
     ax = sb.lmplot(x='num_walls', y='execution_time',
-                   data=concat[concat['method'].isin(['Iterative-Deepening Depth-First', 'Iterative-Deepening A*'])],
-                   hue='method', col='method', col_wrap=2, x_jitter=0.8)
+                   data=concat[concat['method'].isin(['Iterative-Deepening Depth-First'])],
+                   hue='method', col='method', x_jitter=0.8)
     ax.set_axis_labels('Number of walls in grid', 'Run-time (ms)')
     plt.tight_layout(pad=padding)
-    plt.savefig(os.path.join(stats_dir, 'walls_relationship_custom.pdf'))
+    plt.savefig(os.path.join(stats_dir, 'walls_relationship_iddfs.pdf'))
+    plt.close()
+
+    # Plot wall relationships
+    ax = sb.lmplot(x='num_walls', y='execution_time',
+                   data=concat[concat['method'].isin(['Iterative-Deepening A*'])],
+                   hue='method', col='method', x_jitter=0.8)
+    ax.set_axis_labels('Number of walls in grid', 'Run-time (ms)')
+    plt.tight_layout(pad=padding)
+    plt.savefig(os.path.join(stats_dir, 'walls_relationship_idas.pdf'))
     plt.close()
 
     # Plot wall relationships nodes expanded
@@ -438,6 +473,26 @@ def generate_statistics(args):
     plt.savefig(os.path.join(stats_dir, 'walls_nodes_relationship_custom.pdf'))
     plt.close()
 
+    # Plot wall relationships nodes expanded
+    ax = sb.stripplot(x='grid_size', y='execution_time',
+                      data=concat[concat['method'].isin(['Iterative-Deepening A*'])],
+                      jitter=True)
+    ax.set(xlabel='Grid size', ylabel='Run-time (ms)')
+    plt.title('IDA* - Distribution of run-times per grid size')
+    plt.tight_layout(pad=padding)
+    plt.savefig(os.path.join(stats_dir, 'size_relationship_idas.pdf'))
+    plt.close()
+
+    # Plot wall relationships nodes expanded
+    ax = sb.stripplot(x='grid_size', y='execution_time',
+                      data=concat[concat['method'].isin(['Iterative-Deepening Depth-First'])],
+                      jitter=True)
+    ax.set(xlabel='Grid size', ylabel='Run-time (ms)')
+    plt.title('IDDFS - Distribution of run-times per grid size')
+    plt.tight_layout(pad=padding)
+    plt.savefig(os.path.join(stats_dir, 'size_relationship_iddfs.pdf'))
+    plt.close()
+
     # Plot runtime bars
     ax = sb.barplot(x='method', y='execution_time',
                     data=concat[concat['method'].isin(['A*', 'Depth-First', 'Breadth-First', 'Greedy Best-First'])])
@@ -454,6 +509,23 @@ def generate_statistics(args):
     plt.setp(ax.get_xticklabels(), rotation=30)
     plt.tight_layout(pad=padding)
     plt.savefig(os.path.join(stats_dir, 'expanded_bars.pdf'))
+    plt.close()
+
+    # Plot path length bars without DFS
+    ax = sb.barplot(x='method', y='path_length',
+                      data=concat[concat['method'].isin(['A*', 'Breadth-First', 'Greedy Best-First', 'Iterative-Deepening Depth-First', 'Iterative-Deepening A*'])])
+    ax.set(ylabel='Mean path length', xlabel='Method')
+    plt.setp(ax.get_xticklabels(), rotation=30)
+    plt.tight_layout(pad=padding)
+    plt.savefig(os.path.join(stats_dir, 'path_length_bars.pdf'))
+    plt.close()
+
+    # Plot path length bars without DFS
+    ax = sb.barplot(x='method', y='path_length',
+                    data=concat[concat['method'].isin(['Depth-First'])])
+    ax.set(ylabel='Mean path length', xlabel='Method')
+    plt.tight_layout(pad=padding)
+    plt.savefig(os.path.join(stats_dir, 'path_length_bars_dfs.pdf'))
     plt.close()
 
 

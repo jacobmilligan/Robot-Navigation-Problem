@@ -16,6 +16,8 @@
 \RequirePackage{tcolorbox}
 \RequirePackage[titletoc,title]{appendix}
 
+\tcbuselibrary{breakable,skins,minted}
+
 \pagestyle{scrheadings}
 
 \clearscrheadfoot
@@ -35,7 +37,7 @@
 }
 
 \usemintedstyle{vs}
-\setminted{bgcolor=codebg,breaklines=true}
+\setminted{breaklines=true}
 \setmonofont[Scale=0.7]{Menlo}
 
 % Info commands
@@ -76,8 +78,28 @@
 	\thispagestyle{empty}
 }
 
+\newtcbinputlisting{codeinput}[2]{
+	listing file={#2},
+	minted language={#1},
+	minted options={breaklines},
+	breakable,enhanced,listing only,
+	colback=codebg,colframe=framecolor,
+	boxrule=0.08em,
+	arc=0.1em
+}
+
+\newtcbinputlisting{codeinputwithtitle}[3]{
+	listing file={#2},
+	minted language={#1},
+	minted options={breaklines},
+	breakable,enhanced,listing only,
+	colback=codebg,colframe=framecolor,
+	boxrule=0.08em,coltitle=black,
+	arc=0.1em,title={#3}
+}
+
 \BeforeBeginEnvironment{minted}%
-     {\begin{tcolorbox}[colback=codebg, colframe=framecolor, boxrule=0.08em, arc=0.1em]}%
+     {\begin{tcolorbox}[breakable=unlimited,colback=codebg, colframe=framecolor, boxrule=0.08em, arc=0.1em]}%
 \AfterEndEnvironment{minted}
    {\end{tcolorbox}}%
 

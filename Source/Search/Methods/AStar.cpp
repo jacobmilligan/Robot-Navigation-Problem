@@ -21,6 +21,7 @@ Solution AStar::search(const Environment& env)
     explored_.clear();
 
     Node node(env.start, nullptr, 0, Action::none);
+    node.cost = get_heuristic(env, node);
     if ( env.goal_test(node.state) )
         return Solution(true, explored_, &node, frontier_.largest_size());
 
