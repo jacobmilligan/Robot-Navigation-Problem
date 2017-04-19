@@ -22,7 +22,9 @@ namespace robo {
 /// mouse and moving object
 class InputState {
 public:
-    InputState() {}
+    InputState()
+		: moving_start_(false), moving_goal_(false), placing_walls_(false) 
+	{}
 
     /// @brief Sets the input state to either moving all objects or moving none
     /// @param state The state

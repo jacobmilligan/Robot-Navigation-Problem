@@ -23,10 +23,10 @@ std::string Path::filename() const
     std::string filename = "";
     auto lastslash = root_.rfind(separator_);
 
-    if ( lastslash != std::string::npos )
-        filename = root_.substr(lastslash + 1, root_.size());
+	if ( lastslash != std::string::npos )
+		return root_.substr(lastslash + 1, root_.size());
 
-    return filename;
+    return root_;
 }
 
 std::string Path::parent()
