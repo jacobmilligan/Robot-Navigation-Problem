@@ -88,8 +88,11 @@ protected:
     Node get_child(const Environment& env, const Node* parent, const Action action);
 };
 
+/// @brief Typedef mapping a string (AS, BFS, DFS etc.) to a pointer to a search method
 using MethodMap = std::unordered_map<std::string, std::unique_ptr<robo::SearchMethod>>;
 
+/// @brief Generates a map containing all the search methods
+/// @return Map between strings and search methods
 MethodMap generate_method_map();
 
 

@@ -4,7 +4,7 @@ The research component can be split into two components - the GUI \textbf{visual
 
 \subsection{Visualizer} % (fold)
 \label{sub:visualizer}
-To be able to both verify the behavior of each search algorithm and to demonstrate to others how each method affects its search tree, a GUI visualizer was developed as a research component. It can be opened via the same CLI application as the assignment component using the \mintinline[bgcolor=codebg]{shell}{-v} option. This will open the visualizer app - a grid with cells representing states in the search space - black cells are walls, the red cell is the start state, and the green cell is the goal.
+To be able to both verify the behavior of each search algorithm and to demonstrate to others how each method affects its search tree, a GUI visualizer was developed as a research component. It can be opened via the same CLI application as the assignment component using the \mintinline[bgcolor=codebg]{shell}{./robonav -v} option. This will open the visualizer app - a grid with cells representing states in the search space - black cells are walls, the red cell is the start state, and the green cell is the goal.
 
 \paragraph{Usage} % (fold)
 \label{par:usage}
@@ -18,7 +18,7 @@ The visualization of each search algorithm is not in real-time but in a time pro
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{Resources/vis.png}
+	\includegraphics[width=0.6\textwidth]{Resources/vis.png}
 	\caption{Screenshot of the GUI pathfinding visualizer}
 \end{figure}
 
@@ -35,14 +35,14 @@ While each search method has been discussed at a high level, this section aims t
 
 \paragraph{Search space generation} % (fold)
 \label{par:search_space_generation}
-A method for generating search spaces and their optimal path, $l_{opt}$, was developed to generate data for the tests. Grids of sizes $16 \times 16$, $32 \times 32$, and $64 \times 64$ were iterated over in a random order, with walls having a 15\% chance of being placed in each cell. Starting and ending positions were placed randomly, ensuring that no cells collided. As A* has been demonstrated to be both \textit{optimal} and \textit{complete}, with the implementations correctness having been proven through static tests as outlined in  on several pathfinding benchmarks, A* was used to calculate $l_{opt}$ as a benchmark for all subsequent tests.
+Each cell in a grid was iterated over in a random order, with walls having a 15\% chance of being placed in each cell. Starting and ending positions were placed randomly, ensuring that no cells collided. As A* has been demonstrated to be both \textit{optimal} and \textit{complete}, with the implementations correctness having been proven through static tests as outlined in  on several pathfinding benchmarks, A* was used to calculate the optimal path as a benchmark for all subsequent tests.
 % paragraph search_space_generation (end)
 
 % subsubsection methodology (end)
 
 \subsubsection{Results} % (fold)
 \label{sub:results}
-As outlined in table~\ref{tab:runtime_avgs}, A* and Greedy Best-First had the lowest mean run-times ($\mu=10.67$, $\mu=9.90$ respectively), while both iterative deepening methods had the highest. Furthermore the higher run-times had the highest standard deviations ($\sigma=2377.96$ and $\sigma=99.89$).
+As outlined in table~\ref{tab:runtime_avgs}, A* and Greedy Best-First had the lowest mean run-times ($\mu=10.65$, $\mu=9.78$ respectively), while both iterative deepening methods had the highest. Furthermore the higher run-times had the highest standard deviations ($\sigma=142.93$ and $\sigma=6.22$).
 % subsubsection results (end)
 
 \begin{table}[H]
@@ -52,7 +52,7 @@ As outlined in table~\ref{tab:runtime_avgs}, A* and Greedy Best-First had the lo
 	\label{tab:runtime_avgs}
 \end{table}
 
-Table~\ref{tab:space_avgs} describes the average memory usage for each method, where GBFS and IDA* expanded the lowest number of nodes on average ($\mu=66.40$ and $\mu=410.22$), while IDDFS expanded the highest number ($\mu=15035.24$), with the highest standard deviation ($\sigma=27521.75$).
+Table~\ref{tab:space_avgs} describes the average memory usage for each method, where GBFS and IDA* expanded the lowest number of nodes on average ($\mu=114.76$ and $\mu=511.21$), while IDDFS expanded the highest number ($\mu=19493.45$), with the highest standard deviation ($\sigma=36364.81$).
 
 \begin{table}[H]
 	\centering
@@ -72,38 +72,20 @@ Figure~\ref{fig:idas_iddfs_runtime_dist} shows the distribution of run-times for
 	\label{fig:idas_iddfs_runtime_dist}
 \end{figure}
 
-Each search method had the same average path length ($\mu=25.59$), aside from GBFS which was slightly higher ($\mu=26.15$), shown in figure~\ref{fig:path_lengths}. DFS is excluded from the results here as its average path length ($\mu=369.70$) was, as expected, too large of an outlier to be of much use for comparisons.
+Each search method had the same average path length ($\mu=27.94$), aside from GBFS which was slightly higher ($\mu=30.05$). DFS is excluded from the results here as its average path length ($\mu=372.64$) was, as expected, too large of an outlier to be of much use for comparisons. Figure~\ref{fig:expanded_walls_relationship} shows the linear relationship between the number of walls present in a grid and the number of nodes expanded per search. Both IDA* and IDDF are excluded from these results as neither method showed a significant relationship between these variables. Finally, while the number of solutions was recorded for each search method, the mean number of solutions found was the same for all methods ($\mu=92.47$).
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{Resources/Stats/path_length_bars.pdf}
-	\caption{Average path length for all search methods excluding DFS}
-	\label{fig:path_lengths}
-\end{figure}
-
-Figures~\ref{fig:expanded_walls_relationship} and~\ref{fig:runtime_walls_relationship} show the linear relationship between the number of walls present in a grid and the run-time and number of nodes expanded per search. Both IDA* and IDDF are excluded from these results as neither method had any sign of relationship between these variables.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.8\textwidth]{Resources/Stats/walls_nodes_relationship.pdf}
+	\includegraphics[width=0.65\textwidth]{Resources/Stats/walls_nodes_relationship.pdf}
 	\caption{Linear relationship between number of walls in a grid and the number of nodes expanded}
 	\label{fig:expanded_walls_relationship}
 \end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.8\textwidth]{Resources/Stats/walls_relationship.pdf}
-	\caption{Linear relationship between number of walls in a grid and each search methods run-time}
-	\label{fig:runtime_walls_relationship}
-\end{figure}
-
-Finally, while the number of solutions was recorded for each search method, the mean number of solutions found was the same for all methods ($\mu=275.65$).
 
 \subsubsection{Discussion} % (fold)
 \label{sub:discussion}
 As expected (discussed in section~\ref{sec:search_algorithms}) each search method excluding DFS and GBFS proved \textit{optimal} in all problems in which a solution existed. GBFS, while certainly non-optimal, had an average path length that proved not much longer than the optimal one with a lower standard deviation and proved to find solutions faster while expanding far fewer nodes than any other method, which indicates that although it may not always find the optimal solution for the RNP, it finds a \textit{good-enough} solution reliably while using much less resources in doing so - possibly suited for problems where some kind of kind of path, not necessarily the optimal one, is required in a short period of time.
 \par
-Of the \textbf{optimal} search methods, A* proved to be the most reliably efficient in terms of \textit{both} memory \textit{and} run-time and this proved to be the case for both larger grids and smaller ones as shown in figures~\ref{fig:expanded_relationship},~\ref{fig:runtime_walls_relationship}, and~\ref{fig:expanded_walls_relationship}
+Of the \textbf{optimal} search methods, A* proved to have the most reliably efficient run-time whilst still remaining modest in terms of memory usage, demonstrating its usefulness as a general purpose search algorithm. Of note, is that IDA* expanded less nodes on average while still maintaining a modest run-time, this could be of use for computing environments with limited memory, however for environments where memory is plentiful the trade off in run-time may be too great to make IDA* worth utilizing. Finally, of the custom and iterative methods, IDDFS proved to be an outlier with both the amount of nodes expanded and its average run-time proved quite high. However, as highlighted in figure~\ref{fig:idas_iddfs_runtime_dist}, IDDFS showed a few very high outliers for larger grids with the distribution of run-times existing at the lower end for other grid sizes, which may indicate that while IDDFS is certainly optimal and can be efficient it may prove too unreliable to be of use for problems such as the RNP.
 % subsubsection discussion (end)
 
 % subsection search_method_analysis (end)

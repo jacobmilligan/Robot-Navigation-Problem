@@ -21,21 +21,33 @@
 
 namespace robo {
 
-
+/// @brief Frontier is an ADT representing a common interface for many
+/// templated container types
 template <template <typename...> class Container>
 struct Frontier {
     Frontier()
         : largest_(0)
     {}
 
+    /// @brief Clears the frontier of all nodes
     void clear();
 
+    /// @brief Removes the next node from the frontier in the order specified
+    /// by the template specialization type
+    /// @return The next node in the frontier
     Node remove();
 
+    /// @brief Adds a new node to the frontier, placing it in an order specified
+    /// by the internal container type used
+    /// @param node Node to add
     void add(const Node& node);
 
+    /// @brief Checks if the frontier contains any nodes or not
+    /// @return True if empty, false otherwise
     bool empty();
 
+    /// @brief Gets a count of the size that the frontier was at its largest
+    /// @return The size that the frontier was at its largest
     const unsigned long largest_size()
     {
         return largest_;
@@ -59,6 +71,9 @@ public:
         explored_[node.state].push_back(std::make_unique<Node>(node));
     }
 
+    /// @brief Replaces all nodes in the explored set with the same state with
+    /// the node passed in
+    /// @param node Node to overwrite with
     void overwrite(const Node& node)
     {
         operations_.push_back(node);
@@ -66,6 +81,8 @@ public:
         explored_[node.state].push_back(std::make_unique<Node>(node));
     }
 
+    /// @brief Gets the count of operations that occurred in this explored set
+    /// @return Number of operations
     unsigned long num_operations() const
     {
         return operations_.size();
@@ -114,11 +131,15 @@ public:
         return result->second[0].get();
     }
 
+    /// @brief Gets an iterator pointing to the start of the operations list
+    /// @return Node vector iterator pointing to the first operation
     std::vector<Node>::iterator operations_iterator()
     {
         return operations_.begin();
     }
 
+    /// @brief Gets the last state in the list of operations
+    /// @return The last state
     const Point& last_state()
     {
         return operations_.back().state;

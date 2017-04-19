@@ -21,6 +21,7 @@ Solution IDS::search(const Environment& env)
 
     unsigned int depth = 1;
     explored_.clear();
+    // Run iterations of IDDFS until solution is found
     while ( results.cutoff ) {
         results = depth_limited_search(env, depth++);
     }
@@ -46,6 +47,7 @@ IDS::IDSResults IDS::recursive_dls(const Node& node, const Environment& env,
             false
         };
 
+    // Check for cutoff
     if ( depth < 1 )
         return IDSResults {
             Solution( false, explored_, nullptr, depth ),
@@ -55,12 +57,13 @@ IDS::IDSResults IDS::recursive_dls(const Node& node, const Environment& env,
     bool cutoff_occurred = false;
     Node child;
     IDS::IDSResults results;
+    // Search children
     for ( auto& a : env.actions() ) {
         child = get_child(env, explored_.get(node), a);
         child.cost = depth;
 
         if ( !explored_.contains(child, true) ) {
-            results = recursive_dls(child, env, depth - 1);
+            results = recursive_dls(child, env, depth - 1); // increase depth and search again
 
             if ( results.cutoff ) {
                 cutoff_occurred = true;

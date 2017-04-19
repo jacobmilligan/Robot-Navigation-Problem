@@ -1,4 +1,36 @@
-\section{Features} % (fold)
+\section{Features and Known Bugs} % (fold)
 \label{sec:features}
+
+\subsection{CLI application} % (fold)
+\label{sub:cli_application}
+The CLI reads in test files from a relative path from the executables directory. Alongside the positional arguments required by the assignment spec, the CLI application also defines the following option flags:
+\begin{itemize}
+	\item \mintinline[bgcolor=codebg]{shell}{-h | --help} - Displays a help message describing available commands
+	\item \mintinline[bgcolor=codebg]{shell}{-v | --visualizer} - Opens the GUI visualizer
+	\item \mintinline[bgcolor=codebg]{shell}{-s | --stats} - Displays extra stats about the algorithm such as largest frontier, must be placed after all positional arguments
+\end{itemize}
+
+The following search methods are available in both the CLI and the GUI visualizer:
+
+\begin{itemize}
+	\item \mintinline[bgcolor=codebg]{shell}{BFS} - \acrfull{bfs}
+	\item \mintinline[bgcolor=codebg]{shell}{DFS} - \acrfull{dfs}
+	\item \mintinline[bgcolor=codebg]{shell}{GBFS} - \acrfull{gbfs}
+	\item \mintinline[bgcolor=codebg]{shell}{AS} - \acrfull{as}
+	\item \mintinline[bgcolor=codebg]{shell}{CUS1} - \acrfull{iddfs}
+	\item \mintinline[bgcolor=codebg]{shell}{CUS2} - \acrfull{ida}
+\end{itemize}
+% subsection cli_application (end)
+
+\subsection{Known bugs} % (fold)
+\label{sub:known_bugs}
+
+\begin{itemize}
+	\item \textbf{A*} - A known bug exists where every so often A* will expand a few nodes more than it should, however this doesn't affect the completeness or optimality of the implementation
+	\item \textbf{IDA*} - While the implementation here expands less nodes than A*, it does so by keeping track of explored nodes. This shouldn't be necessary for IDA* to work, however without that feature the algorithm seemed to take far too long to complete.
+	\item \textbf{IDDFS} - IDDFS sometimes takes a very long time on large grids - an issue I was unable to resolve.
+\end{itemize}
+
+% subsection known_bugs (end)
 
 % section features (end)

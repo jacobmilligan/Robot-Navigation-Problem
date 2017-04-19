@@ -21,7 +21,7 @@ namespace robo {
 class IDAStar : public SearchMethod {
 public:
     IDAStar()
-        : dist_func_(DistanceFunction::euclidean),
+        : dist_func_(DistanceFunction::manhattan),
           SearchMethod("Iterative-deepening A* search")
     {}
 
@@ -34,17 +34,25 @@ public:
     /// @return The results of the search
     Solution search(const Environment& env) override;
 private:
-    struct RBFSResults {
+    /// @brief Wrapper around an f-limit and a solution
+    struct IDAResults {
         double limit;
         Solution solution;
     };
 
-    IDAStar::RBFSResults ida(const Environment& env, const Node& node, const double limit);
+    /// @brief Executes IDA* recursively until the limit is reached
+    /// @param env The environment to search
+    /// @param node The next node in the search
+    /// @param limit The current f-limit
+    /// @return The results of the search
+    IDAStar::IDAResults ida(const Environment& env, const Node& node, const double limit);
 
     Frontier<std::priority_queue> frontier_;
-    std::unordered_map<Point, bool, PointHash> tentative_;
+    ExploredSet current_;
+    std::unordered_map<Point, double, PointHash> tentative_;
     DistanceFunction dist_func_;
 	const double infinity_ = std::numeric_limits<double>::max();
+
 };
 
 

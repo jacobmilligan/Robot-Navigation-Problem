@@ -278,6 +278,9 @@ def generate_statistics(args):
 
     concat = pd.concat(data_frames)
     print(concat.groupby('method')['solutions_found'].mean())
+    print(concat.groupby('method')['path_length'].mean())
+
+    print(concat[concat['path_length'] < concat['optimal_path']])
     with open(os.path.join(stats_dir, 'table1.tex'), 'w+') as f:
         grouped = concat.groupby('method')
         of_interest = grouped[['execution_time']].agg(

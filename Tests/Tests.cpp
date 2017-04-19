@@ -47,33 +47,6 @@ protected:
 
 sky::Path SearchTestsFixture::root_ = "";
 
-void print_environment(const robo::Environment& env)
-{
-    char cellchar;
-    for ( unsigned long x = 0; x < env.size().x; ++x ) {
-        for ( unsigned long y = 0; y < env.size().y; ++y ) {
-            switch (env[x][y]) {
-                case robo::Cell::empty:
-                    cellchar = '.';
-                    break;
-                case robo::Cell::start:
-                    cellchar = 'O';
-                    break;
-                case robo::Cell::goal:
-                    cellchar = 'X';
-                    break;
-                case robo::Cell::wall:
-                    cellchar = '*';
-                    break;
-            }
-
-            printf("%c", cellchar);
-        }
-
-        printf("\n");
-    }
-}
-
 int main(int argc, char** argv)
 {
     SearchTestsFixture::root_.assign(sky::Path::bin_path(argv));

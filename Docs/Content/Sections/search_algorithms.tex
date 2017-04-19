@@ -1,6 +1,6 @@
 \section{Search Algorithms} % (fold)
 \label{sec:search_algorithms}
-Six search methods were implemented to provide solutions to the \gls{rnp}, three of which are \gls{informed} methods and three \gls{uninformed} methods. Each was tested using a combination of unit testing and statistical experiments outlined in subsection~\ref{sub:methodology}. Furthermore, while this section contains a high-level discussion of the qualities and draw-backs of each search method used, an analysis of their optimality, completeness, time, and space complexity is described in-depth in section~\ref{sec:research} as a component of this reports research initiative.
+Six search methods were implemented to provide solutions to the \gls{rnp}, three of which are \gls{informed} methods and three \gls{uninformed} methods. Each was tested using a combination of unit testing and statistical experiments outlined in subsection~\ref{sub:methodology}.
 
 \subsection{\texorpdfstring{\acrfull{as}}{A*}} % (fold)
 \label{sub:as}
@@ -12,29 +12,27 @@ A* is an \gls{informed} search method that stores its frontier in a priority que
 Breadth-First search is an uninformed search method that uses a \acrfull{fifo} as its frontier, resulting in the shallowest node encountered expanded first. As a consequence of this expansion method, BFS is \gls{complete} in all spaces as eventually every node in the search space will be expanded. Furthermore, BFS is technically \gls{optimal} when the step cost of a node is non-decreasing and equivalent to it's depth \parencite[82]{aiama}. However, while BFS is both complete and optimal it can be inefficient in terms of both memory and time. As BFS eventually analyses every node in the search space, larger grids can increase its memory consumption much more than other algorithms, as demonstrated in figure ~\ref{fig:expanded_relationship}. Furthermore, it's runtime increases proportional the time it takes to scan it's list of neighbors \parencite[597]{introalgos}, which will always be the amount of nodes that exist at depth $d$ extending from the start, minus the ones explored.
 % subsection bfs (end)
 
-\begin{figure}[H]
+\begin{wrapfigure}{r}{0.6\textwidth}
 	\label{fig:expanded_relationship}
 	\centerline{
-		\includegraphics[width=0.75\textwidth]{Resources/Stats/expanded_relationship.pdf}
+		\includegraphics[width=0.55\textwidth]{Resources/Stats/expanded_relationship.pdf}
 	}
 	\caption{Linear relationship between size of RNP grid and the number of nodes expanded for each search algorithm}
-\end{figure}
+\end{wrapfigure}
 
 \subsection{\texorpdfstring{\acrfull{dfs}}{DFS}} % (fold)
 \label{sub:dfs}
-Depth-First search is an uninformed search method that uses a \acrfull{lifo} as its frontier. It will always follow the last-encountered node until it hits either a \gls{leaf} or the goal. In theory this poses obvious advantages over BFS, namely in terms of its memory usage - as it only ever contains the current path and each of the path nodes immediate neighbors - however, DFS has many disadvantages. Firstly, it's non-optimal - for example, if DFS chooses to expand a node to its left (based a pre-defined order of expansion), it will follow that path even if the goal was located one node to the right. In the worst case, this could result in DFS following the longest possible path possible rather than a shorter alternative. Figure~\ref{fig:dfs_bfs_length} highlights this problem, showing the difference in distribution of path lengths between BFS and DFS across 300 randomly generated grids.
-% subsection dfs (end)
+Depth-First search is an uninformed search method that uses a \acrfull{lifo} as its frontier. It will always follow the last-encountered node until it hits either a leaf node (a node with no children) or the goal. In theory this poses obvious advantages over BFS, namely in terms of its memory usage - as it only ever contains the current path and each of the path nodes immediate neighbors. However, DFS is non-optimal - for example, if it chooses to expand a node to its left (based a pre-defined order of expansion), it will follow that path even if the goal was located one node to the right. In the worst case, this could result in DFS following the longest possible path possible rather than a shorter alternative. Figure~\ref{fig:dfs_bfs_length} highlights this problem, showing the difference in distribution of path lengths between BFS and DFS across 300 randomly generated grids. Furthermore, DFS is only complete in graph-based searches whereas the tree-based version is \textit{incomplete} \parencite[86]{aiama}. Both of these factors result in large runtime consequences, especially as the search space increases in size as demonstrated in section~\ref{sub:search_method_analysis}.
 
 \begin{figure}[H]
 	\hfill
-	\subfigure[BFS]{\includegraphics[width=0.45\textwidth]{Resources/Stats/Breadth-First-hist-path_length.pdf}}
+	\subfigure{\includegraphics[width=0.45\textwidth]{Resources/Stats/Breadth-First-hist-path_length.pdf}}
 	\hfill
-	\subfigure[DFS]{\includegraphics[width=0.45\textwidth]{Resources/Stats/Depth-First-hist-path_length.pdf}}
+	\subfigure{\includegraphics[width=0.45\textwidth]{Resources/Stats/Depth-First-hist-path_length.pdf}}
 	\caption{Comparison between the distributions of total path length for Breadth-First Search and Depth-First Search}
 	\label{fig:dfs_bfs_length}
 \end{figure}
-
-Furthermore, DFS is only complete in graph-based searches whereas the tree-based version is \textit{incomplete} \parencite[86]{aiama}. Both of these factors result in large runtime consequences, especially as the search space increases in size as demonstrated in figure %TODO: put figure ref here
+% subsection dfs (end)
 
 \subsection{\texorpdfstring{\acrfull{gbfs}}{GBFS}} % (fold)
 \label{sub:gbfs}
@@ -58,27 +56,8 @@ Iterative Deepening Depth-First search is an improved version of regular depth-f
 
 \subsection{\texorpdfstring{\acrfull{ida}(\texttt{CUS2})}{IDA}} % (fold)
 \label{sub:texorpdfstring}
-Iterative Deepening A* is a search method that attempt to improve the memory requirements of A*. It is similar to IDDFS in its methodology, except for what is used as $\ell$ for the current iteration. A cutoff is reached when the current nodes $f$ cost exceeds the current $\ell$ value, upon which $\ell$ is increased to be equal to that nodes $f$, the search tree cleared and another iteration begun. In a sample of 300 randomly generated grids of differing sizes, IDA* cut down the mean amount of nodes expanded by approximately 50 nodes as demonstrated in figure~\ref{fig:idas_as_expanded}.
-
-\begin{figure}[H]
-	\label{fig:idas_as_expanded}
-	\centerline{
-		\includegraphics[width=0.7\textwidth]{Resources/Stats/Iterative-Deepening A*-bar-nodes_expanded.pdf}
-	}
-	\caption{Comparison of mean number of nodes expanded per search between A* and IDA*}
-\end{figure}
-
-However, while memory requirements are improved, on graph-based searches such as the RNP IDA*'s tendency to analyze the same state for different depths in a standard implementation showed an increase of approximately 800\textit{ms} per search as shown in figure~\ref{fig:idas_as_runtime}.
-
-\begin{figure}[H]
-	\label{fig:idas_as_runtime}
-	\centerline{
-		\includegraphics[width=0.7\textwidth]{Resources/Stats/Iterative-Deepening A*-bar-execution_time.pdf}
-	}
-	\caption{Comparison of mean run-time per search between A* and IDA*}
-\end{figure}
-
-However, it's important to note that the implementation described in section~\ref{sec:implementation} does not make much effort to track repeated states in graph-based problems and IDA* is technically as efficient as A* given the right implementation \parencite{idas}.
+Iterative Deepening A* is a search method that attempt to improve the memory requirements of A*. It is similar to IDDFS in its methodology, except for what is used as $\ell$ for the current iteration. A cutoff is reached when the current nodes $f$ cost exceeds the current $\ell$ value, upon which $\ell$ is increased to be equal to that nodes $f$, the search tree cleared and another iteration begun. In a sample of 300 randomly generated grids of differing sizes, as outlined in section~\ref{sub:search_method_analysis}, IDA* cut down the mean amount of nodes expanded by approximately 50 nodes.\par
+However, while memory requirements are improved, on graph-based searches such as the RNP IDA*'s tendency to analyze the same state for different depths in a standard implementation showed an increase of approximately 2\textit{ms} per search in the same tests. However, it's important to note that the implementation described in section~\ref{sec:implementation} does not make much effort to track repeated states in graph-based problems and IDA* is technically as efficient as A* given the right implementation \parencite{idas}.
 
 % subsection texorpdfstring (end)
 

@@ -20,6 +20,7 @@ Solution AStar::search(const Environment& env)
     frontier_.clear();
     explored_.clear();
 
+    // Get start state and check if goal
     Node node(env.start, nullptr, 0, Action::none);
     node.cost = get_heuristic(env, node);
     if ( env.goal_test(node.state) )
@@ -29,21 +30,24 @@ Solution AStar::search(const Environment& env)
     explored_.overwrite(node);
 
     Node child;
+    // Run search
     while ( !frontier_.empty() ) {
         node = frontier_.remove();
 
+        // Get all children and add to frontier if not already explored
         for ( auto& a : env.actions() ) {
             child = get_child(env, explored_.get(node), a);
             child.cost = get_heuristic(env, child);
 
-            if ( !explored_.contains(child) ) {
-                explored_.overwrite(child);
+            if ( explored_.contains(child) )
+                continue;
 
-                if ( env.goal_test(child.state) )
-                    return Solution(true, explored_, &child, frontier_.largest_size());
+            explored_.overwrite(child);
 
-                frontier_.add(child);
-            }
+            if ( env.goal_test(child.state) )
+                return Solution(true, explored_, &child, frontier_.largest_size());
+
+            frontier_.add(child);
         }
     }
 
@@ -52,8 +56,7 @@ Solution AStar::search(const Environment& env)
 
 double AStar::get_heuristic(const Environment& env, const Node& node)
 {
-    auto parent_cost = (node.parent_ptr == nullptr) ? 0 : node.parent_ptr->cost;
-    auto g = parent_cost;
+    auto g = (node.parent_ptr == nullptr) ? 0 : node.parent_ptr->cost;
     auto h = node.state.distance(env.goal, dist_func_);
     return g + h;
 }

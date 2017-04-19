@@ -17,9 +17,11 @@
 
 namespace robo {
 
-
+/// @brief All valid actions able to be taken in a search environment
 enum class Action {
+    /// @brief Represents invalid states
     unknown = 0,
+    /// @brief Represents no action taken, i.e. from the start position
     none,
     up,
     left,
@@ -27,12 +29,13 @@ enum class Action {
     right
 };
 
+/// @brief Defines a distance function to use
 enum class DistanceFunction {
     euclidean,
     manhattan
 };
 
-
+/// @brief Point is a simple x, y coordinate in a grid
 struct Point {
     Point()
         : x(0), y(0)
@@ -52,6 +55,11 @@ struct Point {
         return !(*this == other);
     }
 
+    /// @brief Calculates the distance from this point to another one using
+    /// the distance function specified
+    /// @param other The other point to get the distance to
+    /// @param distance_function The distance function to use in calculation
+    /// @return The distance to the point
     double distance(const Point& other,
                     const DistanceFunction distance_function) const
     {
@@ -76,6 +84,7 @@ struct Point {
     int y;
 };
 
+/// @brief Hashing function for storing a point in an associative container
 struct PointHash {
     size_t operator() (const Point& point) const
     {
@@ -84,6 +93,8 @@ struct PointHash {
     }
 };
 
+/// @brief Node is a node in a search tree containing its cost, action taken
+/// to get to it, it's state and operator overloads for checking equality
 struct Node {
     Node()
         : parent_ptr(nullptr),

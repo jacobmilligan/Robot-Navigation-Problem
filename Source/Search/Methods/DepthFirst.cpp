@@ -31,6 +31,7 @@ Solution DepthFirst::search(const Environment& env)
     while ( !frontier_.empty() ) {
         node = frontier_.remove();
 
+        // Get all children and add to frontier if not already explored
         for ( auto& a : env.actions() ) {
             child = get_child(env, explored_.get(node), a);
             if ( !explored_.contains(child) ) {

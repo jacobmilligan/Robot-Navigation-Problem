@@ -28,9 +28,11 @@ Solution GreedyBestFirst::search(const Environment& env)
     explored_.append(node);
 
     Node child;
+    // Run search
     while ( !frontier_.empty() ) {
         node = frontier_.remove();
 
+        // Get all children and add to frontier if not already explored
         for ( auto& a : env.actions() ) {
             child = get_child(env, explored_.get(node), a);
             child.cost = get_heuristic(env, child);

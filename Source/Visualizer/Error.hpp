@@ -16,7 +16,9 @@
 
 namespace robo {
 
-
+/// @brief Prints a formatted error message to the console for the visualizer
+/// @param type The type of error message that occurred
+/// @param msg The message to print
 inline void print_visualizer_error(const char* type, const char* msg)
 {
     fprintf(stderr, "[robonav visualizer] %s error occurred: %s\n", type, msg);

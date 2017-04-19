@@ -8,6 +8,11 @@
 //  Jacob Milligan on 3/04/2017
 //  Copyright (c) 2016 Jacob Milligan. All rights reserved.
 //
+//  --------------------------------------------------------------
+//
+//  Defines template specializations for the different frontier
+//  container types available to search algorithms
+//
 
 #pragma once
 
@@ -25,6 +30,10 @@ namespace robo {
 template <>
 class Frontier<std::priority_queue> {
 public:
+    Frontier()
+        : largest_(0)
+    {}
+
     void clear()
     {
         while ( !container_.empty() ) {

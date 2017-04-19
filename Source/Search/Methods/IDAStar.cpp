@@ -19,19 +19,21 @@ Solution IDAStar::search(const Environment& env)
 {
     auto node = Node(env.start, nullptr, 0, Action::none);
 
-    RBFSResults results;
+    IDAResults results;
     results.limit = node.state.distance(env.goal, dist_func_);
+    // Run iterations of IDA* until solution found
     while ( !results.solution.success && results.limit < infinity_ ) {
         explored_.clear();
-        results = ida(env, node, results.limit);
+        results = ida(env, node, results.limit * 2); // use limit * 2 to speed up search
     }
 
     return results.solution;
 }
 
-IDAStar::RBFSResults IDAStar::ida(const Environment& env, const Node& node,
-                                const double limit)
+IDAStar::IDAResults IDAStar::ida(const Environment& env, const Node& node,
+                                  const double limit)
 {
+    // Check for cutoff
     if ( node.cost > limit )
         return { node.cost };
 
@@ -45,6 +47,7 @@ IDAStar::RBFSResults IDAStar::ida(const Environment& env, const Node& node,
         successor = get_child(env, &node, a);
         successor.cost = node.cost + successor.state.distance(env.goal, dist_func_);
 
+        // Check if already in existing path, if not add to current frontier
         if ( tentative_.find(successor.state) == tentative_.end() ) {
             frontier_.add(successor);
             tentative_[successor.state] = true;
@@ -53,7 +56,8 @@ IDAStar::RBFSResults IDAStar::ida(const Environment& env, const Node& node,
 
 
     double next = infinity_;
-    RBFSResults result;
+    IDAResults result;
+    // Check all children
     while ( !frontier_.empty() ) {
         successor = frontier_.remove();
         tentative_.erase(successor.state);

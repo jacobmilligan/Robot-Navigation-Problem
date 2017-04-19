@@ -26,16 +26,17 @@ Solution BreadthFirst::search(const Environment& env)
         return Solution(true, explored_, &node, frontier_.largest_size());
 
     frontier_.add(node);
-    explored_.append(node);
+    explored_.overwrite(node);
 
     Node child;
     while ( !frontier_.empty() ) {
         node = frontier_.remove();
 
+        // Get all children and add to frontier if not already explored
         for ( auto& a : env.actions() ) {
             child = get_child(env, explored_.get(node), a);
             if ( !explored_.contains(child) ) {
-                explored_.append(child);
+                explored_.overwrite(child);
 
                 if ( env.goal_test(child.state) )
                     return Solution(true, explored_, &child, frontier_.largest_size());

@@ -21,7 +21,7 @@ namespace robo {
 class AStar : public SearchMethod {
 public:
     AStar()
-        : dist_func_(DistanceFunction::euclidean), SearchMethod("A* search")
+        : dist_func_(DistanceFunction::manhattan), SearchMethod("A* search")
     {}
 
     AStar(const DistanceFunction distance_function)
@@ -35,8 +35,13 @@ public:
 private:
     /// @brief The frontier, stored as a priority queue, ordered by lowest cost
     Frontier<std::priority_queue> frontier_;
+    /// @brief The distance function used by A*
     DistanceFunction dist_func_;
 
+    /// @brief Gets the heuristic for a given node
+    /// @param env The environment being searched
+    /// @param node The node to get the cost for
+    /// @return The f value of the cost
     double get_heuristic(const Environment& env, const Node& node);
 };
 

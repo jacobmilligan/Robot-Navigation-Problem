@@ -22,7 +22,6 @@ const SDL_Color Colors::light_green = {152, 251, 152, 255};
 const SDL_Color Colors::orange = {253, 127, 86, 255};
 const SDL_Color Colors::gray = {43, 43, 43, 255};
 const SDL_Color Colors::light_blue = {175, 238, 238, 255};
-const SDL_Color Colors::light_yellow = {255, 254, 106, 255};
 const SDL_Color Colors::green = {80, 161, 79, 255};
 const SDL_Color Colors::light_gray = { 110, 110, 110 };
 

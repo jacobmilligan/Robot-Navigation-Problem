@@ -16,18 +16,16 @@
 
 namespace robo {
 
-
+/// @brief Wrapper around a series of color constants to use for the visualizer
 struct Colors {
     static const SDL_Color white;
     static const SDL_Color black;
-    static const SDL_Color blue;
     static const SDL_Color red;
     static const SDL_Color light_green;
     static const SDL_Color orange;
     static const SDL_Color gray;
     static const SDL_Color light_gray;
     static const SDL_Color light_blue;
-    static const SDL_Color light_yellow;
     static const SDL_Color green;
 };
 

@@ -10,32 +10,7 @@
 \newglossaryentry{graph}
 {
 	name=graph,
-	description={An abstract data type, representing either a \gls{directed} or \gls{undirected} graph structure, that contains a set of \glspl{vertex} with pairs of these connected by \glspl{edge}. Each edge may or may not be weighted by a given cost function}
-}
-
-\newglossaryentry{vertex}
-{
-	name=vertex,
-	description={Terminology used in \gls{graph} data types. Synonymous with the concept of a \gls{node}},
-	plural=vertices
-}
-
-\newglossaryentry{edge}
-{
-	name=edge,
-	description={Terminology used in \gls{graph} data types. Defines a link or path between a specific pair of \glspl{vertex}, which may or may not be weighted with a given cost}
-}
-
-\newglossaryentry{directed}
-{
-	name={directed graph},
-	description={A type of \gls{graph} where each \gls{edge} also has a \textit{direction}, meaning they can only be traversed from \glspl{vertex} with edges pointing away from them}
-}
-
-\newglossaryentry{undirected}
-{
-	name={directed graph},
-	description={A type of \gls{graph} where each \gls{edge} has no \textit{direction}, meaning they can be traversed from either end}
+	description={An abstract data type, representing either a \gls{directed} or \gls{undirected} graph structure, that contains a set of vertices (nodes) with pairs of these connected by edges (paths). Each edge may or may not be weighted by a given cost function}
 }
 
 \newglossaryentry{root}
@@ -54,24 +29,6 @@
 {
 	name=node,
 	description={A generalized element of different types data structures that represents a single value or object of interest. It will usually contain a reference or pointer to it's parent or adjacent nodes}
-}
-
-\newglossaryentry{leaf}
-{
-	name=leaf,
-	description={A \gls{node} in a \gls{tree} data structure that has no children, i.e. a terminal state}
-}
-
-\newglossaryentry{branch}
-{
-	name=branch,
-	description={In a \gls{tree} data structure, a branch is a \gls{node} with \textit{at least} one child}
-}
-
-\newglossaryentry{pathcost}
-{
-	name={path cost},
-	description={Path cost, denoted as $g(n)$ where $n$ is a node in a search tree, is the cost of getting from the root node in a search tree to $n$}
 }
 
 \newglossaryentry{heuristic}
