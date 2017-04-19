@@ -1,24 +1,19 @@
 \section{Search Algorithms} % (fold)
 \label{sec:search_algorithms}
-Six search methods were implemented to provide solutions to the \gls{rnp}, three of which are \gls{informed} methods and three \gls{uninformed} methods. Each was tested using a combination of unit testing and statistical experiments outlined in subsection~\ref{sub:methodology}.
-
-\subsection{\texorpdfstring{\acrfull{as}}{A*}} % (fold)
-\label{sub:as}
-A* is an \gls{informed} search method that stores its frontier in a priority queue structure sorted by best node first, as determined by the nodes \textit{evaluation function} $f(n)$ which evaluates the cost of reaching a given node $n$. For A*, $f$ is defined as the cost to reach $n$ from the starting node along the current path - $g(n)$ and its heuristic function $h(n)$ which provides an estimation of the cost of reaching the goal. A requirement for A* to be correctly implemented is that $h$ be \gls{admissible}, that is it never overestimates the quality of a path or node. In the context of the RNP, as the environment is a 2D grid, an admissible heuristic can be achieved by simply measuring the distance from the current node using either euclidean distance, calculated by $\sqrt{(x_1 - x_2)^2 + (y_1 - y_2)^2}$, or using a 'city-block' distance (the amount of nodes traversed without diagonal movements) referred to as \textit{manhattan} distance, calculated by $\left|x_1 - x_2\right| + \left|y_1 - y_2\right|$. A* is both complete and optimal \parencite[104]{astar}, as well as efficient in terms of both time and space complexity. For this reason it's used as a comparison for all subsequent search methods described here.
-% subsection as (end)
+Each of the following search methods were tested using a combination of static and dynamic tests as outlined in subsection~\ref{sub:methodology}, with that data used in this section.
 
 \subsection{\texorpdfstring{\acrfull{bfs}}{BFS}} % (fold)
 \label{sub:bfs}
 Breadth-First search is an uninformed search method that uses a \acrfull{fifo} as its frontier, resulting in the shallowest node encountered expanded first. As a consequence of this expansion method, BFS is \gls{complete} in all spaces as eventually every node in the search space will be expanded. Furthermore, BFS is technically \gls{optimal} when the step cost of a node is non-decreasing and equivalent to it's depth \parencite[82]{aiama}. However, while BFS is both complete and optimal it can be inefficient in terms of both memory and time. As BFS eventually analyses every node in the search space, larger grids can increase its memory consumption much more than other algorithms, as demonstrated in figure ~\ref{fig:expanded_relationship}. Furthermore, it's runtime increases proportional the time it takes to scan it's list of neighbors \parencite[597]{introalgos}, which will always be the amount of nodes that exist at depth $d$ extending from the start, minus the ones explored.
-% subsection bfs (end)
 
-\begin{wrapfigure}{r}{0.6\textwidth}
-	\label{fig:expanded_relationship}
+\begin{figure}[H]
 	\centerline{
-		\includegraphics[width=0.55\textwidth]{Resources/Stats/expanded_relationship.pdf}
+		\includegraphics[width=0.6\textwidth]{Resources/Stats/expanded_relationship.pdf}
 	}
-	\caption{Linear relationship between size of RNP grid and the number of nodes expanded for each search algorithm}
-\end{wrapfigure}
+	\caption{\small Linear relationship between size of RNP grid and the number of nodes expanded for each search algorithm}
+	\label{fig:expanded_relationship}
+\end{figure}
+% subsection bfs (end)
 
 \subsection{\texorpdfstring{\acrfull{dfs}}{DFS}} % (fold)
 \label{sub:dfs}
@@ -36,7 +31,7 @@ Depth-First search is an uninformed search method that uses a \acrfull{lifo} as 
 
 \subsection{\texorpdfstring{\acrfull{gbfs}}{GBFS}} % (fold)
 \label{sub:gbfs}
-Greedy Best-First is an \textit{informed} search method which, like all informed methods outlined in this report, uses a priority queue frontier ordered by lowest $f$ value. In contrast to A*, GBFS expands the node that is closest to the goal first, therefore it's evaluation is $f(n)=h(n)$. GBFS, in contrast to A*, is not optimal nor is it complete \parencite{aiasa}, this is because its heuristic is not \textit{admissible} due to often overestimating the quality of a node, for example in scenarios when the goal is behind a wall but unreachable, the node closest will be evaluated as the best neighbor when it isn't. However, often GBFS can return a \textit{close to optimal path} while expanding less nodes in a faster time than other search methods, demonstrated in figure~\ref{fig:mean_runtime_expanded}.
+Greedy Best-First is an \textit{informed} search method which, like all informed methods outlined in this report, uses a priority queue frontier ordered by lowest $f$ value. GBFS expands whatever node in its frontier that is closest to the goal first, therefore it's evaluation is $f(n)=h(n)$. However, GBFS is not optimal nor is it complete \parencite{aiasa}, this is because its heuristic is not \textit{admissible}, often overestimating the quality of a node, for example in scenarios when the goal is behind a wall but unreachable, the node closest will be evaluated as the best neighbor when it isn't. However while not strictly optimal, often GBFS can return a \textit{close to optimal path} while expanding less nodes in a faster time than other search methods as demonstrated in figure~\ref{fig:mean_runtime_expanded}.
 
 \begin{figure}[H]
 	\hfill
@@ -49,6 +44,11 @@ Greedy Best-First is an \textit{informed} search method which, like all informed
 
 % subsection gbfs (end)
 
+\subsection{\texorpdfstring{\acrfull{as}}{A*}} % (fold)
+\label{sub:as}
+A* is an \gls{informed} search method that stores its frontier in a priority queue structure sorted by best node first, as determined by the nodes \textit{evaluation function} $f(n)$ which evaluates the cost of reaching a given node $n$. For A*, $f$ is defined as the cost to reach $n$ from the starting node along the current path - $g(n)$ and its heuristic function $h(n)$ which provides an estimation of the cost of reaching the goal. A requirement for A* to be correctly implemented is that $h$ be \gls{admissible}, that is it never overestimates the quality of a path or node. In the context of the RNP, as the environment is a 2D grid, an admissible heuristic can be achieved by simply measuring the distance from the current node using either euclidean distance, calculated by $\sqrt{(x_1 - x_2)^2 + (y_1 - y_2)^2}$, or using a 'city-block' distance (the amount of nodes traversed without diagonal movements) referred to as \textit{manhattan} distance, calculated by $\left|x_1 - x_2\right| + \left|y_1 - y_2\right|$. A* is both complete and optimal \parencite[104]{astar}, as well as efficient in terms of both time and space complexity. For this reason it's used as a comparison for all subsequent search methods described here.
+% subsection as (end)
+
 \subsection{\texorpdfstring{\acrfull{iddfs}(\texttt{CUS1})}{IDDFS}} % (fold)
 \label{sub:iddfs}
 Iterative Deepening Depth-First search is an improved version of regular depth-first search uninformed search which executes DFS until either the goal is encountered or some depth-limit $\ell$ is reached, signaling a cutoff upon which the search tree is cleared, increasing $\ell$ by 1 and running the algorithm again, running iterations of DFS until the goal is found. This method aims to combine the best qualities of DFS and BFS, taking the limited space requirements of DFS and combining it with the completeness and optimality of BFS.
@@ -57,7 +57,7 @@ Iterative Deepening Depth-First search is an improved version of regular depth-f
 \subsection{\texorpdfstring{\acrfull{ida}(\texttt{CUS2})}{IDA}} % (fold)
 \label{sub:texorpdfstring}
 Iterative Deepening A* is a search method that attempt to improve the memory requirements of A*. It is similar to IDDFS in its methodology, except for what is used as $\ell$ for the current iteration. A cutoff is reached when the current nodes $f$ cost exceeds the current $\ell$ value, upon which $\ell$ is increased to be equal to that nodes $f$, the search tree cleared and another iteration begun. In a sample of 300 randomly generated grids of differing sizes, as outlined in section~\ref{sub:search_method_analysis}, IDA* cut down the mean amount of nodes expanded by approximately 50 nodes.\par
-However, while memory requirements are improved, on graph-based searches such as the RNP IDA*'s tendency to analyze the same state for different depths in a standard implementation showed an increase of approximately 2\textit{ms} per search in the same tests. However, it's important to note that the implementation described in section~\ref{sec:implementation} does not make much effort to track repeated states in graph-based problems and IDA* is technically as efficient as A* given the right implementation \parencite{idas}.
+However, while memory requirements are improved, on graph-based searches such as the RNP IDA*'s tendency to analyze the same state for different depths in a standard implementation showed an increase of approximately 2\textit{ms} per search in the same tests. However, it's important to note that the implementation described in section~\ref{sec:implementation} does not make as much effort to track repeated states as it could and IDA* is technically as efficient as A* given the right implementation \parencite{idas}.
 
 % subsection texorpdfstring (end)
 

@@ -1,7 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{unipaper}
 
-\LoadClass[headings=standardclasses, abstract=on]{scrartcl}
+\LoadClass[headings=standardclasses, abstract=on,10pt]{scrartcl}
 
 \RequirePackage{pdfpages}
 \RequirePackage{datetime}

@@ -3,7 +3,7 @@
 
 \subsection{Search Methods} % (fold)
 \label{sub:search_methods}
-Each search method is a derived form of the base \mintinline[bgcolor=codebg]{cpp}{SearchMethod} class, each implementing the \mintinline[bgcolor=codebg]{cpp}{search()} and \mintinline[bgcolor=codebg]{cpp}{get_child()} methods.
+Each search method is a derived form of the base \mintinline[bgcolor=codebg]{cpp}{SearchMethod} class, implementing the \mintinline[bgcolor=codebg]{cpp}{search()} and \mintinline[bgcolor=codebg]{cpp}{get_child()} virtual methods.
 % subsection search_methods (end)
 
 \paragraph{BFS} % (fold)
@@ -13,25 +13,21 @@ BFS was implemented iteratively, using a FIFO frontier, its pseudocode shown bel
 \begin{breakablealgorithm}
 	\caption{BFS}
 	\begin{algorithmic}[1]
-		\Procedure{search}{$env$ - a problem environment}
+		\Procedure{search}{$env$: a problem environment}
 			\State $n \gets$ starting state, $explored \gets$ \{\}, $frontier \gets$ empty FIFO queue
-			\If {$n = goal$}
-				\State return solution
-			\EndIf
+			\If {$n = goal$} \Return solution \EndIf
 			\State add $n$ to $frontier$
 			\While{$frontier \neq empty$}
 				\State $n \gets$ first node in frontier
 				\ForAll{valid child $c$ with action $a$ in $env$}
 					\If{not explored}
 						\State add $c$ to explored set
-						\If{$c=goal$}
-							\State return solution
-						\EndIf
+						\If{$c=goal$} \Return solution \EndIf
 						\State add to frontier
 					\EndIf
 				\EndFor
 			\EndWhile
-			\State return no solution found
+			\State \Return no solution found
 		\EndProcedure
 	\end{algorithmic}
 \end{breakablealgorithm}
@@ -44,76 +40,73 @@ DFS is implemented in a very similar way to the pseudocode outlined above for BF
 
 \paragraph{GBFS and A*} % (fold)
 \label{par:gbfs_and_a_}
-Once again, GBFS and A* are both implemented similarily to BFS and DFS but using a a priority queue as their frontier. Furthermore, when getting a valid child from the environment, both add their heuristic cost to the child node before adding it to the frontier, to do this they override \mintinline[bgcolor=codebg]{cpp}{SearchMethods}'s \mintinline[bgcolor=codebg]{cpp}{get_child()} method. GBFS will simply assign as its $f$ cost the distance to the goal using one of the distance functions outlined in section~\ref{sub:as}, while A* will sum both the distance and the child nodes parent $f$ value.
+GBFS and A* are again both implemented similarily to BFS and DFS but using a a priority queue as their frontier. Furthermore, when getting a valid child from the environment, both add their $f$ cost to the child node before adding it to the frontier, to do this they override \mintinline[bgcolor=codebg]{cpp}{SearchMethods}'s \mintinline[bgcolor=codebg]{cpp}{get_child()} method. GBFS will simply assign as its $f$ cost the distance to the goal using one of the distance functions outlined in section~\ref{sub:as}, while A* will sum both the distance and the child nodes parent $f$ value to get $f(n)=g(n) + h(n)$.
 % paragraph gbfs_and_a_ (end)
 
 \paragraph{IDDFS} % (fold)
 \label{par:iddfs}
-IDDFS is implemented recursively in the following manner using a specialized results struct containing a cutoff value and the solution if it exists.
+IDDFS is implemented recursively in the following manner using a specialized \mintinline[bgcolor=codebg]{cpp}{IDDFSResults} struct wrapping a cutoff value and the solution if it exists in a single structure.
 
 \begin{breakablealgorithm}
 \caption{IDDFS implementation pseudocode}
 \begin{algorithmic}[1]
-	\Procedure{search}{$env$ - a problem environment}
+	\Procedure{search}{$env$: a problem environment}
 		\State $results \gets$ empty results set, $\ell \gets 1$
-		\While{$results.cutoff$}
-			\State $results \gets$ $depth\_limited\_search(env,\ \ell)$
+		\While{$\mathit{results.cutoff}$}
+			\State $results \gets$ \Call{depth\_limited\_search}{$env,\ \ell$}
 			\State $\ell \gets \ell + 1$
 		\EndWhile
-		\State return $results$
+		\State \Return $results$
 	\EndProcedure
 
 	\State
 
-	\Procedure{depth\_limited\_search}{$env$ - a problem environment, $\ell$}
+	\Procedure{depth\_limited\_search}{$env$: a problem environment, $\ell$}
 		\State $n \gets$ starting node in $env$
-		\State return $\mathit{recursive\_dls}(n,\ env,\ \ell)$
+		\State \Return \Call{recursive\_dls}{$n,\ env,\ \ell$}
 	\EndProcedure
 
 	\State
 
-	\Procedure{recursive\_dls}{$env$ - a problem environment, $n$ - a node. $d$ - the current depth}
+	\Procedure{recursive\_dls}{$env$: problem environment, $n$: a node. $d$: the current depth}
 		\State Add $n$ to explored set
-		\If{$n=goal$} return solution \EndIf
-		\If{$d < 1$} return cutoff \EndIf
-		\State $\mathit{cutoff\_occurred} \gets false$
-		\State $results \gets$ empty results set
+		\If{$n=goal$} \Return solution \EndIf
+		\If{$d < 1$} \Return cutoff \EndIf
+		\State $\mathit{cutoff\_occurred} \gets false$, $results \gets$ empty results set
 		\ForAll{children $c$ of $n$ with valid actions $a$ in $env$}
 			\If{$c$ not in explored set}
-				\State $results \gets \mathit{recursive\_dls}(c,\ env,\ d-1)$
-				\If{$results.cutoff$}
+				\State $results \gets$ \Call{recursive\_dls}{$c,\ env,\ d-1$}
+				\If{$\mathit{results.cutoff}$}
 					$\mathit{cutoff\_occurred} \gets true$
 				\ElsIf{solution found in $results$}
-					return $results$
+					\Return $results$
 				\EndIf
 			\EndIf
 		\EndFor
-		\State return $\mathit{cutoff\_occurred}$
+		\State \Return $\mathit{cutoff\_occurred}$
 	\EndProcedure
-
-
 \end{algorithmic}
 \end{breakablealgorithm}
 % paragraph iddfs (end)
 
 \paragraph{IDA*} % (fold)
 \label{par:ida_}
-IDA* is implemented almost identically to to IDDFS, however it keeps a temporary map of the current path to ensure that nodes in the same path aren't repeated, alongside using the last encountered $f$ value higher than the current limit as the cutoff.
+IDA* is implemented almost identically to to IDDFS, however it keeps a temporary map of the current path to ensure that nodes in the same path aren't repeated, alongside using the last encountered $f$ value higher than the current $\ell$ as the cutoff.
 % paragraph ida_ (end)
 
 \subsection{Frontier} % (fold)
 \label{sub:frontier}
-Each search method utilized a different frontier container type. The interface for this is provided via the \mintinline[bgcolor=codebg]{cpp}{Frontier<T>} template type which has FIFO (\mintinline[bgcolor=codebg]{cpp}{Frontier<std::queue>}), LIFO (\mintinline[bgcolor=codebg]{cpp}{Frontier<std::vector>}), and Priority Queue (\mintinline[bgcolor=codebg]{cpp}{Frontier<std::priority_queue>}) specializations whilst providing the same interface for all types.
+Each search method utilized a different frontier container type. This is provided via the \mintinline[bgcolor=codebg]{cpp}{Frontier<T>} template type which has FIFO (\mintinline[bgcolor=codebg]{cpp}{Frontier<std::queue>}), LIFO (\mintinline[bgcolor=codebg]{cpp}{Frontier<std::vector>}), and Priority Queue (\mintinline[bgcolor=codebg]{cpp}{Frontier<std::priority_queue>}) template specializations which implement their methods in a container-specific way whilst providing a common interface for search methods.
 % subsection frontier (end)
 
 \subsection{Explored Set} % (fold)
 \label{sub:exploredset}
-The \mintinline[bgcolor=codebg]{cpp}{ExploredSet} class provides an interface for adding and querying the nodes so far expanded for each search algorithm, this is implemented using an \mintinline[bgcolor=codebg]{cpp}{std::unordered_map}. The explored set also contains an \mintinline[bgcolor=codebg]{cpp}{std::vector} of all the operations that occurred during the search algorithm for use in the visualizer (see~\ref{sub:visualizer}) for displaying the search tree as it was operated on in order.
+The \mintinline[bgcolor=codebg]{cpp}{ExploredSet} class provides an interface for adding and querying expanded nodes and denoting them as \textit{explored}. This is implemented internally using an \mintinline[bgcolor=codebg]{cpp}{std::unordered_map} and several helper functions with a high-level interface for dealing with nodes directly. The explored set also contains an \mintinline[bgcolor=codebg]{cpp}{std::vector} of all the operations that occurred during the search algorithm for use in the visualizer (see~\ref{sub:visualizer}) to use in displaying the search tree in order.
 % subsection exploredset (end)
 
 \subsection{Environment} % (fold)
 \label{sub:environment}
-Finally, the environment class defines valid actions and generates new child nodes based on the current \textit{state} - (a point in the grid). It also defines a \textit{goal test} for determining whether a given state is the goal.
+Finally, the environment class defines valid actions and generates new child nodes based on the current \textit{state} - a point in the grid. It also defines a \textit{goal test} for determining whether a given state is the goal.
 % subsection environment (end)
 
 % section implementation (end)
