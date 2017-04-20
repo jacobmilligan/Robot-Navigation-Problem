@@ -1,6 +1,7 @@
 //
-//  GraphTypes.hpp
-//  robonav
+//  Types.hpp
+//  COS30019 Intro To AI - Assignment 1
+//  Robot Navigation
 //
 //  --------------------------------------------------------------
 //

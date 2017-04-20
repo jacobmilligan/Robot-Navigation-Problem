@@ -1,5 +1,5 @@
 //
-//  AStar.cpp
+//  Main.cpp
 //  COS30019 Intro To AI - Assignment 1
 //  Robot Navigation
 //

@@ -21,7 +21,7 @@ namespace robo {
 /// @param msg The message to print
 inline void print_visualizer_error(const char* type, const char* msg)
 {
-    fprintf(stderr, "[robonav visualizer] %s error occurred: %s\n", type, msg);
+    fprintf(stderr, "[search visualizer] %s error occurred: %s\n", type, msg);
 }
 
 

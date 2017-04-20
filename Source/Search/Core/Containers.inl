@@ -1,6 +1,7 @@
 //
-//  Containers.inl.hpp
-//  robonav
+//  Containers.inl
+//  COS30019 Intro To AI - Assignment 1
+//  Robot Navigation
 //
 //  --------------------------------------------------------------
 //
